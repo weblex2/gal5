@@ -50,36 +50,38 @@
                                 <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                     Show
                                 </th>
-                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-center">
                                     Edit
                                 </th>
-                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-center">
                                     Del
                                 </th>
-                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-center">
                                     Del
                                 </th>
                               </tr>
                             </thead>
                             <tbody>
+                              @php $i=0; @endphp  
                               @foreach ($houses as $house)
+                              @php $i++; @endphp
                               @php $class = $i % 2 === 0 ? 'bg-white' : 'bg-gray-100'; @endphp
                               <tr class="border-b text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap {{ $class }}">
-                                  <td>{{ ++$i }}</td>
+                                  <td class="px-6">{{ $house->id }}</td>
                                   <td>{{ $house->name }}</td>
                                   <td>{{ $house->detail }}</td>
                                   <td>{{ $house->detail }}</td>
-                                  <td>
-                                        <a class="btn btn-info" href="{{ route('houses.show',$house->id) }}"><img src={{ URL('img/view.png') }}></a>
+                                  <td class="text-center">
+                                        <a class="btn btn-info" href="{{ route('houses.show',$house->id) }}"><i class="fa-solid fa-pen text-blue-300"></i></a>
                                   </td>
-                                  <td>        
-                                        <a class="btn btn-primary" href="{{ route('houses.edit',$house->id) }}">Edit</a>
+                                  <td class="text-center">        
+                                        <a class="btn btn-primary" href="{{ route('houses.edit',$house->id) }}"><i class="fa-solid fa-eye text-blue-300"></i></a>
                                   </td>
-                                  <td>        
+                                  <td class="text-center">        
                                     <form action="{{ route('houses.destroy',$house->id) }}" method="POST">
                                           @csrf
                                           @method('DELETE')
-                                          <button type="submit"><img src={{ URL('img/delete.png')  }}></button>
+                                          <button type="submit"><i class="fa-regular fa-trash-can text-red-500">
                                     </form>
                                   </td>
                               </tr>
@@ -88,6 +90,7 @@
 
                             </tbody>
                           </table>
+                          {!! $houses->links() !!}
                         </div>
                       </div>
                     </div>
