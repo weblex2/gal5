@@ -19,6 +19,10 @@
                     <x-jet-nav-link href="{{ route('houses.index') }}" :active="request()->routeIs('houses')">
                         {{ __('Houses') }}
                     </x-jet-nav-link>
+
+                    <x-jet-nav-link href="{{ route('easydb.index') }}" :active="request()->routeIs('easydb.index')">
+                        {{ __('EasyDb') }}
+                    </x-jet-nav-link>
                 </div>
             </div>
 

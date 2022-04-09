@@ -9,7 +9,7 @@ class HousesController extends Controller
 {
     function index(){
         //$houses = Houses::latest()->paginate(5);
-        $houses  =Houses::orderBy('id', 'asc')->paginate(7);
+        $houses  =Houses::orderBy('id', 'asc')->paginate(10);
     
         return view('houses.index',compact('houses'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
