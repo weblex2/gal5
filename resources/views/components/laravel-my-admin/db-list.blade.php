@@ -2,6 +2,9 @@
     {{-- Server --}}
    
     @php
+        if (!isset($databases)){
+            $databases = [];
+        }
         $selectedDb = session('selectedDb');
         $selectedTable = session('selectedTable');
         $selectedColumn = session('selectedColumn');
