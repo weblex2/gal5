@@ -1,13 +1,6 @@
-@php
-    echo $collation;
-    #$arr = explode('|', $collation);
-    #$selected  = $arr[0];
-    #$col  = $arr[1];
-    #print_r($col);
-@endphp
 <div>    
-    <select name="col[{{ $col }}][type]">
-        <option  value="" {{$selected == '' ? "selected" : ""}}>---select---</option> 
+    <select name="col[{{ $colnum }}][type]">
+        <option value="" {{$selected == '' ? "selected" : ""}}>---select---</option> 
         <option value="int" {{$selected == 'bigint' ? "selected" : ""}}>bigint</option>
         <option value="tinyint" {{$selected == 'tinyint' ? "selected" : ""}}>tinyint</option>
         <option value="decimal" {{$selected == 'decimal' ? "selected" : ""}}>decimal</option>

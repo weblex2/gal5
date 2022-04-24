@@ -1,12 +1,5 @@
-<div>@php
-    echo $selected;
-    $arr = explode('|', $selected);
-    $selected  = $arr[0];
-    echo "<br>sel = ".$selected."<br>";
-    $collation  = $arr[2];
-    echo $collation;
-    #print_r($col);
-@endphp
+<div>
+   
     <select lang="en" dir="ltr" name="field_collation[0]" id="field_0_5">
         <option value=""></option>
               <optgroup label="armscii8" title="ARMSCII-8 Armenian">
@@ -384,7 +377,7 @@
                       <option value="utf8mb4_danish_ci" title="Dänisch (UCA 4.0.0), Beachtet nicht Groß- und Kleinschreibung">utf8mb4_danish_ci</option>
                       <option value="utf8mb4_esperanto_ci" title="Esperanto (UCA 4.0.0), Beachtet nicht Groß- und Kleinschreibung">utf8mb4_esperanto_ci</option>
                       <option value="utf8mb4_estonian_ci" title="Estnisch (UCA 4.0.0), Beachtet nicht Groß- und Kleinschreibung">utf8mb4_estonian_ci</option>
-                      <option value="utf8mb4_general_ci" title="Unicode (UCA 4.0.0), Beachtet nicht Groß- und Kleinschreibung" {{$selected == 'utf8mb4_general_ci' ? "selected" : ""}}>>utf8mb4_general_ci</option>
+                      <option {{$collation == 'utf8mb4_general_ci' ? "selected" : ""}} value="utf8mb4_general_ci" title="Unicode (UCA 4.0.0), Beachtet nicht Groß- und Kleinschreibung">>utf8mb4_general_ci</option>
                       <option value="utf8mb4_general_nopad_ci" title="Unicode (UCA 4.0.0), no-pad, Beachtet nicht Groß- und Kleinschreibung">utf8mb4_general_nopad_ci</option>
                       <option value="utf8mb4_german2_ci" title="Deutsch (Telefonbuchverzeichnis) (UCA 4.0.0), Beachtet nicht Groß- und Kleinschreibung">utf8mb4_german2_ci</option>
                       <option value="utf8mb4_hungarian_ci" title="Ungarisch (UCA 4.0.0), Beachtet nicht Groß- und Kleinschreibung">utf8mb4_hungarian_ci</option>
@@ -407,9 +400,9 @@
                       <option value="utf8mb4_turkish_ci" title="Türkisch (UCA 4.0.0), Beachtet nicht Groß- und Kleinschreibung">utf8mb4_turkish_ci</option>
                       <option value="utf8mb4_unicode_520_ci" title="Unicode (UCA 5.2.0), Beachtet nicht Groß- und Kleinschreibung">utf8mb4_unicode_520_ci</option>
                       <option value="utf8mb4_unicode_520_nopad_ci" title="Unicode (UCA 5.2.0), no-pad, Beachtet nicht Groß- und Kleinschreibung">utf8mb4_unicode_520_nopad_ci</option>
-                      <option value="utf8mb4_unicode_ci" title="Unicode (UCA 4.0.0), Beachtet nicht Groß- und Kleinschreibung">utf8mb4_unicode_ci</option>
-                      <option value="utf8mb4_unicode_nopad_ci" title="Unicode (UCA 4.0.0), no-pad, Beachtet nicht Groß- und Kleinschreibung">utf8mb4_unicode_nopad_ci</option>
-                      <option value="utf8mb4_vietnamese_ci" title="Vietnamesisch (UCA 4.0.0), Beachtet nicht Groß- und Kleinschreibung">utf8mb4_vietnamese_ci</option>
+                      <option {{$collation == 'utf8mb4_unicode_ci' ? "selected" : ""}} value="utf8mb4_unicode_ci" title="Unicode (UCA 4.0.0), Beachtet nicht Groß- und Kleinschreibung">utf8mb4_unicode_ci</option>
+                      <option {{$collation == 'utf8mb4_unicode_nopad_ci' ? "selected" : ""}} value="utf8mb4_unicode_nopad_ci" title="Unicode (UCA 4.0.0), no-pad, Beachtet nicht Groß- und Kleinschreibung">utf8mb4_unicode_nopad_ci</option>
+                      <option {{$collation == 'utf8mb4_vietnamese_ci' ? "selected" : ""}} value="utf8mb4_vietnamese_ci" title="Vietnamesisch (UCA 4.0.0), Beachtet nicht Groß- und Kleinschreibung">utf8mb4_vietnamese_ci</option>
                   </optgroup>
           </select>
 </div>

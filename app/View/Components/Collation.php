@@ -13,7 +13,7 @@ class Collation extends Component
      */
 
 
-    public $selected; // new property
+    public $collation; // new property
 
     public function __construct($collation)
     {

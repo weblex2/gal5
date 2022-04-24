@@ -13,11 +13,12 @@ class DataType extends Component
      */
 
     public $selected; // new property
+    public $colnum; // new property
 
-    public function __construct($collation)
+    public function __construct($selected, $colnum)
     {
-        $this->collation = $collation;
-        //
+        $this->selected = $selected;
+        $this->colnum = $colnum;
     }
 
     /**

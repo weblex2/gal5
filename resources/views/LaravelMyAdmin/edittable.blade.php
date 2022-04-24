@@ -45,11 +45,7 @@
                 @endphp
                 <td class="p-2 border-r" >
                     <span> 
-                        @php
-                            $data = $selected."|".$i;
-                            $data = $selected."|".$i.'|'.$column->TABLE_COLLATION;
-                        @endphp
-                        <x-data-type :collation="$data" ></x-data-type>
+                        <x-data-type :selected="$selected" :colnum="$i" ></x-data-type>
                     </span>
                 </td>
                 <td class="p-2 border-r"><span><input type="text" name="col[{{ $i }}][length]" value="{{ $column->CHARACTER_MAXIMUM_LENGTH }}"></span></td>
@@ -59,7 +55,7 @@
                 <td class="p-2 border-r"><span><input type="text" name="col[{{ $i }}][default]" value="{{ $column->COLUMN_DEFAULT}}"></span></td>
                 <td class="p-2 border-r">
                     <span>
-                        <x-collation :selected="$data" ></x-collation>
+                        <x-collation :collation="$column->COLLATION_NAME" ></x-collation>
                     </span>
                 </td>
             </div>
