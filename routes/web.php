@@ -38,21 +38,14 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/houses/delete/{houseid}',
 Route::middleware(['auth:sanctum', 'verified'])->get('/pages', [PagesController::class, 'index']); 
 Route::middleware(['auth:sanctum', 'verified'])->get('/pages/about', [PagesController::class, 'about']); 
 
-/*
-Route::controller(EasyDB::class)->group(function () {
-    Route::get('/EasyDb', 'index')->middleware(['auth'])->name('easydb.index');
-    Route::get('/EasyDb/createTable', 'createTable')->middleware(['auth'])->name('easydb.createTable');
-    Route::post('/EasyDb/makeTable', 'makeTable')->middleware(['auth'])->name('easydb.makeTable');
-    Route::post('/EasyDb/saveTable', 'saveTable')->middleware(['auth'])->name('easydb.saveTable');
-    Route::get('/EasyDb/showTable/{name}', 'showTable')->middleware(['auth'])->name('easydb.showTable');
-    Route::get('/EasyDb/editTable/{name}', 'editTable')->middleware(['auth'])->name('easydb.editTable');
-    Route::get('/EasyDb/createNewTableDetailRow/{rownum}', 'createNewTableDetailRow')->middleware(['auth'])->name('easydb.createNewTableDetailRow');
-    Route::get('/EasyDB/editColumn/{db}/{table_name}/{column_name}','editColumn')->middleware(['auth'])->name('easydb.editColumn'); 
-});
-*/
 
 Route::controller(LaravelMyAdminController::class)->group(function () { 
     Route::get('/LaravelMyAdmin', 'index')->middleware(['auth'])->name('lma.index');
     //Route::get('/LaravelMyAdmin/{db_name}', 'index')->middleware(['auth'])->name('lma.db');
-    Route::get('/LaravelMyAdmin/editDb/{db_name?}', 'editDb')->middleware(['auth'])->name('LaravelMyAdmin.editDb');
+    Route::get('/LaravelMyAdmin/editDb/{dbName?}', 'editDb')->middleware(['auth'])->name('LaravelMyAdmin.editDb');
+    Route::get('/LaravelMyAdmin/editTable/{dbName}/{tableName}', 'editTable')->middleware(['auth'])->name('LaravelMyAdmin.editTable');
+    Route::get('/LaravelMyAdmin/editColumn/{dbName}/{tableName}/{columnName}', 'editColumn')->middleware(['auth'])->name('LaravelMyAdmin.editColumn');
+    Route::post('/LaravelMyAdmin/CreateNewTable/{dbName}', 'editDb')->middleware(['auth'])->name('LaravelMyAdmin.CreateNewTable');
+    Route::post('/LaravelMyAdmin/SaveTable/{dbName}', 'saveTable')->middleware(['auth'])->name('LaravelMyAdmin.saveTable');
+    
 }); 

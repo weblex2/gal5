@@ -23,7 +23,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div class="h-screen  flex flex-col" id="maindiv">
+<div class="h-screen  flex flex-col shadow-2xl" id="maindiv">
     <div class="bg-slate-800 py-8 hidden sm:block ">
         <div class="flex space-x-4">
             <a href="#" class="bg-orange-900 text-white
@@ -83,7 +83,9 @@
             <!-- COLUMN ONE -->
 
             <!-- COLUMN TWO -->
-            <div class="w-4/5 bg-slate-300 flex flex-col h-full overflow-y-auto" id="main">MIDDLE</div>
+            <div class="w-4/5 bg-slate-300 flex flex-col h-full overflow-y-auto" id="main">
+                @yield('content')
+            </div>
             <!-- COLUMN TWO -->
 
         </div>

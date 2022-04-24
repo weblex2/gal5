@@ -20,7 +20,7 @@
                         {{ __('Houses') }}
                     </x-jet-nav-link>
 
-                    <x-jet-nav-link href="{{ route('easydb.index') }}" :active="request()->routeIs('easydb.index')">
+                    <x-jet-nav-link href="{{ route('lma.index') }}" :active="request()->routeIs('easydb.index')">
                         {{ __('EasyDb') }}
                     </x-jet-nav-link>
                 </div>
