@@ -1,11 +1,21 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Houses') }}
+            {{ __('Links') }}
         </h2>
     </x-slot>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg mb-4 p-3">
+              <form action="{{ route('Links.store') }}" method="POST">
+                <div>
+                    New Link: 
+                    <input class="p-1 rounded mt-3 mb-2 w-full" type="text" name="mylink">
+                    @csrf
+                    <button type="submit" class="mt-3 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-1  rounded ">Save</button>
+                </div> 
+              </form>
+            </div>  
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                   @if ($errors->any())
                     <div class="sm:rounded-lg bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
@@ -19,13 +29,7 @@
                 @endif    
                 
                 <div class="flex flex-col">
-                  <form action="{{ route('Links.store') }}" method="POST">
-                    <div>
-                      New Link: <input class="p-1 rounded mr-2" type="text" name="mylink">
-                        @csrf
-                        <button type="submit" class="bg-blue-100 border border-blue-400 text-blue-700 px-4 py-1  rounded">Save</button>
-                    </div> 
-                  </form>
+                  
                     <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
                       <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
                         <div class="overflow-hidden">
