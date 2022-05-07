@@ -5,6 +5,7 @@ use App\Http\Controllers\HousesController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\EasyDB;
 use App\Http\Controllers\LaravelMyAdminController;
+use App\Http\Controllers\LinkController;
 
 
 /*
@@ -49,3 +50,8 @@ Route::controller(LaravelMyAdminController::class)->group(function () {
     Route::post('/LaravelMyAdmin/SaveTable/{dbName}', 'saveTable')->middleware(['auth'])->name('LaravelMyAdmin.saveTable');
     
 }); 
+
+Route::controller(LinkController::class)->group(function () { 
+    Route::get('/LinkController', 'index')->middleware(['auth'])->name('Links.index');    
+    Route::post('/LinkController/store', 'store')->middleware(['auth'])->name('Links.store');
+});

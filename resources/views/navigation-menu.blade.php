@@ -23,6 +23,9 @@
                     <x-jet-nav-link href="{{ route('lma.index') }}" :active="request()->routeIs('easydb.index')">
                         {{ __('EasyDb') }}
                     </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('Links.index') }}" :active="request()->routeIs('Links.index')">
+                        {{ __('Links') }}
+                    </x-jet-nav-link>
                 </div>
             </div>
 

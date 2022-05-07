@@ -63,10 +63,15 @@
         @endforeach
         <tr>
             <td colspan=10>
-                <button  type="submit"
+                <button  type="submit" 
                 class="bg-orange-900 text-white px-3 py-2 rounded-md text-sm font-medium" 
                 aria-current="page">
                 Button
+                </button>
+                <button  type="button" onclick="addColumn2Table()"
+                class="bg-orange-900 text-white px-3 py-2 rounded-md text-sm font-medium" 
+                aria-current="page">
+                Add Column
                 </button>
             </td>    
         </tr>    
@@ -75,3 +80,8 @@
         <input type="hidden" name="tableName" value="{{ $tableName }}">
   </form>
 @endsection
+<script>
+    function addColumn2Table(){
+        alert("ho");
+    }
+</script>    
