@@ -21,9 +21,9 @@
                 <div class="flex flex-col">
                   <form action="{{ route('Links.store') }}" method="POST">
                     <div>
-                      New Link: <input type="text" name="mylink">
+                      New Link: <input class="p-1 rounded mr-2" type="text" name="mylink">
                         @csrf
-                        <button type="submit">Save</button>
+                        <button type="submit" class="bg-blue-100 border border-blue-400 text-blue-700 px-4 py-1  rounded">Save</button>
                     </div> 
                   </form>
                     <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -49,6 +49,9 @@
                                 <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                   Updated
                                 </th>
+                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                  Delete
+                                </th>
                               </tr>
                             </thead>
                             <tbody>
@@ -57,17 +60,18 @@
                               @php $i++; @endphp
                               @php $class = $i % 2 === 0 ? 'bg-white' : 'bg-gray-100'; @endphp
                               <tr class="border-b text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap {{ $class }}">
-                                  <td class="px-6">{{ $link->id }}</td>
-                                  <td class="px-6"><a target="_blank" class="text-blue-500" href="{{ $link->link }}">{{ $link->link }}</a></td>
-                                  <td class="px-6">{{ $link->created_at }}</td>
-                                  <td class="px-6">{{ $link->updated_at }}</td>
+                                  <td class="p-2">{{ $link->id }}</td>
+                                  <td class="p-2"><a target="_blank" class="text-blue-500" href="{{ $link->link }}">{{ $link->link }}</a></td>
+                                  <td class="p-2">{{ $link->created_at }}</td>
+                                  <td class="p-2">{{ $link->updated_at }}</td>
+                                  <td class="text-center">        
+                                        <form action="{{ route('Links.destroy',$link->id) }}" method="POST">
+                                          @csrf
+                                          {{-- @method('DELETE') --}}
+                                          <button type="submit"><i class="fa-regular fa-trash-can text-red-500">
+                                    </form>
+                                  </td>
                                   
-                                  <td class="text-center">        
-                                        <a class="btn btn-primary" href="{{ route('houses.edit',$link->id) }}"><i class="fa-solid fa-eye text-blue-300"></i></a>
-                                  </td>
-                                  <td class="text-center">        
-                                    
-                                  </td>
                               </tr>
                               @endforeach
 

@@ -54,4 +54,5 @@ Route::controller(LaravelMyAdminController::class)->group(function () {
 Route::controller(LinkController::class)->group(function () { 
     Route::get('/LinkController', 'index')->middleware(['auth'])->name('Links.index');    
     Route::post('/LinkController/store', 'store')->middleware(['auth'])->name('Links.store');
+    Route::post('/LinkController/destroy/{id}', 'destroy')->middleware(['auth'])->name('Links.destroy'); 
 });

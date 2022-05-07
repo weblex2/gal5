@@ -30,4 +30,13 @@ class LinkController extends Controller
         $links = Link::all();
         return redirect()->route('Links.index', compact('links'));
     }
+
+    function destroy($id){
+        $res = Link::where('id',$id)->delete();
+        if ($res){
+            $links = Link::all();
+            return redirect()->route('Links.index', compact('links')); 
+        }
+        else echo "Fehler!";
+    }
 }
