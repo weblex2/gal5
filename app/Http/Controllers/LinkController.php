@@ -8,11 +8,12 @@ use App\Models\Link;
 class LinkController extends Controller
 {
     //
-    function index(){
+    function index($errors=[], $success=""){
+        $app = app();
         $links = Link::all();
         $errors = [];
         $success = [];
-        return view('Links.index', compact('links'));
+        return view('Links.index', compact('links', 'errors'));
     }
 
     function store(Request $request){
