@@ -1,3 +1,55 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+
+#gallery_overview {
+    @apply text-gray-300;
+}
+
+#gallery_overview div{
+    @apply border p-3 bg-slate-400 rounded-lg
+}    
+
+nav{
+    @apply border-b border-gray-100 bg-white
+}
+
+header{
+    @apply bg-slate-300 !important
+}
+
+.myh2{
+    @apply font-semibold text-xl text-gray-800 leading-tight
+}
+
+.preview_pic{
+    @apply rounded-lg
+}
+
+.container_menu{
+    @apply float-left w-1/5
+}
+
+.container_pictures{
+    @apply float-left w-4/5
+}
+
+.btn_save{
+    @apply bg-sky-500 text-white active:bg-sky-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150
+}
+
+.btn_edit{
+    @apply no-underline block w-fit m-3 bg-sky-500 text-white active:bg-sky-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150
+}
+
+.pic_container{
+    @apply border border-slate-400 w-full max-h-full
+}
+.the_pic{
+    @apply max-w-full h-auto rounded-lg shadow-md
+}
+
+.menu_header{
+    @apply bg-slate-800 text-orange-500 w-full p-5 block
+}

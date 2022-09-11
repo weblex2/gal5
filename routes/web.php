@@ -6,6 +6,8 @@ use App\Http\Controllers\PagesController;
 use App\Http\Controllers\EasyDB;
 use App\Http\Controllers\LaravelMyAdminController;
 use App\Http\Controllers\LinkController;
+use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\FileuploadController;
 
 
 /*
@@ -27,32 +29,18 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/houses', [HousesController::class, 'index'])->name('houses.index');
-Route::middleware(['auth:sanctum', 'verified'])->get('/houses/show/{houseid}', [HousesController::class, 'show'])->name('houses.show');
-Route::middleware(['auth:sanctum', 'verified'])->get('/houses/create', [HousesController::class, 'create'])->name('houses.create'); 
-Route::middleware(['auth:sanctum', 'verified'])->post('/houses/store', [HousesController::class, 'store'])->name('houses.store'); 
-Route::middleware(['auth:sanctum', 'verified'])->get('/houses/edit/{houseid}', [HousesController::class, 'edit'])->where(['houseid' => '[0-9]+'])->name('houses.edit'); 
-Route::middleware(['auth:sanctum', 'verified'])->get('/houses/delete/{houseid}', [HousesController::class, 'destroy'])->where(['houseid' => '[0-9]+'])->name('houses.destroy'); 
 
 
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/pages', [PagesController::class, 'index']); 
-Route::middleware(['auth:sanctum', 'verified'])->get('/pages/about', [PagesController::class, 'about']); 
-
-
-Route::controller(LaravelMyAdminController::class)->group(function () { 
-    Route::get('/LaravelMyAdmin', 'index')->middleware(['auth'])->name('lma.index');
-    //Route::get('/LaravelMyAdmin/{db_name}', 'index')->middleware(['auth'])->name('lma.db');
-    Route::get('/LaravelMyAdmin/editDb/{dbName?}', 'editDb')->middleware(['auth'])->name('LaravelMyAdmin.editDb');
-    Route::get('/LaravelMyAdmin/editTable/{dbName}/{tableName}', 'editTable')->middleware(['auth'])->name('LaravelMyAdmin.editTable');
-    Route::get('/LaravelMyAdmin/editColumn/{dbName}/{tableName}/{columnName}', 'editColumn')->middleware(['auth'])->name('LaravelMyAdmin.editColumn');
-    Route::post('/LaravelMyAdmin/CreateNewTable/{dbName}', 'editDb')->middleware(['auth'])->name('LaravelMyAdmin.CreateNewTable');
-    Route::post('/LaravelMyAdmin/SaveTable/{dbName}', 'saveTable')->middleware(['auth'])->name('LaravelMyAdmin.saveTable');
+Route::controller(GalleryController::class)->group(function () { 
+    Route::get('/gal', 'index')->name('gallery.index');    
+    Route::get('/gallery/newGallery', 'newGallery')->middleware(['auth'])->name('gallery.new');
+    Route::get('/gallery/showGallery/{id}', 'showGallery')->middleware(['auth'])->name('gallery.show');
+    Route::get('/gallery/editGallery/{id}', 'editGallery')->middleware(['auth'])->name('gallery.edit');
+    Route::get('/gallery/saveGallery/{id}', 'saveGallery')->middleware(['auth'])->name('gallery.save');
+    Route::get('/gallery/showPic/{id}', 'showPic')->middleware(['auth'])->name('gallery.showPic');
+    Route::post('/gallery/createGallery', 'createGallery')->middleware(['auth'])->name('gallery.create');
     
-}); 
-
-Route::controller(LinkController::class)->group(function () { 
-    Route::get('/LinkController', 'index')->middleware(['auth'])->name('Links.index');    
-    Route::post('/LinkController/store', 'store')->middleware(['auth'])->name('Links.store');
-    Route::post('/LinkController/destroy/{id}', 'destroy')->middleware(['auth'])->name('Links.destroy'); 
 });
+
+Route::resource('files', FileuploadController::class);
