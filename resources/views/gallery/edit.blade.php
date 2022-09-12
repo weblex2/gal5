@@ -45,7 +45,7 @@
     {
         maxFilesize: 12,
         resizeQuality: 1.0,
-        acceptedFiles: ".jpeg,.jpg,.png,.gif",
+        //acceptedFiles: ".jpeg,.jpg,.png,.gif",
         addRemoveLinks: true,
         timeout: 60000,
         removedfile: function(file) 

@@ -56,7 +56,8 @@ class FileUploadController extends Controller
         $imageUpload->gal_id = $gal_id;
         $imageUpload->create_user_id = \Auth::id();
         $imageUpload->save();
-        return response()->json(['success' => $FileName, 'img_path' => $img_path, 'exif' => $getID3 ]);
+        return response()->json(['success' => $FileName ]);
+        #return response()->json(['success' => $FileName, 'img_path' => $img_path, 'exif' => $getID3 ]);
     }
 
     /**
