@@ -13,6 +13,9 @@
     <div class="container_pictures flex justify-center items-center flex-grow bg-slate-200">
 
       <div class="pic_container flex">
+            @php
+              echo "hallo ". Storage::url("public/app/gal/".$pic->gal_id."/".$pic->file_name);
+            @endphp 
             <img class="the_pic object-contain" src="{{ Storage::url("gal/".$pic->gal_id."/".$pic->file_name) }}"></img>
       </div>  
     </div>  
