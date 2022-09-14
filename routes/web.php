@@ -43,4 +43,4 @@ Route::controller(GalleryController::class)->group(function () {
     
 });
 
-Route::resource('files', FileuploadController::class);
+Route::resource('files', FileUploadController::class);
