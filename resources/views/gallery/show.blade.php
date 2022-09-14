@@ -13,7 +13,7 @@
     <div class="container_pictures flex justify-center items-center flex-grow bg-slate-200">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 pt-12">
             <div id="pic_overview" class="grid grid-cols-10 gap-3">
-            @foreach ($pics as $pic)
+                @foreach ($pics as $pic)
                 @php
                 $fileName = 'gal/'.$gal_id."/" . $pic->file_name;
                 @endphp

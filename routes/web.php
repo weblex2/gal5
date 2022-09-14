@@ -7,7 +7,7 @@ use App\Http\Controllers\EasyDB;
 use App\Http\Controllers\LaravelMyAdminController;
 use App\Http\Controllers\LinkController;
 use App\Http\Controllers\GalleryController;
-use App\Http\Controllers\FileuploadController;
+use App\Http\Controllers\FileUploadController;
 
 
 /*

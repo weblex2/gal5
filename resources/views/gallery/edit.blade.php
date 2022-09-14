@@ -31,7 +31,11 @@
                 </div> 
                 <div class="flex content-center w-full items-center bg-slate-800">
                     <a class="btn_save" href="{{ route("gallery.save" , [$gal_id]) }}">Save</a>
-                </div>  
+                </div> 
+                
+                @php
+              echo "<img src=". Storage::url("gal/1/a.jpg")."></img>";
+            @endphp 
             </div>    
         </div>    
         
