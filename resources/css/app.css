@@ -53,3 +53,16 @@ header{
 .menu_header{
     @apply bg-slate-800 text-orange-500 w-full p-5 block
 }
+
+
+.container_pictures  nav{
+    @apply border-0 bg-transparent
+} 
+
+.tblExif, .tblOsm{
+    @apply w-full  text-xs
+}
+
+.tblExif td, .tblOsm td{
+    @apply border border-slate-800 
+}

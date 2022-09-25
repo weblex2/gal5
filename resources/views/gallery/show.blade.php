@@ -14,18 +14,20 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 pt-12">
             <div id="pic_overview" class="grid grid-cols-10 gap-3">
                 @foreach ($pics as $pic)
-                @php
+                {{-- @php
                 $fileName = 'gal/'.$gal_id."/" . $pic->file_name;
-                @endphp
+                @endphp --}}
                 <div>
                     <a href="{{ route('gallery.showPic',$pic->id) }}">
-                    <img class="preview_pic" src="{{ Storage::url($fileName) }}"></img>
+                    <img class="preview_pic" src="{{ Storage::url('gal/'.$gal_id."/" . $pic->file_name) }}"></img>
                     </a>
                 </div>
             @endforeach
-           
+             
             </div>   
-            {{ $pics->links() }}  
+            <div class="flex">
+                {{ $pics->links() }}
+            </div> 
         </div>
        
     </div>  

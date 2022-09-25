@@ -7,14 +7,19 @@ use Illuminate\Http\Request;
 use App\Models\Gallery;
 use App\Models\GalleryPics;
 use Http\Controllers\FileUploadController;
-//use jamesHeinrich\getid3;
-//use Owenoj\LaravelGetId3\GetId3;
+
 
 class GalleryController extends Controller
 {
     public function index(){
         $create_user_id = \Auth::id();
-        $galleries = Gallery::where('create_user_id' , "=", $create_user_id )->get();
+        echo $create_user_id;
+        #if ($create_user_id) {
+            $galleries = Gallery::where('create_user_id' , "=", $create_user_id )->get();
+        #}
+        #else{
+        #    $galleries = Gallery::where('public' , "=", 1 )->get();
+        #}
         if (count($galleries)==0){   
             $galleries = [];
             return redirect()->route("gallery.new", compact('galleries'));
@@ -32,7 +37,7 @@ class GalleryController extends Controller
     public function showGallery($gal_id){
         
         $pics = GalleryPics::where('gal_id' , "=", $gal_id )->paginate(4);
-        return view("gallery.show", compact('pics', 'gal_id'));
+        return view("gallery.showgallery", compact('pics', 'gal_id'));
     }
 
     public function editGallery($gal_id){
@@ -54,26 +59,7 @@ class GalleryController extends Controller
         return redirect()->route("gallery.edit" , [$gal_id]);
     }
 
-    private function getLocation($lat,$lon){
-        #$lon=-75.64090833333334;
-        #$lat=6.159527777777778;
-        #$res = $this->getLocation($lat,$lon);
-        $url= "https://nominatim.openstreetmap.org/reverse?lon=-75.64090833333334&lat=6.159527777777778";
-        $ch = curl_init();
-        // set url
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.2; WOW64; rv:17.0) Gecko/20100101 Firefox/17.0');
-        // $output contains the output string
-        $output = curl_exec($ch);
-        // close curl resource to free up system resources
-        curl_close($ch);    
-        $xml = simplexml_load_string($output, "SimpleXMLElement", LIBXML_NOCDATA);
-        $json = json_encode($xml);
-        $array = json_decode($json,TRUE);
-        return $array;
-    }
+    
 
     public function showPic($pic_id){
         $pic = GalleryPics::find($pic_id);
@@ -89,7 +75,7 @@ class GalleryController extends Controller
 
         #dump( $getID3->info['jpg']['exif']['GPS']['computed']['latitude'] );
 
-        return view("gallery.showpic", compact('pic'));
+        return view("gallery.showpic2", compact('pic'));
     }
 
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Http\Controllers\GalleryController; 
 use App\Models\GalleryPics;
 use Illuminate\Http\Request;
 
@@ -48,16 +49,22 @@ class FileUploadController extends Controller
         $img_path = storage_path($img_path);    
 
         $getID3 = new \getID3;
-        $ThisFileInfo = $getID3->analyze($img_path);
-        $getID3->CopyTagsToComments($ThisFileInfo);
+        $thisFileInfo = $getID3->analyze($img_path);
+
+        $lat = $thisFileInfo['jpg']['exif']['GPS']['computed']['latitude'];
+        $lon = $thisFileInfo['jpg']['exif']['GPS']['computed']['longitude'];
+        $getID3->CopyTagsToComments($thisFileInfo);
+        $osm_data  = $this->getLocation($lat,$lon);    
 
         $imageUpload = new GalleryPics();
         $imageUpload->file_name = $FileName;
         $imageUpload->gal_id = $gal_id;
         $imageUpload->create_user_id = \Auth::id();
+        $imageUpload->exif_data = json_encode($thisFileInfo);
+        $imageUpload->osm_data = $osm_data;
         $imageUpload->save();
-        return response()->json(['success' => $FileName ]);
-        #return response()->json(['success' => $FileName, 'img_path' => $img_path, 'exif' => $getID3 ]);
+        #return response()->json(['success' => $FileName ]);
+        return response()->json(['success' => $FileName, 'img_path' => $img_path, 'exif' => $thisFileInfo ]);
     }
 
     /**
@@ -102,9 +109,27 @@ class FileUploadController extends Controller
      */
     public function destroy($id)
     {
-        $fileUpload = FileUpload::find($id);
+        $fileUpload = GalleryPics::find($id);
         $fileUpload->delete();
         return redirect()->back()
             ->with('success', 'File deleted successfully');
+    }
+
+    private function getLocation($lat,$lon){
+        $url= "https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=".$lat."&lon=".$lon;
+        $ch = curl_init();
+        // set url
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.2; WOW64; rv:17.0) Gecko/20100101 Firefox/17.0');
+        // $output contains the output string
+        $result = curl_exec($ch);
+        // close curl resource to free up system resources
+        curl_close($ch);    
+        #$xml = simplexml_load_string($output, "SimpleXMLElement", LIBXML_NOCDATA);
+        #$json = json_encode($xml);
+        #$array = json_decode($json,TRUE);
+        return $result;
     }
 }

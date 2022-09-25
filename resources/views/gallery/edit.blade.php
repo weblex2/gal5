@@ -1,10 +1,9 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Edit Gallery') }}
-        </h2>
-    </x-slot>
-    
+@extends('layouts.gallery')
+@section('options')
+    <a href="{{ route('gallery.edit', ['id'=>1] ) }}">Edit</a>
+@endsection
+
+@section('content')
     
         <div class="container_menu  flex flex-grow items-left bg-slate-700">
                 menu
@@ -33,16 +32,13 @@
                     <a class="btn_save" href="{{ route("gallery.save" , [$gal_id]) }}">Save</a>
                 </div> 
                 
-                @php
-              echo "<img src=". Storage::url("gal/1/a.jpg")."></img>";
-            @endphp 
             </div>    
         </div>    
         
         
     </div>
-</x-app-layout>
 
+    @endsection
 
 <script type="text/javascript">
     Dropzone.options.dropzone =

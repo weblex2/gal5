@@ -21,9 +21,11 @@ use App\Http\Controllers\FileUploadController;
 |
 */
 
+/*
 Route::get('/', function () {
     return view('welcome');
 });
+*/
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
@@ -33,6 +35,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 
 Route::controller(GalleryController::class)->group(function () { 
+    Route::get('/', 'index')->name('gallery.index');  
     Route::get('/gal', 'index')->name('gallery.index');    
     Route::get('/gallery/newGallery', 'newGallery')->middleware(['auth'])->name('gallery.new');
     Route::get('/gallery/showGallery/{id}', 'showGallery')->middleware(['auth'])->name('gallery.show');
@@ -42,5 +45,4 @@ Route::controller(GalleryController::class)->group(function () {
     Route::post('/gallery/createGallery', 'createGallery')->middleware(['auth'])->name('gallery.create');
     
 });
-
 Route::resource('files', FileUploadController::class);
