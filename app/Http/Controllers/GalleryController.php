@@ -35,9 +35,9 @@ class GalleryController extends Controller
     }
 
     public function showGallery($gal_id){
-        
-        $pics = GalleryPics::where('gal_id' , "=", $gal_id )->paginate(4);
-        return view("gallery.showgallery", compact('pics', 'gal_id'));
+        $pagination = 5;
+        $pics = GalleryPics::where('gal_id' , "=", $gal_id )->paginate($pagination);
+        return view("gallery.showgallery", compact('pics', 'gal_id', 'pagination'));
     }
 
     public function editGallery($gal_id){

@@ -8,7 +8,7 @@
 @section('content')
     <div id="myPic" class="h-full max-h-full p-5  items-center justify-center">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 pt-12">
-            <div id="pic_overview" class="grid grid-cols-10 gap-3">
+            <div class="grid grid-cols-{{ $pagination }} grid-flow-col gap-3">
                 @foreach ($pics as $pic)
                 {{-- @php
                 $fileName = 'gal/'.$gal_id."/" . $pic->file_name;

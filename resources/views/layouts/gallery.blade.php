@@ -24,26 +24,39 @@
     <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script-->
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    {{--  dropbox CDN  --}}
+       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.0/min/dropzone.min.css">
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.0/dropzone.js"></script>
+
+       <!-- Font Awesome JS -->
+        <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
+        integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous">
+        </script>
+        <!--script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
+            integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous">
+        </script-->
+
+        <!-- Bootstrap CSS CDN -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+            integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+
+
+
 </head>
 <body>
 <div class="h-screen  flex flex-col" id="maindiv">
-    <div class="bg-slate-800   border-b border-slate-900 pt-3  hidden sm:block ">
+    <div class="bg-slate-800 border-b border-slate-900 pt-3  hidden sm:block ">
         <div class="flex space-x-4 float-left">
-            <a href="/" class="text-gray-300
-                        hover:bg-gray-700
-                        hover:text-white px-3 py-2
-                        rounded-md text-sm font-medium">
+            <a href="/" class="menu_item">
                 home
             </a>
 
-            <a href="#" class="text-gray-300
-                        hover:bg-gray-700 hover:text-white
-                        px-3 py-2 rounded-md
-                        text-sm font-medium">
+            <a href="#" class="menu_item">
                 new gallery
             </a>
         </div>
-        <div class="float-right px-5 z-20">
+        <div class="float-right flex px-3 z-20">
             @php
                 #dump (Auth::User());
             @endphp
@@ -52,6 +65,7 @@
             <a href="#" onclick="$('#loginWrapper').toggle(200)">
                 <i class="mb-3 text-white fa fa-user"></i>
             </a>
+            
             <div id="loginWrapper" class="hidden absolute p-3 w-48 h-48 mx-5 right-0 mt-3 border border-slate-900 z-20">
                 <form METHOD="POST" action="{{ route("login") }}">
                     @csrf
@@ -65,11 +79,19 @@
                 </form>
             </div>
             @else
+                @isset($gal_id) 
+                    <a href="{{ route("gallery.show", ['id' => $gal_id]) }}">
+                        <i class="float-right mb-3 mx-2 text-white fa fa-home"></i>
+                    </a>
+                @else
+                    <a href="{{ route("gallery.index") }}">
+                        <i class="float-right mb-3 mx-2 text-white fa fa-home"></i>
+                    </a>
+                @endisset
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-
                     <a href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();">
-                        <i class="mb-3 text-white fa fa-sign-out"></i>
+                        <i class="float-right mb-3 mx-2 text-white fa fa-sign-out"></i>
                     </a>
                 </form>
             @endif
@@ -84,7 +106,7 @@
 
                 <div class="flex flex-col h-full">
 
-                    <div class="h-full flex-grow-0 overflow-y-auto p-3">
+                    <div class="h-full flex-grow-0 overflow-y-auto">
                         <div class="flex flex-col">
                         @yield('options')
                         </div>

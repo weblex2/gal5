@@ -1,19 +1,19 @@
 @extends('layouts.gallery')
 @section('options')
-    <a href="{{ route('gallery.edit', ['id'=>1] ) }}">Edit</a>
+    <div class="container_menu_header">
+                menu
+    </div>
 @endsection
 
 @section('content')
     
-        <div class="container_menu  flex flex-grow items-left bg-slate-700">
-                menu
-        </div>
-        <div class="container_pictures flex justify-center items-center flex-grow bg-slate-200">
-            <div class="block w-full h-full bg-slate-300">
+        
+        <div class="container_pictures w-full flex justify-center items-center flex-grow">
+            <div class="block w-full h-full">
                 <div class="py-12">
                     <div>
                         <div>
-                            <div class="text-center">
+                            <div class="text-center text-slate-400">
                                 <h2>Upload Files</h2> 
                             </div>
                         </div>
@@ -26,11 +26,11 @@
                         <input type="hidden" name="gal_id" value="{{ $gal_id }}">
                         <input type="hidden" name="user_id" value="{{ $gal_id }}">
                     </form>
-                          
-                </div> 
-                <div class="flex content-center w-full items-center bg-slate-800">
+                    <div class="flex content-center w-full items-center bg-slate-800">
                     <a class="btn_save" href="{{ route("gallery.save" , [$gal_id]) }}">Save</a>
+                    </div>       
                 </div> 
+                
                 
             </div>    
         </div>    
