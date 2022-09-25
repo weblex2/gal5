@@ -6,7 +6,7 @@
 @endphp
 
 @section('options')
-    <div id="exif_data">
+    <div id="exif_data flex items-stretch">
     <table class="tblExif">
             <thead>
               <tr><th colspan="2">Exif Data</th></tr>  
@@ -33,7 +33,7 @@
              $lon = $exif['jpg']['exif']['GPS']['computed']['longitude'];
              $lat = $exif['jpg']['exif']['GPS']['computed']['latitude'];
           @endphp
-
+          <div class="bottom-0">  
           <iframe 
                 width="100%" 
                 height="240" 
@@ -45,6 +45,7 @@
                 src="https://maps.google.com/maps?q={{$lat}},{{$lon}}&hl=de&z=14&amp;output=embed"
            >
            </iframe>
+           </div>
     </div>
 @endsection
 

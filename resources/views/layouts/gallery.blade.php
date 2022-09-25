@@ -110,7 +110,7 @@
                 <div class="flex flex-col h-full">
 
                     <div class="h-full flex-grow-0 overflow-y-auto">
-                        <div class="flex flex-col">
+                        <div class="flex flex-col items-stretch">
                         @yield('options')
                         </div>
                     </div>
