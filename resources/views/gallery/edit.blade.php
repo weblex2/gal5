@@ -43,11 +43,11 @@
 <script type="text/javascript">
     Dropzone.options.dropzone =
     {
-        maxFilesize: 12,
+        //maxFilesize: 12,
         resizeQuality: 1.0,
         //acceptedFiles: ".jpeg,.jpg,.png,.gif",
         addRemoveLinks: true,
-        timeout: 60000,
+        //timeout: 60000,
         removedfile: function(file) 
         {
             var name = file.upload.filename;

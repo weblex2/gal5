@@ -6,8 +6,16 @@
             <!--div class="bg-white overflow-hidden shadow-xl sm:rounded-lg"-->
               <div id="gallery_overview" class="grid grid-cols-4 gap-4">
               @foreach ($galleries as $gal)
+                @php
+                  if ($gal->background_pic !="") {
+                      $bg= Storage::url('gal/1/2022_07_29_IMG_1789.jpg');
+                  } 
+                  else{
+                    $bg  = Storage::url('gal/default_bg.jpg');
+                  }
+                @endphp  
                 <a href="{{ route('gallery.show',$gal->id) }}">
-                  <div class="h-48">{{ $gal->gal_name }}</div>
+                  <div class="" style="background-image:url({{ $bg }})">{{ $gal->gal_name }}</div>
                 </a>
               @endforeach
             </div>

@@ -83,6 +83,9 @@
                     <a href="{{ route("gallery.show", ['id' => $gal_id]) }}">
                         <i class="float-right mb-3 mx-2 text-white fa fa-home"></i>
                     </a>
+                    <a href="{{ route("gallery.edit", ['id' => $gal_id]) }}">
+                        <i class="float-right mb-3 mx-2 text-white fa fa-edit"></i>
+                    </a>
                 @else
                     <a href="{{ route("gallery.index") }}">
                         <i class="float-right mb-3 mx-2 text-white fa fa-home"></i>

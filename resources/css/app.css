@@ -8,7 +8,7 @@
 }
 
 #gallery_overview div{
-    @apply border p-3 bg-slate-400 rounded-lg
+    @apply border p-3 bg-slate-900 rounded-lg h-48 bg-cover border-slate-600
 }    
 
 nav{
@@ -28,7 +28,7 @@ header{
 }
 
 .container_menu_header{
-    @apply float-left text-orange-500 w-full block bg-slate-700
+    @apply float-left text-orange-500 w-full block bg-slate-700 text-sm p-4
 }
 
 .container_pictures{
@@ -67,9 +67,17 @@ header{
 } 
 
 .tblExif, .tblOsm{
-    @apply w-full  text-xs
+    @apply w-full  text-xs  mb-2
 }
 
 .tblExif td, .tblOsm td{
-    @apply border border-slate-800 
+    @apply border border-slate-800 text-orange-500 px-3
+}
+
+.tblExif th, .tblOsm th{
+    @apply border border-slate-800 bg-slate-700 text-orange-400 font-bold p-3
+}
+
+#osm_header{
+    @apply mt-3
 }

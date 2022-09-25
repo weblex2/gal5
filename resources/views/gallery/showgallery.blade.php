@@ -1,7 +1,9 @@
 @extends('layouts.gallery')
 
 @section('options')
-    <a href="{{ route('gallery.edit', ['id'=>1] ) }}">Edit</a>
+    <div class="container_menu_header">
+                menu
+    </div>
 @endsection
 
 

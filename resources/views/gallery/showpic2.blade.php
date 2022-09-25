@@ -6,10 +6,46 @@
 @endphp
 
 @section('options')
-    <div class="container_menu_header">
-        menu
+    <div id="exif_data">
+    <table class="tblExif">
+            <thead>
+              <tr><th colspan="2">Exif Data</th></tr>  
+            </thead>
+            <tbody>
+              <tr><td>filename</td><td>{{ $exif['filename'] }}</td></tr>
+              <tr><td>format</td><td>{{ $exif['fileformat'] }}</td></tr>
+              <tr><td>width</td><td>{{ $exif['video']['resolution_x']}}</td></tr>
+              <tr><td>height</td><td>{{ $exif['video']['resolution_y']}}</td></tr>
+              <tr><td>latitude</td><td>{{ $exif['jpg']['exif']['GPS']['computed']['latitude'] }}</td></tr>
+              <tr><td>longitude</td><td>{{ $exif['jpg']['exif']['GPS']['computed']['longitude'] }}</td></tr>
+              <tr><td>altitude</td><td>{{ $exif['jpg']['exif']['GPS']['computed']['altitude'] }}</td></tr>
+              <tr><td>make</td><td>{{ $exif['jpg']['exif']['IFD0']['Make'] }}</td></tr>
+              <tr><td>model</td><td>{{ $exif['jpg']['exif']['IFD0']['Model'] }}</td></tr>
+              <tr><td colspan="2">&nbsp;</td>  
+              <tr><th colspan="2">Open Street Map Data</th></tr>
+              @foreach($osm['address'] as $key => $val)
+              <tr><td>{{ $key }}</td><td>{{ $val }}</td></tr>
+              @endforeach
+            </tbody>
+          </table>
+        
+          @php
+             $lon = $exif['jpg']['exif']['GPS']['computed']['longitude'];
+             $lat = $exif['jpg']['exif']['GPS']['computed']['latitude'];
+          @endphp
+
+          <iframe 
+                width="100%" 
+                height="240" 
+                bottom="0"
+                frameborder="0" 
+                scrolling="no" 
+                marginheight="0" 
+                marginwidth="0" 
+                src="https://maps.google.com/maps?q={{$lat}},{{$lon}}&hl=de&z=14&amp;output=embed"
+           >
+           </iframe>
     </div>
-    <a href="{{ route('gallery.edit', ['id'=>1] ) }}">Edit</a>
 @endsection
 
 @section('content')

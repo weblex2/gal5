@@ -13,7 +13,6 @@ class GalleryController extends Controller
 {
     public function index(){
         $create_user_id = \Auth::id();
-        echo $create_user_id;
         #if ($create_user_id) {
             $galleries = Gallery::where('create_user_id' , "=", $create_user_id )->get();
         #}
@@ -63,8 +62,9 @@ class GalleryController extends Controller
 
     public function showPic($pic_id){
         $pic  = GalleryPics::find($pic_id);
-        $prev = GalleryPics::where('id', '<', $pic_id)->max('id');
-        $next = GalleryPics::where('id', '>', $pic_id)->min('id');
+        $gal_id = $pic->gal_id;
+        $prev = GalleryPics::where('id', '<', $pic_id)->where('gal_id', "=", $gal_id)->max('id');
+        $next = GalleryPics::where('id', '>', $pic_id)->where('gal_id', "=", $gal_id)->min('id');
         return view("gallery.showpic2", compact('pic','prev','next'));
     }
 
