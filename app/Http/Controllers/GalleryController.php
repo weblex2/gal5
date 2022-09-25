@@ -62,20 +62,10 @@ class GalleryController extends Controller
     
 
     public function showPic($pic_id){
-        $pic = GalleryPics::find($pic_id);
-        $picFullPath = 'app/public/gal/'.$pic->gal_id."/" . $pic->file_name;
-        $src = Storage::url($picFullPath);
-        $src = storage_path('app/public/gal/1/2022_07_29_IMG_1786.jpg');
-        $exif  = exif_read_data($src);
-        $getID3 = new \getID3;
-        $ThisFileInfo = $getID3->analyze($src);
-        #dump($ThisFileInfo);
-        $getID3->CopyTagsToComments($ThisFileInfo);
-        #dump($getID3);
-
-        #dump( $getID3->info['jpg']['exif']['GPS']['computed']['latitude'] );
-
-        return view("gallery.showpic2", compact('pic'));
+        $pic  = GalleryPics::find($pic_id);
+        $prev = GalleryPics::where('id', '<', $pic_id)->max('id');
+        $next = GalleryPics::where('id', '>', $pic_id)->min('id');
+        return view("gallery.showpic2", compact('pic','prev','next'));
     }
 
 }

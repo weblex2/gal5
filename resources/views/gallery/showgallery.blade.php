@@ -13,11 +13,13 @@
                 {{-- @php
                 $fileName = 'gal/'.$gal_id."/" . $pic->file_name;
                 @endphp --}}
-                <div>
+                
+                <div class="block">
                     <a href="{{ route('gallery.showPic',$pic->id) }}">
                     <img class="preview_pic" src="{{ Storage::url('gal/'.$gal_id."/" . $pic->file_name) }}"></img>
-                    </a>
+                    </a>    
                 </div>
+                
             @endforeach
              
             </div>   
