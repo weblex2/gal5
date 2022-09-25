@@ -27,6 +27,11 @@ class GalleryController extends Controller
     }
 
     public function newGallery($status = null){
+        $fileUpload = GalleryPics::where('file_name', '2022_07_29_IMG_1786.jpg')->get();
+        dump($fileUpload);
+        $fileUpload->delete();
+        die();
+        
         if ($status == null) {
             $status = [];
         }    
@@ -50,9 +55,10 @@ class GalleryController extends Controller
     }
 
     public function createGallery(REQUEST $request){
-        dump($request->all());
+        
         $gallery = New Gallery();
         $gallery->fill($request->all());
+        #dump($gallery);
         $res = $gallery->save();
         $gal_id  = $gallery->id;
         return redirect()->route("gallery.edit" , [$gal_id]);

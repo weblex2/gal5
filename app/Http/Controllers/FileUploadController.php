@@ -44,7 +44,7 @@ class FileUploadController extends Controller
         $gal_id = $req['gal_id'];
         $image = $request->file('file');
         $FileName = $image->getClientOriginalName();
-        $image->move(storage_path('app/public/gal/'.$gal_id), $FileName);
+        $status = $image->move(storage_path('app/public/gal/'.$gal_id), $FileName);
         $img_path = 'app/public/gal/'. $gal_id. '/'. $FileName;
         $img_path = storage_path($img_path);    
 
@@ -55,7 +55,8 @@ class FileUploadController extends Controller
         $lon = $thisFileInfo['jpg']['exif']['GPS']['computed']['longitude'];
         $getID3->CopyTagsToComments($thisFileInfo);
         $osm_data  = $this->getLocation($lat,$lon);    
-
+        $osm_status = $osm_data ? true : false;
+        
         $imageUpload = new GalleryPics();
         $imageUpload->file_name = $FileName;
         $imageUpload->gal_id = $gal_id;
@@ -63,8 +64,9 @@ class FileUploadController extends Controller
         $imageUpload->exif_data = json_encode($thisFileInfo);
         $imageUpload->osm_data = $osm_data;
         $imageUpload->save();
+        $id = $imageUpload->id;
         #return response()->json(['success' => $FileName ]);
-        return response()->json(['success' => $FileName, 'img_path' => $img_path, 'exif' => $thisFileInfo ]);
+        return response()->json(['success' => $status, 'id' => $id, 'filename' => $FileName, 'img_path' => $img_path, 'exif' => $thisFileInfo, 'osm' => $osm_status ]);
     }
 
     /**
@@ -107,12 +109,15 @@ class FileUploadController extends Controller
      * @param  \App\Models\FileUpload  $fileUpload
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        $fileUpload = GalleryPics::find($id);
-        $fileUpload->delete();
-        return redirect()->back()
-            ->with('success', 'File deleted successfully');
+        $req = $request->all();
+        $pic_id = $req['pic_id'];    
+        $fileUpload = GalleryPics::find($pic_id);
+        $status = $fileUpload->delete();
+        return response()->json(['success' => $status, 'filename' => $fileUpload]);
+        #return redirect()->back()
+        #    ->with('success', 'File deleted successfully');
     }
 
     private function getLocation($lat,$lon){
@@ -125,6 +130,7 @@ class FileUploadController extends Controller
         curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.2; WOW64; rv:17.0) Gecko/20100101 Firefox/17.0');
         // $output contains the output string
         $result = curl_exec($ch);
+        $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         // close curl resource to free up system resources
         curl_close($ch);    
         #$xml = simplexml_load_string($output, "SimpleXMLElement", LIBXML_NOCDATA);

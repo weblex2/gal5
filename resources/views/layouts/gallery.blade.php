@@ -48,19 +48,17 @@
 <div class="h-screen  flex flex-col" id="maindiv">
     <div class="bg-slate-800 border-b border-slate-900 pt-3  hidden sm:block ">
         <div class="flex space-x-4 float-left">
-            <a href="/" class="menu_item">
+            <!--a href="/" class="menu_item">
                 home
-            </a>
+            </a-->
 
-            <a href="#" class="menu_item">
+            <!--a href="#" class="menu_item">
                 new gallery
-            </a>
+            </a-->
+            <div class="text-xs text-orange-400 ml-5" id="noppal">noppal</div>
         </div>
         <div class="float-right flex px-3 z-20">
-            @php
-                #dump (Auth::User());
-            @endphp
-
+          
             @if (!Auth::user())
             <a href="#" onclick="$('#loginWrapper').toggle(200)">
                 <i class="mb-3 text-white fa fa-user"></i>
@@ -86,10 +84,21 @@
                     <a href="{{ route("gallery.edit", ['id' => $gal_id]) }}">
                         <i class="float-right mb-3 mx-2 text-white fa fa-edit"></i>
                     </a>
+
+                    <a href="{{ route("gallery.edit", ['id' => $gal_id]) }}">
+                        <i class="float-right mb-3 mx-2 text-white fa fa-play"></i>
+                    </a>
+
                 @else
+
+                    <a href="{{ route("gallery.new") }}">
+                        <i class="float-right mb-3 mx-2 text-white fa fa-plus"></i>
+                    </a>
+
                     <a href="{{ route("gallery.index") }}">
                         <i class="float-right mb-3 mx-2 text-white fa fa-home"></i>
                     </a>
+                    
                 @endisset
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf

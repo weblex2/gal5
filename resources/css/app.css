@@ -93,3 +93,7 @@ header{
 #osm_header{
     @apply mt-3
 }
+
+#upload_status{
+    @apply absolute bottom-0 w-96 h-72 bg-slate-500 right-0
+}

@@ -3,10 +3,11 @@
   $exif = json_decode($pic->exif_data,1);
   $osm = json_decode($pic->osm_data,1);
   $picPath = Storage::url("gal/".$pic->gal_id."/".$pic->file_name);
+  $gal_id = $pic->gal_id;
 @endphp
 
 @section('options')
-    <div id="exif_data flex items-stretch">
+    <div id="exif_data flex flex-col justify-between">
     <table class="tblExif">
             <thead>
               <tr><th colspan="2">Exif Data</th></tr>  
@@ -33,10 +34,10 @@
              $lon = $exif['jpg']['exif']['GPS']['computed']['longitude'];
              $lat = $exif['jpg']['exif']['GPS']['computed']['latitude'];
           @endphp
-          <div class="bottom-0">  
+          <div class="h-full flex flex-grow bg-slate-700 mt-10 p-3 ">  
           <iframe 
                 width="100%" 
-                height="240" 
+                height="200" 
                 bottom="0"
                 frameborder="0" 
                 scrolling="no" 

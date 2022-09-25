@@ -6,9 +6,10 @@
             <!--div class="bg-white overflow-hidden shadow-xl sm:rounded-lg"-->
               <div id="gallery_overview" class="grid grid-cols-4 gap-8">
               @foreach ($galleries as $gal)
+                
                 @php
                   if ($gal->background_pic !="") {
-                      $bg= Storage::url('gal/1/2022_07_29_IMG_1789.jpg');
+                      $bg= Storage::url('gal/'.$gal->id."/".$gal->background_pic);
                   } 
                   else{
                     $bg  = Storage::url('gal/default_bg.jpg');
@@ -19,7 +20,7 @@
                     <div class="gallery_name">
                     {{ $gal->gal_name }}
                     </div>
-                    <div class="gallery_public"><i class="fa-solid fa-users"></i></div>
+                    <div class="gallery_public"><i class="{{ $gal->public==1 ? 'text-green-500': 'text-orange-500' }} fa-solid fa-users"></i></div>
                   </div>
                 </a>
               @endforeach

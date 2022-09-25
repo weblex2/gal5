@@ -46,3 +46,4 @@ Route::controller(GalleryController::class)->group(function () {
     
 });
 Route::resource('files', FileUploadController::class);
+Route::post('files/destroy', [FileUploadController::class, 'destroy' ])->name('file.remove');

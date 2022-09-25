@@ -37,10 +37,9 @@
         
         
     </div>
-
-    @endsection
-
-<script type="text/javascript">
+    <div id="upload_status"></div>
+    <script type="text/javascript">
+   
     Dropzone.options.dropzone =
     {
         //maxFilesize: 12,
@@ -51,13 +50,20 @@
         removedfile: function(file) 
         {
             var name = file.upload.filename;
+            var pic_id = $(file.previewElement).attr('pic_id');
+            alert(pic_id);
             $.ajax({
+                //headers: {
+                //    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                //        },
                 headers: {
-                            'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                        },
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },        
                 type: 'POST',
                 url: '{{ url("files/destroy") }}',
-                data: {filename: name},
+                data: {
+                        pic_id: pic_id
+                },
                 success: function (data){
                     console.log("File has been successfully removed!!");
                 },
@@ -70,10 +76,18 @@
         },
         success: function (file, response) {
             console.log(response);
+            console.log(file);
+            console.log($(file.previewElement).length);
+            $(file.previewElement).attr('pic_id', response.id);
+            $('#upload_status').prepend("<div>File " + response.filename + " successfully uploaded.");
         },
         error: function (file, response) {
             console.log(response);
             return false;
         }
     };
+   
 </script>
+
+    @endsection
+
