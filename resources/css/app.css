@@ -95,5 +95,5 @@ header{
 }
 
 #upload_status{
-    @apply absolute bottom-0 w-96 h-72 bg-slate-500 right-0
+    @apply absolute bottom-0 w-96 h-72 bg-slate-500 right-0 text-[10px] font-bold rounded-l-lg overflow-auto p-3
 }

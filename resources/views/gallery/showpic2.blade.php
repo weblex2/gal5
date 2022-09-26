@@ -4,6 +4,14 @@
   $osm = json_decode($pic->osm_data,1);
   $picPath = Storage::url("gal/".$pic->gal_id."/".$pic->file_name);
   $gal_id = $pic->gal_id;
+  if (!isset($exif['jpg'])) {
+    $exif['jpg']['exif']['GPS']['computed']['latitude']="";
+    $exif['jpg']['exif']['GPS']['computed']['longitude']="";
+    $exif['jpg']['exif']['GPS']['computed']['altitude']="";
+    $exif['jpg']['exif']['IFD0']['Make']="";
+    $exif['jpg']['exif']['IFD0']['Model']="";
+    $osm['address']=[];
+  }
 @endphp
 
 @section('options')
@@ -61,10 +69,22 @@
         <div id="picNext" class="absolute bg-green-500 bg-opacity-0"></div>
     </a>
     @endif
+
+    @php
+        $path = asset('storage/gal/'.$gal_id."/" . $pic->file_name);
+        $extension = strtoupper(pathinfo($path, PATHINFO_EXTENSION));
+    @endphp
     <div id="myPic" class="h-full max-h-full p-5  items-center justify-center">
-        <img class="mx-auto rounded-lg shadow-2xl shadow-cyan-500/50 max-h-full" src="{{$picPath}}">
-    </div>
-    
+    @if (in_array($extension,['JPG','JPEG','GIF','PNG']))
+       <img class="mx-auto rounded-lg shadow-2xl shadow-cyan-500/50 max-h-full" src="{{$picPath}}">
+    @else
+       <video   controls class="mx-auto rounded-lg shadow-2xl shadow-cyan-500/50 max-h-full">
+       <source src="{{ Storage::url('gal/'.$gal_id."/" . $pic->file_name) }}" type="video/mp4">
+       Your browser does not support the video tag.
+       </video>                 
+    }
+    @endif
+    </div> 
     <script>
         $(function() {
             var h = $('#myPic').outerHeight();

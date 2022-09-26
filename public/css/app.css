@@ -12245,6 +12245,10 @@ select {
   --tw-text-opacity: 1;
   color: rgb(148 163 184 / var(--tw-text-opacity));
 }
+.text-green-700 {
+  --tw-text-opacity: 1;
+  color: rgb(21 128 61 / var(--tw-text-opacity));
+}
 .text-blue-700 {
   --tw-text-opacity: 1;
   color: rgb(29 78 216 / var(--tw-text-opacity));
@@ -12699,8 +12703,14 @@ header {
   right: 0px;
   height: 18rem;
   width: 24rem;
+  overflow: auto;
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
   --tw-bg-opacity: 1;
   background-color: rgb(100 116 139 / var(--tw-bg-opacity));
+  padding: 0.75rem;
+  font-size: 10px;
+  font-weight: 700;
 }
 .hover\:border-gray-300:hover {
   --tw-border-opacity: 1;

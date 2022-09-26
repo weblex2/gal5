@@ -50,13 +50,28 @@ class FileUploadController extends Controller
 
         $getID3 = new \getID3;
         $thisFileInfo = $getID3->analyze($img_path);
+        $osm_status = 0;
+        if (isset($thisFileInfo['jpg'])) {   
+            $lat = $thisFileInfo['jpg']['exif']['GPS']['computed']['latitude'];
+            $lon = $thisFileInfo['jpg']['exif']['GPS']['computed']['longitude'];
+        }    
+        elseif (isset($thisFileInfo['comments'])) {
+            $lla = $thisFileInfo['quicktime']['comments']['location.ISO6709'][0];
+            $lla = str_replace('+','|+',$lla);
+            $lla = str_replace('-','|-',$lla);
+            $lla = str_replace('/','',$lla);
+            $lla = explode('|', $lla);
 
-        $lat = $thisFileInfo['jpg']['exif']['GPS']['computed']['latitude'];
-        $lon = $thisFileInfo['jpg']['exif']['GPS']['computed']['longitude'];
+            $lat = $lla[1];
+            $lon = $lla[2];
+            $alt = $lla[3];
+        }
         $getID3->CopyTagsToComments($thisFileInfo);
         $osm_data  = $this->getLocation($lat,$lon);    
         $osm_status = $osm_data ? true : false;
         
+        
+
         $imageUpload = new GalleryPics();
         $imageUpload->file_name = $FileName;
         $imageUpload->gal_id = $gal_id;
@@ -65,8 +80,9 @@ class FileUploadController extends Controller
         $imageUpload->osm_data = $osm_data;
         $imageUpload->save();
         $id = $imageUpload->id;
+        $timestamp  = date('Y-m-d H:i:s');
         #return response()->json(['success' => $FileName ]);
-        return response()->json(['success' => $status, 'id' => $id, 'filename' => $FileName, 'img_path' => $img_path, 'exif' => $thisFileInfo, 'osm' => $osm_status ]);
+        return response()->json(['success' => $status, 'timestamp' => $timestamp,  'id' => $id, 'filename' => $FileName, 'img_path' => $img_path, 'exif' => $thisFileInfo, 'osm' => $osm_status ]);
     }
 
     /**

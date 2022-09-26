@@ -12,16 +12,26 @@
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 pt-12">
             <div class="grid grid-cols-{{ $pagination }} grid-flow-col gap-3">
                 @foreach ($pics as $pic)
-                {{-- @php
-                $fileName = 'gal/'.$gal_id."/" . $pic->file_name;
-                @endphp --}}
+                @php
+                    $path = asset('storage/gal/'.$gal_id."/" . $pic->file_name);
+                    $extension = strtoupper(pathinfo($path, PATHINFO_EXTENSION));
+                    #echo $extension;                   
+                @endphp
                 
-                <div class="block">
+                @if (in_array($extension,['JPG','JPEG','GIF','PNG']))
+                    <div class="block">
+                        <a href="{{ route('gallery.showPic',$pic->id) }}">
+                        <img class="preview_pic" src="{{ Storage::url('gal/'.$gal_id."/" . $pic->file_name) }}"></img>
+                        </a>    
+                    </div>
+                @else{
                     <a href="{{ route('gallery.showPic',$pic->id) }}">
-                    <img class="preview_pic" src="{{ Storage::url('gal/'.$gal_id."/" . $pic->file_name) }}"></img>
-                    </a>    
-                </div>
-                
+                    <video  class="preview_pic">
+                    <source src="{{ Storage::url('gal/'.$gal_id."/" . $pic->file_name) }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                    </video>
+                    </a>
+                @endif
             @endforeach
              
             </div>   

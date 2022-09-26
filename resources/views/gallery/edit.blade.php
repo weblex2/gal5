@@ -26,7 +26,7 @@
                         <input type="hidden" name="gal_id" value="{{ $gal_id }}">
                         <input type="hidden" name="user_id" value="{{ $gal_id }}">
                     </form>
-                    <div class="flex content-center w-full items-center bg-slate-800">
+                    <div class="flex content-center w-full items-center bg-slate-800 mt-3">
                     <a class="btn_save" href="{{ route("gallery.save" , [$gal_id]) }}">Save</a>
                     </div>       
                 </div> 
@@ -79,7 +79,7 @@
             console.log(file);
             console.log($(file.previewElement).length);
             $(file.previewElement).attr('pic_id', response.id);
-            $('#upload_status').prepend("<div>File " + response.filename + " successfully uploaded.");
+            $('#upload_status').prepend("<div>" + response.timestamp+ ": File " + response.filename + " successfully uploaded. <br>Exif <i class='text-green-700 fa-solid fa-check'></i>OSM <i class='text-green-700 fa-solid fa-check'></i></div>");
         },
         error: function (file, response) {
             console.log(response);
