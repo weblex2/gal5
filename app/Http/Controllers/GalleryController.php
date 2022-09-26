@@ -26,15 +26,7 @@ class GalleryController extends Controller
         return view("gallery.index", compact('galleries'));
     }
 
-    public function newGallery($status = null){
-        $fileUpload = GalleryPics::where('file_name', '2022_07_29_IMG_1786.jpg')->get();
-        dump($fileUpload);
-        $fileUpload->delete();
-        die();
-        
-        if ($status == null) {
-            $status = [];
-        }    
+    public function newGallery(){
         return view("gallery.new", compact('status'));
     }
 
