@@ -50,28 +50,33 @@ class FileUploadController extends Controller
 
         $getID3 = new \getID3;
         $thisFileInfo = $getID3->analyze($img_path);
-        $osm_status = 0;
-        if (isset($thisFileInfo['jpg'])) {   
+        $osm_status = false;
+        if (isset($thisFileInfo['jpg']['exif']['GPS']['computed'])) {   
             $lat = $thisFileInfo['jpg']['exif']['GPS']['computed']['latitude'];
             $lon = $thisFileInfo['jpg']['exif']['GPS']['computed']['longitude'];
         }    
-        elseif (isset($thisFileInfo['comments'])) {
+        elseif (isset($thisFileInfo['quicktime']['comments']['location.ISO6709'][0])) {
             $lla = $thisFileInfo['quicktime']['comments']['location.ISO6709'][0];
             $lla = str_replace('+','|+',$lla);
             $lla = str_replace('-','|-',$lla);
             $lla = str_replace('/','',$lla);
             $lla = explode('|', $lla);
-
             $lat = $lla[1];
             $lon = $lla[2];
             $alt = $lla[3];
         }
-        $getID3->CopyTagsToComments($thisFileInfo);
-        $osm_data  = $this->getLocation($lat,$lon);    
-        $osm_status = $osm_data ? true : false;
-        
-        
+        else{
+            
+        }
 
+        $getID3->CopyTagsToComments($thisFileInfo);
+        $osm_data = null;
+        if (isset($lat) && $isset($lon)) {
+            $osm_data  = $this->getLocation($lat,$lon);    
+            $osm_status = true;
+        }
+        
+        
         $imageUpload = new GalleryPics();
         $imageUpload->file_name = $FileName;
         $imageUpload->gal_id = $gal_id;
@@ -82,7 +87,13 @@ class FileUploadController extends Controller
         $id = $imageUpload->id;
         $timestamp  = date('Y-m-d H:i:s');
         #return response()->json(['success' => $FileName ]);
-        return response()->json(['success' => $status, 'timestamp' => $timestamp,  'id' => $id, 'filename' => $FileName, 'img_path' => $img_path, 'exif' => $thisFileInfo, 'osm' => $osm_status ]);
+        return response()->json(['success' => $status, 
+                                 'timestamp' => $timestamp,  
+                                 'id' => $id, 
+                                 'filename' => $FileName, 
+                                 'img_path' => $img_path, 
+                                 'exif' => $thisFileInfo, 
+                                 'osm' => $osm_status ]);
     }
 
     /**

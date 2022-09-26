@@ -42,7 +42,7 @@
    
     Dropzone.options.dropzone =
     {
-        //maxFilesize: 12,
+        maxFilesize: 500,
         resizeQuality: 1.0,
         //acceptedFiles: ".jpeg,.jpg,.png,.gif",
         addRemoveLinks: true,
