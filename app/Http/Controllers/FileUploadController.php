@@ -71,7 +71,7 @@ class FileUploadController extends Controller
 
         $getID3->CopyTagsToComments($thisFileInfo);
         $osm_data = null;
-        if (isset($lat) && $isset($lon)) {
+        if (isset($lat) && isset($lon)) {
             $osm_data  = $this->getLocation($lat,$lon);    
             $osm_status = true;
         }
