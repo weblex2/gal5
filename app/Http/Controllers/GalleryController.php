@@ -27,6 +27,7 @@ class GalleryController extends Controller
     }
 
     public function newGallery(){
+        $status="super!";
         return view("gallery.new", compact('status'));
     }
 
