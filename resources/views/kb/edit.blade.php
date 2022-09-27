@@ -6,9 +6,11 @@
     </x-slot>
 <form method="POST" action="{{ route("kb.update", ['id'=>$kb->id]) }}">
     @csrf
-    <input type="text" name="topic" value="{{ $kb->topic}}">
-    <input type="text" name="description" value="{{ $kb->description}}">
-    <textarea name="body">"{{ $kb->body }}"</textarea>
+    <table>
+    <tr><td>Topic</td><td><input type="text" name="topic" value="{{ $kb->topic}}"></td></tr>
+    <tr><td>Description</td><td><input type="text" name="description" value="{{ $kb->description}}"></td></tr>
+    <tr><td>Body</td><td><textarea name="body">"{{ $kb->body }}"</textarea></td></tr>
+    </table>
     <input type="submit" value="Save">
 </form>
 </x-app-layout>
