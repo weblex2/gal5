@@ -8,6 +8,7 @@ use App\Http\Controllers\LaravelMyAdminController;
 use App\Http\Controllers\LinkController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\FileUploadController; 
+use App\Http\Controllers\KnowledgeBaseController;
 
 
 /*
@@ -47,3 +48,12 @@ Route::controller(GalleryController::class)->group(function () {
 });
 Route::resource('files', FileUploadController::class);
 Route::post('files/destroy', [FileUploadController::class, 'destroy' ])->name('file.remove');
+
+
+Route::controller(KnowledgeBaseController::class)->group(function () { 
+    Route::get('/kb', 'index')->name('kb.index');  
+    Route::get('/kb/new', 'new')->name('kb.new');  
+    Route::post('/kb/create', 'create')->name('kb.create');
+    Route::get('/kb/edit/{id}', 'edit')->name('kb.edit');
+    Route::post('/kb/update', 'update')->name('kb.update');
+});    
