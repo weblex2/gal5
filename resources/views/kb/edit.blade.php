@@ -9,7 +9,7 @@
     <table>
     <tr><td>Topic</td><td><input type="text" name="topic" value="{{ $kb->topic}}"></td></tr>
     <tr><td>Description</td><td><input type="text" name="description" value="{{ $kb->description}}"></td></tr>
-    <tr><td>Body</td><td><textarea name="body">"{{ $kb->body }}"</textarea></td></tr>
+    <tr><td>Body</td><td><textarea name="body">{{ $kb->body }}</textarea></td></tr>
     </table>
     <input type="submit" value="Save">
 </form>
