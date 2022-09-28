@@ -19,21 +19,25 @@ class GalleryController extends Controller
         #else{
         #    $galleries = Gallery::where('public' , "=", 1 )->get();
         #}
-        if (count($galleries)==0){   
-            $galleries = [];
-            return redirect()->route("gallery.new", compact('galleries'));
+        if (count($galleries)==0 && \Auth::id()){   
+            return redirect()->route("gallery.new");
         }
-        return view("gallery.index", compact('galleries'));
+        else {
+            return view("gallery.index", compact('galleries'));        
+        }
+        
     }
 
     public function newGallery(){
-        $status="super!";
-        return view("gallery.new", compact('status'));
+        return view("gallery.new");
     }
 
     public function showGallery($gal_id){
         $pagination = 5;
         $pics = GalleryPics::where('gal_id' , "=", $gal_id )->paginate($pagination);
+        if (count($pics)==0) {
+            return redirect()->route("gallery.edit" , [$gal_id]);
+        }    
         return view("gallery.showgallery", compact('pics', 'gal_id', 'pagination'));
     }
 
@@ -65,6 +69,14 @@ class GalleryController extends Controller
         $prev = GalleryPics::where('id', '<', $pic_id)->where('gal_id', "=", $gal_id)->max('id');
         $next = GalleryPics::where('id', '>', $pic_id)->where('gal_id', "=", $gal_id)->min('id');
         return view("gallery.showpic2", compact('pic','prev','next'));
+    }
+
+    public function deletePic(Request $request){
+        $id = $request->all()['pic_id'];
+        $pic  = GalleryPics::find($id);
+        $pic->delete();
+        return redirect()->back()
+            ->with('success', 'File deleted successfully');
     }
 
 }

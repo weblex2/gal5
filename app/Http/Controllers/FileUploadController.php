@@ -47,7 +47,7 @@ class FileUploadController extends Controller
         $status = $image->move(storage_path('app/public/gal/'.$gal_id), $FileName);
         $img_path = 'app/public/gal/'. $gal_id. '/'. $FileName;
         $img_path = storage_path($img_path);    
-
+        $mime  = mime_content_type($img_path);
         $getID3 = new \getID3;
         $thisFileInfo = $getID3->analyze($img_path);
         $osm_status = false;
@@ -61,9 +61,10 @@ class FileUploadController extends Controller
             $lla = str_replace('-','|-',$lla);
             $lla = str_replace('/','',$lla);
             $lla = explode('|', $lla);
-            $lat = $lla[1];
-            $lon = $lla[2];
+            $lat = str_replace('+','',$lla[1]);
+            $lon = str_replace('+','',$lla[2]);
             $alt = $lla[3];
+            
         }
         else{
             
@@ -77,12 +78,14 @@ class FileUploadController extends Controller
         }
         
         
+        
         $imageUpload = new GalleryPics();
         $imageUpload->file_name = $FileName;
         $imageUpload->gal_id = $gal_id;
         $imageUpload->create_user_id = \Auth::id();
         $imageUpload->exif_data = json_encode($thisFileInfo);
         $imageUpload->osm_data = $osm_data;
+        $imageUpload->mimetype = $mime;
         $imageUpload->save();
         $id = $imageUpload->id;
         $timestamp  = date('Y-m-d H:i:s');
@@ -102,7 +105,8 @@ class FileUploadController extends Controller
      * @param  \App\Models\FileUpload  $fileUpload
      * @return \Illuminate\Http\Response
      */
-    public function show(FileUpload $fileUpload)
+    
+     public function show(FileUploadController $fileUpload)
     {
         //
     }
@@ -110,10 +114,10 @@ class FileUploadController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\FileUpload  $fileUpload
+     * @param  \App\Models\FileUploadController  $fileUpload
      * @return \Illuminate\Http\Response
      */
-    public function edit(FileUpload $fileUpload)
+    public function edit(FileUploadController $fileUpload)
     {
         //
     }
@@ -125,10 +129,10 @@ class FileUploadController extends Controller
      * @param  \App\Models\FileUpload  $fileUpload
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, FileUpload $fileUpload)
+    /* public function update(Request $request, FileUpload $fileUpload)
     {
         //
-    }
+    } */
 
     /**
      * Remove the specified resource from storage.
@@ -138,13 +142,14 @@ class FileUploadController extends Controller
      */
     public function destroy(Request $request)
     {
+        echo "delete";
         $req = $request->all();
         $pic_id = $req['pic_id'];    
         $fileUpload = GalleryPics::find($pic_id);
         $status = $fileUpload->delete();
-        return response()->json(['success' => $status, 'filename' => $fileUpload]);
-        #return redirect()->back()
-        #    ->with('success', 'File deleted successfully');
+        #return response()->json(['success' => $status, 'filename' => $fileUpload]);
+        return redirect()->back()
+            ->with('success', 'File deleted successfully');
     }
 
     private function getLocation($lat,$lon){

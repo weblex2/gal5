@@ -32,9 +32,25 @@
               <tr><td>model</td><td>{{ $exif['jpg']['exif']['IFD0']['Model'] }}</td></tr>
               <tr><td colspan="2">&nbsp;</td>  
               <tr><th colspan="2">Open Street Map Data</th></tr>
-              @foreach($osm['address'] as $key => $val)
-              <tr><td>{{ $key }}</td><td>{{ $val }}</td></tr>
-              @endforeach
+              @php 
+                #dump($osm);
+              @endphp
+              @if( count($osm['address'])>0) 
+                @foreach($osm['address'] as $key => $val)
+                <tr><td>{{ $key }}</td><td>{{ $val }}</td></tr>
+                @endforeach
+              @elseif (isset($osm['place_id']) )
+                <tr><td> place id </td><td>{{ $osm['place_id'] }}</td></tr>
+                <tr><td> osm_type </td><td>{{ $osm['osm_type'] }}</td></tr>
+                <tr><td> cat </td><td>{{ $osm['category'] }}</td></tr>
+                <tr><td> type </td><td>{{ $osm['type'] }}</td></tr>
+                <tr><td> address type </td><td>{{ $osm['addresstype'] }}</td></tr>
+                <tr><td> name </td><td>{{ $osm['name'] }}</td></tr>
+                <tr><td> display name </td><td>{{ $osm['display_name'] }}</td></tr>
+              @else{
+                <tr><td colspan="2"> No OSM data found.</td></tr>
+              }
+              @endif
             </tbody>
           </table>
         
@@ -71,6 +87,7 @@
     @endif
 
     @php
+        $diashow=false;
         $path = asset('storage/gal/'.$gal_id."/" . $pic->file_name);
         $extension = strtoupper(pathinfo($path, PATHINFO_EXTENSION));
     @endphp
@@ -85,7 +102,19 @@
     }
     @endif
     </div> 
+
+
+    
+
     <script>
+
+        function nextPic(){
+            clearTimeout(myTimeout);
+            if ($('#picNext').length>0) {
+              $('#picNext').click();
+            }
+        }
+
         $(function() {
             var h = $('#myPic').outerHeight();
             var cl = "h-["+ h +"]";
@@ -101,4 +130,13 @@
             $('#picNext').css('right', '0px');
         });
     </script>
+   
+   @if ($diashow)
+    <script>
+        var to = 70000;
+        console.log('to set to ' + to);
+        var myTimeout = setTimeout(nextPic(),to);
+    </script>  
+    @endif
+
 @endsection

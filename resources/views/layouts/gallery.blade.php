@@ -64,7 +64,7 @@
                 <i class="mb-3 text-white fa fa-user"></i>
             </a>
             
-            <div id="loginWrapper" class="hidden absolute p-3 w-48 h-48 mx-5 right-0 mt-3 border border-slate-900 z-20">
+            <div id="loginWrapper" class="">
                 <form METHOD="POST" action="{{ route("login") }}">
                     @csrf
                 <div class="">
@@ -73,13 +73,17 @@
                     <div class="">
                         <input type="password" name="password" class="rounded-md shadow-sm border-gray-800 block mt-1 w-full">
                     </div>
-                    <button class="">Login</button>
+                    <button class="btn_save mt-1 rounded-lg">Login</button>
                 </form>
             </div>
             @else
                 @isset($gal_id) 
-                    <a href="{{ route("gallery.show", ['id' => $gal_id]) }}">
+                    <a href="{{ route("gallery.index") }}">
                         <i class="float-right mb-3 mx-2 text-white fa fa-home"></i>
+                    </a>
+
+                    <a href="{{ route("gallery.show", ['id' => $gal_id] ) }}">
+                        <i class="float-right mb-3 mx-2 text-white fa fa-arrow-up"></i>
                     </a>
                     <a href="{{ route("gallery.edit", ['id' => $gal_id]) }}">
                         <i class="float-right mb-3 mx-2 text-white fa fa-edit"></i>
@@ -88,7 +92,6 @@
                     <a href="{{ route("gallery.edit", ['id' => $gal_id]) }}">
                         <i class="float-right mb-3 mx-2 text-white fa fa-play"></i>
                     </a>
-
                 @else
 
                     <a href="{{ route("gallery.new") }}">
@@ -100,6 +103,7 @@
                     </a>
                     
                 @endisset
+                
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <a href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();">

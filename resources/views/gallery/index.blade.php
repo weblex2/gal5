@@ -1,5 +1,8 @@
 @extends('layouts.gallery')
 
+@php
+  #dump();
+@endphp
 @section('content')
 <div class="py-12 w-full">
         <div class="w-4/5 mx-auto sm:px-6 lg:px-8">  
@@ -24,6 +27,9 @@
                   </div>
                 </a>
               @endforeach
+              @if (count($galleries)==0)
+                  No galleries found. Log in and create one.
+              @endif
             </div>
             <!--/div-->
     </div>

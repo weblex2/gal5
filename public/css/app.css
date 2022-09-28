@@ -11293,10 +11293,6 @@ select {
   margin-left: auto;
   margin-right: auto;
 }
-.mx-5 {
-  margin-left: 1.25rem;
-  margin-right: 1.25rem;
-}
 .mx-2 {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
@@ -11442,9 +11438,6 @@ select {
 .h-5\/6 {
   height: 83.333333%;
 }
-.h-48 {
-  height: 12rem;
-}
 .h-32 {
   height: 8rem;
 }
@@ -11453,6 +11446,9 @@ select {
 }
 .h-96 {
   height: 24rem;
+}
+.h-48 {
+  height: 12rem;
 }
 .max-h-full {
   max-height: 100%;
@@ -11513,11 +11509,11 @@ select {
 .w-4\/5 {
   width: 80%;
 }
-.w-1\/2 {
-  width: 50%;
-}
 .w-2\/3 {
   width: 66.666667%;
+}
+.w-32 {
+  width: 8rem;
 }
 .min-w-0 {
   min-width: 0px;
@@ -11612,11 +11608,14 @@ select {
 .grid-cols-4 {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
-.grid-cols-3 {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
 .grid-cols-2 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.grid-cols-5 {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+.grid-cols-8 {
+  grid-template-columns: repeat(8, minmax(0, 1fr));
 }
 .flex-row {
   flex-direction: row;
@@ -11984,6 +11983,23 @@ select {
 }
 .bg-opacity-0 {
   --tw-bg-opacity: 0;
+}
+.bg-gradient-to-r {
+  background-image: linear-gradient(to right, var(--tw-gradient-stops));
+}
+.from-gray-900 {
+  --tw-gradient-from: #111827;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(17 24 39 / 0));
+}
+.from-transparent {
+  --tw-gradient-from: transparent;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(0 0 0 / 0));
+}
+.to-transparent {
+  --tw-gradient-to: transparent;
+}
+.to-gray-900 {
+  --tw-gradient-to: #111827;
 }
 .bg-cover {
   background-size: cover;
@@ -12435,6 +12451,22 @@ select {
 }
 .ease-in {
   transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
+}
+#loginWrapper {
+  position: absolute;
+  right: 0px;
+  z-index: 20;
+  margin-top: 2.25rem;
+  display: none;
+  height: 12rem;
+  width: 12rem;
+  border-radius: 0.5rem;
+  border-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(15 23 42 / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(51 65 85 / var(--tw-bg-opacity));
+  padding: 0.75rem;
 }
 #gallery_overview {
   --tw-text-opacity: 1;

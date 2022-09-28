@@ -44,6 +44,7 @@ Route::controller(GalleryController::class)->group(function () {
     Route::get('/gallery/saveGallery/{id}', 'saveGallery')->middleware(['auth'])->name('gallery.save');
     Route::get('/gallery/showPic/{id}', 'showPic')->middleware(['auth'])->name('gallery.showPic');
     Route::post('/gallery/createGallery', 'createGallery')->middleware(['auth'])->name('gallery.create');
+    Route::post('/gallery/deletePic', 'deletePic')->middleware(['auth'])->name('gallery.deletePic');
     
 });
 Route::resource('files', FileUploadController::class);
