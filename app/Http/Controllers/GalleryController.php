@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use Storage;
-use FFMpeg;
-use FFProbe;
 use Illuminate\Http\Request;
 use App\Models\Gallery;
 use App\Models\GalleryPics;
@@ -21,7 +19,7 @@ class GalleryController extends Controller
     }
 
     public function index(){
-        //$this->createPreviewImageFromVideo();
+       
         $create_user_id = \Auth::id();
         if ($create_user_id) {
             $galleries = Gallery::where('create_user_id' , "=", $create_user_id )->get();
@@ -115,21 +113,6 @@ class GalleryController extends Controller
             ->with('success', 'File deleted successfully');
     }
 
-    public function createPreviewImageFromVideo(){
-        
-       
-        
-        $file = Storage::url('gal/1/2022_08_17_IMG_3348.MOV');
-        $ffprobe = FFMpeg\FFProbe::create();
-        $thumbnail = 'thumbnail.png';
-        $ffmpeg = \FFMpeg\FFMpeg::create([
-            'ffmpeg.binaries'  => '/vendor/php-ffmpeg/php-ffmpeg/src/FFMpeg/ffmpeg',
-            'ffprobe.binaries' => '/vendor/php-ffmpeg/php-ffmpeg/src/ffprobe' 
-        ]);
-        #$video = $ffmpeg->open($movie);
-        #$frame = $video->frame(FFMpeg\Coordinate\TimeCode::fromSeconds(2));
-        #$frame->save($thumbnail);
-        echo '<img src="'.$thumbnail.'">';
-    }
+    
 
 }
