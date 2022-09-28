@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Storage;
+use FFMpeg;
+use FFProbe;
 use Illuminate\Http\Request;
 use App\Models\Gallery;
 use App\Models\GalleryPics;
@@ -11,14 +13,22 @@ use Http\Controllers\FileUploadController;
 
 class GalleryController extends Controller
 {
+
+    
+    public function __construct()
+    {
+        
+    }
+
     public function index(){
+        //$this->createPreviewImageFromVideo();
         $create_user_id = \Auth::id();
-        #if ($create_user_id) {
+        if ($create_user_id) {
             $galleries = Gallery::where('create_user_id' , "=", $create_user_id )->get();
-        #}
-        #else{
-        #    $galleries = Gallery::where('public' , "=", 1 )->get();
-        #}
+        }
+        else{
+            $galleries = Gallery::where('public' , "=", 1 )->get();
+        }
         if (count($galleries)==0 && \Auth::id()){   
             return redirect()->route("gallery.new");
         }
@@ -34,10 +44,15 @@ class GalleryController extends Controller
 
     public function showGallery($gal_id){
         $pagination = 5;
-        $pics = GalleryPics::where('gal_id' , "=", $gal_id )->paginate($pagination);
-        if (count($pics)==0) {
+        if (\Auth::id()) {
+            $pics = GalleryPics::where('gal_id' , "=", $gal_id )->paginate($pagination);
+        }
+        else {
+            $pics = GalleryPics::where('gal_id' , "=", $gal_id )->where('public', "=", 1)->paginate($pagination);
+        }
+        /* if (count($pics)==0) {
             return redirect()->route("gallery.edit" , [$gal_id]);
-        }    
+        }   */  
         return view("gallery.showgallery", compact('pics', 'gal_id', 'pagination'));
     }
 
@@ -55,7 +70,6 @@ class GalleryController extends Controller
         
         $gallery = New Gallery();
         $gallery->fill($request->all());
-        #dump($gallery);
         $res = $gallery->save();
         $gal_id  = $gallery->id;
         return redirect()->route("gallery.edit" , [$gal_id]);
@@ -64,10 +78,32 @@ class GalleryController extends Controller
     
 
     public function showPic($pic_id){
-        $pic  = GalleryPics::find($pic_id);
-        $gal_id = $pic->gal_id;
-        $prev = GalleryPics::where('id', '<', $pic_id)->where('gal_id', "=", $gal_id)->max('id');
-        $next = GalleryPics::where('id', '>', $pic_id)->where('gal_id', "=", $gal_id)->min('id');
+
+        if (\Auth::id()) {
+            $pic  = GalleryPics::find($pic_id);
+            if ($pic !== null) {
+                $gal_id = $pic->gal_id;
+                $prev = GalleryPics::where('id', '<', $pic_id)->where('gal_id', "=", $gal_id)->max('id');
+                $next = GalleryPics::where('id', '>', $pic_id)->where('gal_id', "=", $gal_id)->min('id');
+            }    
+        }
+        else {
+            $pic  = GalleryPics::where('id','=', $pic_id)->where('public',"=",1)->firstorfail();
+            if ($pic !== null) {
+                $gal_id = $pic->gal_id;
+                $prev = GalleryPics::where('id', '<', $pic_id)
+                                    ->where('gal_id', "=", $gal_id)
+                                    ->where('public', "=", 1)
+                                    ->max('id');
+                $next = GalleryPics::where('id', '>', $pic_id)
+                                    ->where('gal_id', "=", $gal_id)
+                                    ->where('public', "=", 1)
+                                    ->min('id');
+            }                    
+        }
+
+        
+        
         return view("gallery.showpic2", compact('pic','prev','next'));
     }
 
@@ -77,6 +113,23 @@ class GalleryController extends Controller
         $pic->delete();
         return redirect()->back()
             ->with('success', 'File deleted successfully');
+    }
+
+    public function createPreviewImageFromVideo(){
+        
+       
+        
+        $file = Storage::url('gal/1/2022_08_17_IMG_3348.MOV');
+        $ffprobe = FFMpeg\FFProbe::create();
+        $thumbnail = 'thumbnail.png';
+        $ffmpeg = \FFMpeg\FFMpeg::create([
+            'ffmpeg.binaries'  => '/vendor/php-ffmpeg/php-ffmpeg/src/FFMpeg/ffmpeg',
+            'ffprobe.binaries' => '/vendor/php-ffmpeg/php-ffmpeg/src/ffprobe' 
+        ]);
+        #$video = $ffmpeg->open($movie);
+        #$frame = $video->frame(FFMpeg\Coordinate\TimeCode::fromSeconds(2));
+        #$frame->save($thumbnail);
+        echo '<img src="'.$thumbnail.'">';
     }
 
 }

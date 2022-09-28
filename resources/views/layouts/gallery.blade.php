@@ -55,27 +55,40 @@
             <!--a href="#" class="menu_item">
                 new gallery
             </a-->
-            <div class="text-xs text-orange-400 ml-5" id="noppal">noppal</div>
+            <a href="{{ route("gallery.index") }}">
+                <img src="{{ Storage::url('me.png')}}" class="rounded-full w-8 ml-3 mb-2 mt-[-5px]">
+            </a>
         </div>
         <div class="float-right flex px-3 z-20">
           
             @if (!Auth::user())
-            <a href="#" onclick="$('#loginWrapper').toggle(200)">
-                <i class="mb-3 text-white fa fa-user"></i>
-            </a>
-            
-            <div id="loginWrapper" class="">
-                <form METHOD="POST" action="{{ route("login") }}">
-                    @csrf
-                <div class="">
-                    <input type="text" name="email" class="rounded-md shadow-sm border-gray-800 block mt-1 w-full">
-                </div>
+
+                <a href="{{ route("gallery.index") }}">
+                    <i class="float-right mb-3 mx-2 text-white fa fa-home"></i>
+                </a>
+                    
+                @isset($gal_id) 
+                <a href="{{ route("gallery.show", ['id' => $gal_id] ) }}">
+                    <i class="float-right mb-3 mx-2 text-white fa fa-arrow-up"></i>
+                </a>
+                @endisset
+
+                <a href="#" onclick="$('#loginWrapper').toggle(200)">
+                    <i class="float-right mb-3 mx-2 text-white fa fa-user"></i>
+                </a>
+                
+                <div id="loginWrapper" class="">
+                    <form METHOD="POST" action="{{ route("login") }}">
+                        @csrf
                     <div class="">
-                        <input type="password" name="password" class="rounded-md shadow-sm border-gray-800 block mt-1 w-full">
+                        <input type="text" name="email" class="rounded-md shadow-sm border-gray-800 block mt-1 w-full">
                     </div>
-                    <button class="btn_save mt-1 rounded-lg">Login</button>
-                </form>
-            </div>
+                        <div class="">
+                            <input type="password" name="password" class="rounded-md shadow-sm border-gray-800 block mt-1 w-full">
+                        </div>
+                        <button class="btn_save mt-1 rounded-lg">Login</button>
+                    </form>
+                </div>
             @else
                 @isset($gal_id) 
                     <a href="{{ route("gallery.index") }}">

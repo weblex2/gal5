@@ -23,6 +23,14 @@
                     </a>
                 </div>
             @endforeach
+asdasda
+            @php
+                echo "hallo " .count($pics);
+            @endphp        
+
+            @if (count($pics)==0) 
+                No pics found.
+            @endif
              
             </div>   
             <div class="flex">

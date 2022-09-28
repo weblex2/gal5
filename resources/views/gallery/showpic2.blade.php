@@ -1,5 +1,6 @@
 @extends('layouts.gallery')
-@php          
+@php         
+  
   $exif = json_decode($pic->exif_data,1);
   $osm = json_decode($pic->osm_data,1);
   $picPath = Storage::url("gal/".$pic->gal_id."/".$pic->file_name);

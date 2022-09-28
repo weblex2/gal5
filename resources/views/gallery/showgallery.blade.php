@@ -33,6 +33,10 @@
                     </a>
                 @endif
             @endforeach
+
+            @if (count($pics)==0) 
+                <div class="text-white">No pics found.</div>
+            @endif
              
             </div>   
             <div class="flex">

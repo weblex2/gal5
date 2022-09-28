@@ -34,15 +34,24 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 
 
+Route::controller(GalleryController::class)->group(function () { 
+    Route::get('/kb', 'index')->name('kb.index');  
+    Route::get('/kb/new', 'new')->name('kb.new');  
+    Route::post('/kb/create', 'create')->name('kb.create');
+    Route::get('/kb/edit/{id}', 'edit')->name('kb.edit');
+    Route::post('/kb/update', 'update')->name('kb.update');
+});  
+
+
 
 Route::controller(GalleryController::class)->group(function () { 
     Route::get('/', 'index')->name('gallery.index');  
     Route::get('/gal', 'index')->name('gallery.index');    
     Route::get('/gallery/newGallery', 'newGallery')->middleware(['auth'])->name('gallery.new');
-    Route::get('/gallery/showGallery/{id}', 'showGallery')->middleware(['auth'])->name('gallery.show');
+    Route::get('/gallery/showGallery/{id}', 'showGallery')->name('gallery.show');
     Route::get('/gallery/editGallery/{id}', 'editGallery')->middleware(['auth'])->name('gallery.edit');
     Route::get('/gallery/saveGallery/{id}', 'saveGallery')->middleware(['auth'])->name('gallery.save');
-    Route::get('/gallery/showPic/{id}', 'showPic')->middleware(['auth'])->name('gallery.showPic');
+    Route::get('/gallery/showPic/{id}', 'showPic')->name('gallery.showPic');
     Route::post('/gallery/createGallery', 'createGallery')->middleware(['auth'])->name('gallery.create');
     Route::post('/gallery/deletePic', 'deletePic')->middleware(['auth'])->name('gallery.deletePic');
     
