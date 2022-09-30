@@ -8,7 +8,7 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
-        
+
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
@@ -36,6 +36,7 @@
         <!-- Bootstrap CSS CDN -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
             integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+        <x-rich-text-trix-styles />
 
     </head>
     <body class="font-sans antialiased">
@@ -55,7 +56,7 @@
 
             <!-- Page Content -->
             <main class="flex flex-grow">
-                 {{ $slot }} 
+                 {{ $slot }}
             </main>
         </div>
 
