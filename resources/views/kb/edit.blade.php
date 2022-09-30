@@ -3,7 +3,7 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Knowledge Base') }}
         </h2>
-    </x-slot>
+    </x-slot> 
 <form method="POST" action="{{ route("kb.update", ['id'=>$kb->id]) }}">
     @csrf
     <table>

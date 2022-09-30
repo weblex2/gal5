@@ -8,7 +8,7 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
-        
+
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
@@ -55,7 +55,7 @@
 
             <!-- Page Content -->
             <main class="flex flex-grow">
-                 {{ $slot }} 
+                 {{ $slot }}
             </main>
         </div>
 
