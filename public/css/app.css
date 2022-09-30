@@ -11512,6 +11512,11 @@ select {
 .w-2\/3 {
   width: 66.666667%;
 }
+.w-fit {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
 .min-w-0 {
   min-width: 0px;
 }

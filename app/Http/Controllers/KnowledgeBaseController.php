@@ -44,4 +44,9 @@ class KnowledgeBaseController extends Controller
         $kb = KnowledgeBase::where('topic', 'like', '%'.$topic.'%')->get();
         return view('kb.show', compact('kb'));
     }
+
+    public function detail($id){
+        $kb = KnowledgeBase::find($id);
+        return view('kb.detail', compact('kb'));
+    }
 }
