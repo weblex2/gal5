@@ -37,4 +37,11 @@ class KnowledgeBaseController extends Controller
         $kb->update();
         return redirect()->route('kb.index');
     }
+
+    public function show(Request $request){
+        $req  = $request->all();
+        $topic  = $req['topic'];
+        $kb = KnowledgeBase::where('topic', 'like', '%'.$topic.'%')->get();
+        return view('kb.show', compact('kb'));
+    }
 }

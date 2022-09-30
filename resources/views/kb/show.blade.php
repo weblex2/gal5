@@ -19,7 +19,7 @@
                 </form>
             </div>
             <div class="float-left w-4/5">
-                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="w-full mx-auto sm:px-6 lg:px-8">
                     <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                     <div class="bg-gray-200 bg-opacity-25 grid grid-cols-1 md:grid-cols-2">
                         <div class="p-6">
@@ -30,7 +30,7 @@
 
                                 <div class="grid grid-cols-2">
                                     @foreach ($kb as $key => $row)
-                                    <div><a href="{{ route("kb.edit", ['id' => $row->id] ) }}">{{$row->topic}}</a></div>
+                                    <div><a href="{{ route("kb.detail", ['id' => $row->id] ) }}">{{$row->topic}}</a></div>
                                     <div>{{$row->description}}</div>
                                     @endforeach
                                 </div>
