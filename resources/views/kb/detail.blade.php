@@ -7,24 +7,14 @@
 
     <div class="py-12 w-full">
         <div class="bg-slate-300 w-full px-3  ">
-            <div class="float-left bg-gray-200 bg-opacity-25 shadow-xl sm:rounded-lg w-1/5 p-3">
-                <div>Search</div>
-                <form method="POST" action="{{route("kb.show")}}">
-                    @csrf
-                    <div>Topic:</div>
-                    <div>
-                        <input type="text" name="topic" class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full">
-                    </div>
-                    <button type="submit" class="px-3 py-2 mt-3 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ">Search</button>
-                </form>
-            </div>
+             @include("kb.search")
             <div class="float-left w-4/5">
                 <div class="w-full mx-auto sm:px-6 lg:px-8">
                     <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                         <div class="bg-gray-200 bg-opacity-25 ">
                             <div class="p-6 w-full">
                                 <div class="w-full block  text-right">
-                                    <a class="px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition " href="{{route('kb.new')}}">Edit</a>
+                                    <a class="px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition " href="{{route('kb.edit', ['id' => $kb->id])}}">Edit</a>
 
                                 <a class="px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition " href="{{route('kb.new')}}">New</a>
                                 </div>
