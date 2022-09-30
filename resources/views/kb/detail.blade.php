@@ -14,9 +14,13 @@
                         <div class="bg-gray-200 bg-opacity-25 ">
                             <div class="p-6 w-full">
                                 <div class="w-full block  text-right">
+                                    <form id="frmDelKb" method="POST" action="{{route('kb.delete')}}">
+                                        @csrf
+                                        <input type="hidden" name="id" value="{{$kb->id }}">
+                                    </form>
+                                    <a class="px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition " href="javascript:void(0)" onclick="$('#frmDelKb').submit()">Delete</a>
                                     <a class="px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition " href="{{route('kb.edit', ['id' => $kb->id])}}">Edit</a>
-
-                                <a class="px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition " href="{{route('kb.new')}}">New</a>
+                                    <a class="px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition " href="{{route('kb.new')}}">New</a>
                                 </div>
                                 <div class="detail_div w-full">
                                     {!! $kb->body !!}

@@ -68,4 +68,5 @@ Route::controller(KnowledgeBaseController::class)->group(function () {
     Route::post('/kb/update', 'update')->name('kb.update');
     Route::post('/kb/show', 'show')->name('kb.show');
     Route::get('/kb/detail/{id}', 'detail')->name('kb.detail');
+    Route::post('/kb/delete', 'delete')->name('kb.delete');
 });

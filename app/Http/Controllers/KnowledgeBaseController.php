@@ -49,4 +49,12 @@ class KnowledgeBaseController extends Controller
         $kb = KnowledgeBase::find($id);
         return view('kb.detail', compact('kb'));
     }
+
+    public function delete(Request $request){
+        $req  = $request->all();
+        $id  = $req['id'];
+        $kb = KnowledgeBase::find($id);
+        $kb->delete();
+        return redirect()->route('kb.index');
+    }
 }
