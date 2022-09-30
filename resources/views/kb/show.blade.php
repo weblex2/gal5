@@ -21,12 +21,15 @@
                                 </div>
                                 <div class="w-full">
                                     <div class="grid grid-cols-2">
-                                        <div><h3>Topic</h3></div>
-                                        <div><h3>Description</h3></div>
+                                        <div class="border-b border-slate-200 mt-[-1px] p-1"><h6>Topic</h6></div>
+                                        <div class="border-b border-slate-200 mt-[-1px] p-1"><h6>Description</h6></div>
                                         @foreach ($kb as $key => $row)
-                                            <div class="border border-slate-600 mt-[-1px] p-1 "><a href="{{ route("kb.detail", ['id' => $row->id] ) }}">{{$row->topic}}</a></div>
-                                            <div class="border border-slate-600 mt-[-1px] ml-[-1px] p-1 ">{{$row->description}}</div>
+                                            <div class="border-b border-slate-200 mt-[-1px] p-1 "><a href="{{ route("kb.detail", ['id' => $row->id] ) }}">{{$row->topic}}</a></div>
+                                            <div class="border-b border-slate-200 mt-[-1px] ml-[-1px] p-1 ">{{$row->description}}</div>
                                         @endforeach
+                                        @if (count($kb)==0)
+                                        <div class="border-b border-slate-200 mt-[-1px] p-1 col-span-2 text-center"> Nothing found, sorry :( </div>
+                                        @endif
                                     </div>
                                     {{$kb->appends(request()->input())->links('vendor.pagination.tailwind')}}
                                 </div>

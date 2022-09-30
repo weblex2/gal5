@@ -38,7 +38,7 @@ class KnowledgeBaseController extends Controller
 
     public function show(Request $request){
         $req  = $request->all();
-        $topic  = $req['topic'];
+        $topic  = isset($req['topic']) ? $req['topic'] : "";
         $kb = KnowledgeBase::where('topic', 'like', ''.$topic.'%')->orderBy('topic', 'DESC')->orderBy('description', 'DESC')->paginate(2);
         return view('kb.show', compact('kb'));
     }
