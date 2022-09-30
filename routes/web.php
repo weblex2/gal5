@@ -46,7 +46,7 @@ Route::controller(GalleryController::class)->group(function () {
 
 Route::controller(GalleryController::class)->group(function () {
     Route::get('/', 'index')->name('gallery.index');
-    Route::get('/gal', 'index')->name('gallery.index');
+    Route::get('/gallery', 'index')->name('gallery.index');
     Route::get('/gallery/newGallery', 'newGallery')->middleware(['auth'])->name('gallery.new');
     Route::get('/gallery/showGallery/{id}', 'showGallery')->name('gallery.show');
     Route::get('/gallery/editGallery/{id}', 'editGallery')->middleware(['auth'])->name('gallery.edit');
@@ -66,7 +66,7 @@ Route::controller(KnowledgeBaseController::class)->group(function () {
     Route::post('/kb/create', 'create')->name('kb.create');
     Route::get('/kb/edit/{id}', 'edit')->name('kb.edit');
     Route::post('/kb/update', 'update')->name('kb.update');
-    Route::post('/kb/show', 'show')->name('kb.show');
+    Route::get('/kb/show/{topic?}', 'show')->name('kb.show');
     Route::get('/kb/detail/{id}', 'detail')->name('kb.detail');
     Route::post('/kb/delete', 'delete')->name('kb.delete');
 });

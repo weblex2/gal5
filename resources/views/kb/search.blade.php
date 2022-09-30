@@ -1,7 +1,6 @@
 <div class="float-left bg-gray-200 bg-opacity-25 shadow-xl sm:rounded-lg w-1/5 p-3">
     <div>Search</div>
-    <form method="POST" action="{{route("kb.show")}}">
-        @csrf
+    <form method="GET" action="{{route("kb.show")}}">
         <div>Topic:</div>
         <div>
             <input type="text" name="topic" class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full">

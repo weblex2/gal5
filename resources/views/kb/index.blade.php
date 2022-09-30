@@ -25,7 +25,9 @@
                                             <div><a href="{{ route("kb.detail", ['id' => $row->id] ) }}">{{$row->topic}}</a></div>
                                             <div>{{$row->description}}</div>
                                         @endforeach
+
                                     </div>
+                                    {{ $kb->links()  }}
                                 </div>
                             </div>
                         </div>

@@ -7,7 +7,7 @@ use App\Models\KnowledgeBase;
 class KnowledgeBaseController extends Controller
 {
     public function index(){
-        $kb = KnowledgeBase::all();
+        $kb = KnowledgeBase::orderBy('topic', 'ASC')->orderBy('description', 'ASC')->paginate(5);
         return view('kb.index', compact('kb'));
     }
 
@@ -16,10 +16,8 @@ class KnowledgeBaseController extends Controller
     }
 
     public function create(Request $request){
-        dump($request);
         $kb = new KnowledgeBase();
         $kb->fill($request->all());
-        dump ($kb);
         $kb->save();
         return redirect()->route('kb.index');
     }
@@ -41,7 +39,7 @@ class KnowledgeBaseController extends Controller
     public function show(Request $request){
         $req  = $request->all();
         $topic  = $req['topic'];
-        $kb = KnowledgeBase::where('topic', 'like', '%'.$topic.'%')->get();
+        $kb = KnowledgeBase::where('topic', 'like', ''.$topic.'%')->orderBy('topic', 'DESC')->orderBy('description', 'DESC')->paginate(2);
         return view('kb.show', compact('kb'));
     }
 
