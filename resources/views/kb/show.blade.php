@@ -28,7 +28,7 @@
                                             <div class="border-b border-slate-200 mt-[-1px] ml-[-1px] p-1 ">{{$row->description}}</div>
                                         @endforeach
                                         @if (count($kb)==0)
-                                        <div class="border-b border-slate-200 mt-[-1px] p-1 col-span-2 text-center"> Nothing found, sorry :( </div>
+                                        <div class="border-b border-slate-200 mt-[-1px] p-1 col-span-2 text-center"> Nothing found, sorry <i class="fa-solid fa-face-frown"></i> </div>
                                         @endif
                                     </div>
                                     {{$kb->appends(request()->input())->links('vendor.pagination.tailwind')}}

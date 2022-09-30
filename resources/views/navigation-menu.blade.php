@@ -12,13 +12,20 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+
+
+                    @if (request()->is('gallery*'))
+
                     <x-jet-nav-link href="{{ route('gallery.index') }}" :active="request()->routeIs('gallery.index')">
                         {{ __('Home') }}
                     </x-jet-nav-link>
 
-                    @if (request()->is('gallery*'))
-                        <x-jet-nav-link href="{{ route('gallery.new') }}" :active="request()->routeIs('gallery.new')">
-                            {{ __('Create new Gallery') }}
+                    @endif
+
+                    @if (request()->is('kb*'))
+
+                        <x-jet-nav-link href="{{ route('kb.index') }}" :active="request()->routeIs('gallery.index')">
+                            {{ __('Home') }}
                         </x-jet-nav-link>
                     @endif
                 </div>

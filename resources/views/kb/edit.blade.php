@@ -27,12 +27,12 @@
                                         @csrf
 
                                         <div>Topic</div>
-                                        <div><input type="text" name="topic" value="{{ $kb->topic}}" class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full"></div>
+                                        <div><input value="{{ $kb->topic }}" type="text" name="topic" value="" class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full"></div>
                                         <div>Description</div>
-                                        <div><input type="text" name="description" value="{{ $kb->description}}" class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full"></div>
+                                        <div><input value="{{ $kb->description }}" type="text" name="description" value="" class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full"></div>
                                         <div>Body</div>
-                                        <div><textarea name="body" class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full">{{ $kb->body }}</textarea></div>
-
+                                        <div><x-trix-field value="{!! $kb->body !!}" id="body" name="body" class="bg-white border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full"></x-trix-field></div>
+                                        <div></div>
                                         <input type="submit" value="Save" class="px-3 py-2 mt-3 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ">
                                     </form>
                                 </div>
