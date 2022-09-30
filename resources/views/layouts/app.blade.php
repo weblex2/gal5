@@ -38,6 +38,9 @@
             integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
         <x-rich-text-trix-styles />
 
+        <x-rich-text-trix-styles />
+
+
     </head>
     <body class="font-sans antialiased">
         <x-jet-banner />

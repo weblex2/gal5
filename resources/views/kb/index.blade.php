@@ -13,8 +13,11 @@
                     <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                         <div class="bg-gray-200 bg-opacity-25 ">
                             <div class="p-6 w-full">
-                                <div class="w-full block  text-right">
 
+                                <div class="w-full block  text-right">
+                                    <a class="px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition " disabled><i class="fa-solid fa-pen-to-square"></i> Edit</a>
+
+                                    <a class="px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition " href="{{route('kb.new')}}"><i class="fa-solid fa-plus"></i> New</a>
                                 </div>
                                 <div class="w-full">
                                     <div class="grid grid-cols-2">
