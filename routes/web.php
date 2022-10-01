@@ -40,17 +40,6 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 
 Route::controller(GalleryController::class)->group(function () {
-    Route::get('/kb', 'index')->name('kb.index');
-    Route::get('/kb/new', 'new')->name('kb.new');
-    Route::post('/kb/create', 'create')->name('kb.create');
-    Route::get('/kb/edit/{id}', 'edit')->name('kb.edit');
-    Route::post('/kb/update', 'update')->name('kb.update');
-});
-
-
-
-Route::controller(GalleryController::class)->group(function () {
-    
     Route::get('/gallery', 'index')->name('gallery.index');
     Route::get('/gallery/newGallery', 'newGallery')->middleware(['auth'])->name('gallery.new');
     Route::get('/gallery/showGallery/{id}', 'showGallery')->name('gallery.show');
