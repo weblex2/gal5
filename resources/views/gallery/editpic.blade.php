@@ -59,8 +59,8 @@
              $lon = $exif['jpg']['exif']['GPS']['computed']['longitude'];
              $lat = $exif['jpg']['exif']['GPS']['computed']['latitude'];
           @endphp
-          @if ($lon!="" && $lat!="")
-          <div class="gmaps_wrapper">  
+          @if ($lon!="" && $lat !="" )
+          <div class="h-full flex flex-grow bg-slate-700 mt-10 p-3 ">  
           <iframe 
                 width="100%" 
                 height="200" 
@@ -78,60 +78,58 @@
 @endsection
 
 @section('content')
-    @if ($prev!=null)
-    <a href="{{ route("gallery.showPic", ['id' => $prev]) }}" >
-        <div id="picPrev" class="absolute bg-green-500 bg-opacity-0"></div>
-    </a>
-    @endif
-    @if ($next!=null)
-    <a href="{{ route("gallery.showPic", ['id' => $next]) }}" >
-        <div id="picNext" class="absolute bg-green-500 bg-opacity-0"></div>
-    </a>
-    @endif
+@php
+#echo date('Y-m-d H:i:s',strtotime(gmdate('2022-07-29 07:43:24'))+60*60*2);
 
-    @php
-        $diashow=false;
-        $path = asset('storage/gal/'.$gal_id."/" . $pic->file_name);
-        $extension = strtoupper(pathinfo($path, PATHINFO_EXTENSION));
-    @endphp
-    <div id="myPic" class="h-full max-h-full p-5  items-center justify-center">
-    @if (in_array($extension,['JPG','JPEG','GIF','PNG']))
-       <img class="mx-auto rounded-lg shadow-2xl shadow-cyan-500/50 max-h-full" src="{{$picPath}}">
-       
-    @else
-       <video   controls class="mx-auto rounded-lg shadow-2xl shadow-cyan-500/50 max-h-full">
-       <source src="{{ Storage::url('gal/'.$gal_id."/" . $pic->file_name) }}" type="video/mp4">
-       Your browser does not support the video tag.
-       </video>                 
-    }
-    @endif
-
-    @if ($pic->$lon==0 && $pic->$lat==0)
-    <div class="text-center">
-    <a href="{{  route("gallery.editPic", ['id' => $pic->id])  }}" class="text-center btn_save z-30">Edit Picture</a>
-    </div>
-    @endif
-    
-    </div> 
-
-
-    
+$diashow=false;
+$path = asset('storage/gal/'.$gal_id."/" . $pic->file_name);
+$extension = strtoupper(pathinfo($path, PATHINFO_EXTENSION));
+@endphp
+    <div class="h-full w-full bg-slate-500">
+      <div class="mypic grid grid-cols-3 h-full">
+        <div>
+          <div class="mydump  overflow-auto bg-slate-700">
+          @php 
+            dump(json_decode($pic->exif_data,1));
+          @endphp  
+          </div>
+        </div>
+        <div>
+          <form class="p-5" method="POST" action="{{ route("gallery.savePic") }}">
+            @csrf
+            <table>
+            <tr><td>Lat</td><td><input type="text" name="lat" value=""></td></tr>
+            <tr><td>Lon<td><input type="text" name="lon" value=""></td></tr>
+            <tr><td>Taken</td><td><input type="text" name="taken" value=""></td></tr>
+            </table>
+            <button class="btn_save" type="submit" name="btn_save">Save Pic</button> 
+          </form> 
+        </div>
+        <div>
+          <div id="myPic" class="h-96 w-96 items-center justify-center">
+            @if (in_array($extension,['JPG','JPEG','GIF','PNG']))
+               <img class="mx-auto rounded-lg shadow-2xl shadow-cyan-500/50 max-h-full" src="{{$picPath}}">
+            @else
+               <video   controls class="mx-auto rounded-lg shadow-2xl shadow-cyan-500/50 max-h-full">
+               <source src="{{ Storage::url('gal/'.$gal_id."/" . $pic->file_name) }}" type="video/mp4">
+               Your browser does not support the video tag.
+               </video>                 
+            }
+            @endif
+        </div>
+      </div>  
+    </div>  
 
     <script>
 
-        function nextPic(){
-            clearTimeout(myTimeout);
-            if ($('#picNext').length>0) {
-              $('#picNext').click();
-            }
-        }
-
+        
         $(function() {
             var h = $('#myPic').outerHeight();
+            var h2  = h-10;
             var cl = "h-["+ h +"]";
             var w  = $('#myPic').outerWidth() / 3;
             $('#myPic').addClass(cl);
-
+            $('.mydump').css("height",$('#main').outerHeight()-3);
             $('#picPrev').css('height', $('#myPic').outerHeight());
             $('#picPrev').css('top', $('#myPic').offset().top)
             $('#picPrev').css('width', w);

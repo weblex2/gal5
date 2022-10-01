@@ -40,6 +40,8 @@ class FileUploadController extends Controller
      */
     public function store(Request $request)
     {
+        $lat  = 0;
+        $lon = 0;
         $req = $request->all();
         $gal_id = $req['gal_id'];
         $image = $request->file('file');
@@ -86,6 +88,8 @@ class FileUploadController extends Controller
         $imageUpload->exif_data = json_encode($thisFileInfo);
         $imageUpload->osm_data = $osm_data;
         $imageUpload->mimetype = $mime;
+        $imageUpload->lon = $lon;
+        $imageUpload->lat = $lat;
         $imageUpload->save();
         $id = $imageUpload->id;
         $timestamp  = date('Y-m-d H:i:s');

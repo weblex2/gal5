@@ -45,15 +45,17 @@ Route::controller(GalleryController::class)->group(function () {
 
 
 Route::controller(GalleryController::class)->group(function () {
-    Route::get('/', 'index')->name('gallery.index');
+    #Route::get('/', 'index')->name('gallery.index');
     Route::get('/gallery', 'index')->name('gallery.index');
     Route::get('/gallery/newGallery', 'newGallery')->middleware(['auth'])->name('gallery.new');
     Route::get('/gallery/showGallery/{id}', 'showGallery')->name('gallery.show');
     Route::get('/gallery/editGallery/{id}', 'editGallery')->middleware(['auth'])->name('gallery.edit');
-    Route::get('/gallery/saveGallery/{id}', 'saveGallery')->middleware(['auth'])->name('gallery.save');
+    Route::post('/gallery/saveGallery', 'saveGallery')->middleware(['auth'])->name('gallery.save');
     Route::get('/gallery/showPic/{id}', 'showPic')->name('gallery.showPic');
     Route::post('/gallery/createGallery', 'createGallery')->middleware(['auth'])->name('gallery.create');
     Route::post('/gallery/deletePic', 'deletePic')->middleware(['auth'])->name('gallery.deletePic');
+    Route::get('/gallery/editPic/{id}', 'editPic')->middleware(['auth'])->name('gallery.editPic');
+    Route::post('/gallery/savePic', 'savePic')->middleware(['auth'])->name('gallery.savePic');
 
 });
 Route::resource('files', FileUploadController::class);
@@ -61,12 +63,12 @@ Route::post('files/destroy', [FileUploadController::class, 'destroy' ])->name('f
 
 
 Route::controller(KnowledgeBaseController::class)->group(function () {
-    Route::get('/kb', 'index')->name('kb.index');
-    Route::get('/kb/new', 'new')->name('kb.new');
-    Route::post('/kb/create', 'create')->name('kb.create');
-    Route::get('/kb/edit/{id}', 'edit')->name('kb.edit');
-    Route::post('/kb/update', 'update')->name('kb.update');
-    Route::get('/kb/show/{topic?}', 'show')->name('kb.show');
-    Route::get('/kb/detail/{id}', 'detail')->name('kb.detail');
-    Route::post('/kb/delete', 'delete')->name('kb.delete');
+    Route::get('/kb', 'index')->middleware(['auth'])->name('kb.index');
+    Route::get('/kb/new', 'new')->middleware(['auth'])->name('kb.new');
+    Route::post('/kb/create', 'create')->middleware(['auth'])->name('kb.create');
+    Route::get('/kb/edit/{id}', 'edit')->middleware(['auth'])->name('kb.edit');
+    Route::post('/kb/update', 'update')->middleware(['auth'])->name('kb.update');
+    Route::get('/kb/show/{topic?}', 'show')->middleware(['auth'])->name('kb.show');
+    Route::get('/kb/detail/{id}', 'detail')->middleware(['auth'])->name('kb.detail');
+    Route::post('/kb/delete', 'delete')->middleware(['auth'])->name('kb.delete');
 });

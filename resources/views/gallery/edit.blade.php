@@ -27,7 +27,15 @@
                         <input type="hidden" name="user_id" value="{{ $gal_id }}">
                     </form>
                     <div class="flex content-center w-full items-center bg-slate-800 mt-3">
-                    <a class="btn_save" href="{{ route("gallery.save" , [$gal_id]) }}">Save</a>
+                    <form id="frmSaveGallery" method="POST" action="{{ route("gallery.save") }}">    
+                        @csrf
+                        <div class="grid grid-cols-2 fon-orange-500">
+                            <input type="hidden" name="gal_id" value="{{$gal_id}}">
+                            <div>Is Public:</div> 
+                            <div><input type="checkbox" name="public" {{  ($gallery->public == 1 ? ' checked' : '') }}></div>
+                            <div class="row-span-2"><button type="submit" class="btn_save">Save</a></div>
+                        </div>    
+                    </form>
                     </div>     
                     
                     <div class="h-full overflow">

@@ -20,6 +20,10 @@
         <x-rich-text-trix-styles />
 
 
+        <x-rich-text-trix-styles />
+
+
+
     </head>
     <body>
         <div class="font-sans text-gray-900 antialiased">

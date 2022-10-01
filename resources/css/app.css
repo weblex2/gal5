@@ -107,3 +107,7 @@ header{
 .detail_div ol, .detail_div ul{
     list-style: revert; margin:0px; padding-left:20px;
 }
+
+.gmaps_wrapper{
+    @apply bottom-0 h-full flex flex-grow bg-slate-700 mt-10 p-3 
+}

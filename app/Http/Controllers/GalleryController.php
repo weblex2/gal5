@@ -57,11 +57,25 @@ class GalleryController extends Controller
     public function editGallery($gal_id){
         $gallery = Gallery::find($gal_id )->first();
         $pics = GalleryPics::where('gal_id' , "=", $gal_id )->get();
-        return view("gallery.edit", compact('pics', 'gal_id'));
+        return view("gallery.edit", compact('pics', 'gal_id', 'gallery'));
     }
 
-    public function saveGallery($gal_id){
-        return redirect()->route("gallery.show" , [$gal_id]);
+    public function saveGallery(Request $request){
+        $req = $request->all();
+        $gal_id = $req['gal_id'];
+        $gal  = Gallery::find($gal_id);
+        
+        if (!isset($req['public'])) {
+            $req['public']=0;
+        }
+        else{
+            $req['public']=1;
+        }
+        $gal->fill($req);
+        dump($req);
+        dump($gal);
+        $gal->update();
+        return redirect()->route("gallery.edit" , [$gal_id]);
     }
 
     public function createGallery(REQUEST $request){
@@ -113,6 +127,10 @@ class GalleryController extends Controller
             ->with('success', 'File deleted successfully');
     }
 
+    public function editPic($id){
+        $pic  = GalleryPics::find($id);
+        return view('gallery.editpic', compact('pic') );
+    }
     
 
 }
