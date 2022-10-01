@@ -22,7 +22,7 @@
                                     <a class="px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition " href="{{route('kb.edit', ['id' => $kb->id])}}">Edit</a>
                                     <a class="px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition " href="{{route('kb.new')}}">New</a>
                                 </div>
-                                <div class="detail_div w-full">
+                                <div id="detail" class="detail_div w-full">
                                     {!! $kb->body !!}
                                 </div>
                             </div>
@@ -33,4 +33,9 @@
         </div>
     </div>
 
+    <script>
+        $('#detail a').each(function(index){
+            $(this).attr('target','_blank');
+        });
+    </script>    
 </x-app-layout>
