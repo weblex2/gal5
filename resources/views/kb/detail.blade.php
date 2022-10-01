@@ -22,6 +22,8 @@
                                     <a class="px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition " href="{{route('kb.edit', ['id' => $kb->id])}}">Edit</a>
                                     <a class="px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition " href="{{route('kb.new')}}">New</a>
                                 </div>
+                                <div class="topic"><h5>{{ $kb->topic }}</h5></div>
+                                <div class="topic"><h6>{{ $kb->description }}</h5></div>
                                 <div id="detail" class="detail_div w-full">
                                     {!! $kb->body !!}
                                 </div>
