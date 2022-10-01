@@ -11,6 +11,10 @@ class DispatchController extends Controller
             echo "Gallery";
             return  redirect()->route("gallery.index");
         }
+        elseif ($_SERVER['HTTP_HOST']=="kb.noppal.de") {
+            echo "Gallery";
+            return  redirect()->route("kb.index");
+        }
         else {
             echo $_SERVER['HTTP_HOST'];
         }
