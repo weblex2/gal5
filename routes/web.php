@@ -9,6 +9,7 @@ use App\Http\Controllers\LinkController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\KnowledgeBaseController;
+use App\Http\Controllers\DispatchController;
 
 
 /*
@@ -28,9 +29,9 @@ Route::get('/', function () {
 });
 */
 
-Route::get('/', function () {
-    return view('dispatch');
-})->name('dispatch');
+Route::controller(DispatchController::class)->group(function () {
+    Route::get('/', 'index')->name('index');
+});
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
