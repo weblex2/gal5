@@ -28,6 +28,10 @@ Route::get('/', function () {
 });
 */
 
+Route::get('/', function () {
+    return view('dispatch');
+})->name('dispatch');
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
@@ -45,7 +49,7 @@ Route::controller(GalleryController::class)->group(function () {
 
 
 Route::controller(GalleryController::class)->group(function () {
-    #Route::get('/', 'index')->name('gallery.index');
+    
     Route::get('/gallery', 'index')->name('gallery.index');
     Route::get('/gallery/newGallery', 'newGallery')->middleware(['auth'])->name('gallery.new');
     Route::get('/gallery/showGallery/{id}', 'showGallery')->name('gallery.show');
