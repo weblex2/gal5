@@ -1,13 +1,13 @@
 @extends('layouts.gallery')
 
 @php
-  #dump();
+  #echo \Auth::id();
 @endphp
 @section('content')
 <div class="py-12 w-full h-full">
         <div class="w-4/5 mx-auto sm:px-6 lg:px-8 h-full">  
             <!--div class="bg-white overflow-hidden shadow-xl sm:rounded-lg"-->
-              @if (count($galleries)>0)
+              @if (count($galleries)>0 && Auth::id())
               <div id="gallery_overview" class="grid grid-cols-4 gap-8 h-full">
                   @foreach ($galleries as $gal)
                     
@@ -29,13 +29,19 @@
                     </a>
                   @endforeach
             </div>
-            
-            @else
-            <div class="h-full flex justify-center items-center w-full text-center w-full ">
+            @elseif (\Auth::id()) {
+              <div class="h-full flex justify-center items-center w-full text-center w-full ">
                 <div class="p-5 rounded bg-slate-700 w-fit text-orange-500 text-xl bold">
-                No galleries found. Log in and create one.
+                You have no galleries yet. <a href="{{ route('gallery.new') }}">Create one!</a>
                 </div>
-            </div>
+              </div>  
+            }
+            @else
+              <div class="h-full flex justify-center items-center w-full text-center w-full ">
+                  <div class="p-5 rounded bg-slate-700 w-fit text-orange-500 text-xl bold">
+                  No public galleries found. Try to log on.
+                  </div>
+              </div>
             @endif
             <!--/div-->
     </div>

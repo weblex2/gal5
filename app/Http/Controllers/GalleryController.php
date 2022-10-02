@@ -27,12 +27,12 @@ class GalleryController extends Controller
         else{
             $galleries = Gallery::where('public' , "=", 1 )->get();
         }
-        if (count($galleries)==0 && \Auth::id()){   
-            return redirect()->route("gallery.new");
-        }
-        else {
+        #if (count($galleries)==0 && \Auth::id()){   
+        #    return redirect()->route("gallery.new");
+        #}
+        #else {
             return view("gallery.index", compact('galleries'));        
-        }
+        #}
         
     }
 
