@@ -48,9 +48,6 @@ class GalleryController extends Controller
         else {
             $pics = GalleryPics::where('gal_id' , "=", $gal_id )->where('public', "=", 1)->paginate($pagination);
         }
-        /* if (count($pics)==0) {
-            return redirect()->route("gallery.edit" , [$gal_id]);
-        }   */  
         return view("gallery.showgallery", compact('pics', 'gal_id', 'pagination'));
     }
 

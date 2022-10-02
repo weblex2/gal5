@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Http\Controllers\GalleryController; 
 use App\Models\GalleryPics;
 use Illuminate\Http\Request;
+use Intervention\Image\ImageManager;
+use Image;
 
 class FileUploadController extends Controller
 {
@@ -40,11 +42,67 @@ class FileUploadController extends Controller
      */
     public function store(Request $request)
     {
+
+
         $lat  = 0;
         $lon = 0;
         $req = $request->all();
         $gal_id = $req['gal_id'];
         $image = $request->file('file');
+
+        $original_photo_storage = storage_path('app/public/gal/'.$gal_id.'/original_photos/');
+        $large_photos_storage   = storage_path('app/public/gal/'.$gal_id.'/large_photos/');
+        $medium_photos_storage  = storage_path('app/public/gal/'.$gal_id.'/medium_photos/');
+        $mobile_photos_storage  = storage_path('app/public/gal/'.$gal_id.'/mobile_photos/');
+        $tiny_photos_storage    = storage_path('app/public/gal/'.$gal_id.'/tiny_photos/');
+
+        if (!file_exists($original_photo_storage)){
+            mkdir($original_photo_storage, 0755, true);
+        }
+
+        if (!file_exists($large_photos_storage)){
+            mkdir($large_photos_storage, 0755, true);
+        }
+
+        if (!file_exists($medium_photos_storage)){
+            mkdir($medium_photos_storage, 0755, true);
+        }
+
+        if (!file_exists($mobile_photos_storage)){
+            mkdir($mobile_photos_storage, 0755, true);
+        }
+
+        if (!file_exists($tiny_photos_storage)){
+            mkdir($tiny_photos_storage, 0755, true);
+        }
+
+        #$photo -> photo = $file->hashName();//give the uploaded photo a hash //name
+        
+        #$manager = new ImageManager(['driver' => 'imagick']);
+
+        // to finally create image instances
+        #$pic = $manager->make($image->getRealPath());
+        #$image = Image::make($image->getRealPath());//create a new image //resource from file.This is done by the Intervention Image package
+
+
+        $pic = Image::make($image->getRealPath());
+        $hash =  $image->hashName();
+        $pic->save($original_photo_storage.$image->hashName(),100)->resize(860, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                })
+              ->save($large_photos_storage.$image->hashName(),85)->resize(640, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                })->save($medium_photos_storage.$image->hashName(),85)
+              ->resize(420, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                })->save($mobile_photos_storage.$image->hashName(),85)
+              ->resize(10, null, function ($constraint) {
+                    $constraint->aspectRatio();
+              })->blur(1)->save($tiny_photos_storage.$image->hashName(),85);
+        $pic->save();
+        
+
+
         $FileName = $image->getClientOriginalName();
         $status = $image->move(storage_path('app/public/gal/'.$gal_id), $FileName);
         $img_path = 'app/public/gal/'. $gal_id. '/'. $FileName;
@@ -89,6 +147,7 @@ class FileUploadController extends Controller
         $imageUpload->osm_data = $osm_data;
         $imageUpload->mimetype = $mime;
         $imageUpload->lon = $lon;
+        $imageUpload->hash = $hash;
         $imageUpload->lat = $lat;
         $imageUpload->save();
         $id = $imageUpload->id;

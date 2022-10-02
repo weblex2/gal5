@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Show Gallery') }}
+            {{ __('Show Gallery2') }}
         </h2>
     </x-slot>
     <div class="container_menu  flex flex-grow items-left bg-slate-700">
@@ -12,14 +12,12 @@
     </div>
     <div class="container_pictures flex justify-center items-center flex-grow bg-slate-200">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 pt-12">
-            <div id="pic_overview" class="grid grid-cols-10 gap-3">
+            <div id="pic_overview" class="grid grid-cols-10 gap-3 auto-rows-max">
                 @foreach ($pics as $pic)
-                {{-- @php
-                $fileName = 'gal/'.$gal_id."/" . $pic->file_name;
-                @endphp --}}
                 <div>
+                    abc
                     <a href="{{ route('gallery.showPic',$pic->id) }}">
-                    <img class="preview_pic" src="{{ Storage::url('gal/'.$gal_id."/" . $pic->file_name) }}"></img>
+                    <img class="preview_pic" src="{{ Storage::url('gal/'.$gal_id."/medium_photos/" . $pic->hash) }}"></img>
                     </a>
                 </div>
             @endforeach

@@ -21,7 +21,7 @@
                 @if (in_array($extension,['JPG','JPEG','GIF','PNG']))
                     <div class="block">
                         <a href="{{ route('gallery.showPic',$pic->id) }}">
-                        <img class="preview_pic" src="{{ Storage::url('gal/'.$gal_id."/" . $pic->file_name) }}"></img>
+                        <img class="preview_pic" src="{{ Storage::url('gal/'.$gal_id."/medium_photos/" . $pic->hash) }}"></img>
                         </a>    
                     </div>
                 @else 

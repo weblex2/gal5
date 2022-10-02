@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
+    
+    <title>Noppal - Gallery</title>
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
@@ -46,7 +46,7 @@
 </head>
 <body>
 <div class="h-screen  flex flex-col" id="maindiv">
-    <div class="bg-slate-800 border-b border-slate-900 pt-3  hidden sm:block ">
+    <div class="bg-slate-800 border-b border-slate-900 pt-3  sm:block ">
         <div class="flex space-x-4 float-left">
             <!--a href="/" class="menu_item">
                 home
@@ -126,12 +126,12 @@
             @endif
         </div>
     </div>
-    <div class="flex flex-col h-full overflow-y-auto">
+    <div class="flex w-full lg:flex-col h-full overflow-y-auto">
         <!-- THREE COLUMNS LAYOUT -->
         <div class="flex h-full">
 
             <!-- COLUMN ONE -->
-            <div class="w-1/5  flex flex-col bg-slate-800">
+            <div class="w-full lg:w-1/5  flex flex-col bg-slate-800 ">
 
                 <div class="flex flex-col h-full">
 
@@ -146,7 +146,7 @@
             <!-- COLUMN ONE -->
 
             <!-- COLUMN TWO -->
-            <div class="w-4/5 bg-slate-800 border-l border-slate-900 flex flex-col h-full max-h-full overflow-none" id="main">
+            <div class="w-full xl:w-4/5 bg-slate-800 border-l border-slate-900 flex flex-col h-full max-h-full overflow-none" id="main">
                 @yield('content')
             </div>
             <!-- COLUMN TWO -->
