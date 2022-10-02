@@ -52,7 +52,7 @@ class GalleryController extends Controller
     }
 
     public function editGallery($gal_id){
-        $gallery = Gallery::find($gal_id )->first();
+        $gallery = Gallery::find($gal_id );
         $pics = GalleryPics::where('gal_id' , "=", $gal_id )->get();
         return view("gallery.edit", compact('pics', 'gal_id', 'gallery'));
     }

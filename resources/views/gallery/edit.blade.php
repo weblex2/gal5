@@ -57,11 +57,9 @@
                         @endphp
                         <div class="pic_del_wrapper picWrapper_{{ $pic->id }}">
                             <div class="pic_del">
-                                <a class="mr-2" onclick="deletePic({{ $pic->id }})" href="javascript:void(0)">
-                                    <i class="text-orange-500 fa fa-trash" aria-hidden="true"></i>       
-                                </a>
-                                <a class="mr-2" onclick="setGalleryBackground({{ $pic->id }})" href="javascript:void(0)">
-                                    <i class="text-orange-500 fa-solid fa-image"></i>   
+                                <i class="cursor-pointer mr-1 text-orange-500 fa fa-trash" aria-hidden="true" onclick="deletePic({{ $pic->id }})"></i>       
+                                <i class="cursor-pointer mr-1 text-orange-500 fa fa-image"  onclick="setGalleryBackground({{ $pic->id }})"></i>   
+                                <i class="cursor-pointer mr-1 text-orange-500 fa fa-user"  onclick="makePicPublic({{ $pic->id }})"></i>   
                                 </a>
                             </div>
                             
@@ -180,7 +178,9 @@
             
             var html='<div class="pic_del_wrapper picWrapper_'+response.id+'">' +
                         '<div class="pic_del">' +
-                            '<i class="fa fa-trash text-orange-500" aria-hidden="true" onclick="deletePic('+response.id+')"></i>' + 
+                            '<i class="cursor-pointer mr-1 text-orange-500 fa fa-trash " onclick="deletePic('+response.id+')"></i>' + 
+                            '<i class="cursor-pointer mr-1 text-orange-500 fa fa-image"  onclick="setGalleryBackground('+response.id+')"></i>' + 
+                            '<i class="cursor-pointer mr-1 text-orange-500 fa fa-user"   onclick="makeImagePublic('+response.id+')"></i>' +   
                         '</div>'+ img +                        
                     '</div>';
                         
