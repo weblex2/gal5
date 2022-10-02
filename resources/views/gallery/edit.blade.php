@@ -48,10 +48,6 @@
                         @endphp
                         <div class="pic_del_wrapper picWrapper_{{ $pic->id }}">
                             <div class="pic_del">
-                                <form method="POST" action="{{ route("gallery.deletePic") }}"> 
-                                    @csrf
-                                    <input type="hidden" name="pic_id" value="{{ $pic->id }}">
-                                </form> 
                                 <a class="javascript:void(0)" onclick="deletePic({{ $pic->id }})" href="#">
                                     <i class="text-orange-500 fa fa-trash" aria-hidden="true"></i>
                                            
@@ -97,8 +93,8 @@
                     $('.picWrapper_'+id).remove();
 
                 },
-                error: function(e) {
-                    console.log(e);
+                error: function( data) {
+                    console.log(data);
                 }
             });
         };        
@@ -145,23 +141,19 @@
             console.log(file);
             $(file.previewElement).attr('pic_id', response.id);
             $('#upload_status').prepend("<div>" + response.timestamp+ ": File " + response.filename + " successfully uploaded. <br>Exif <i class='text-green-700 fa-solid fa-check'></i>OSM <i class='text-green-700 fa-solid fa-check'></i></div>");
-            var html = $(file.previewElement).find('.dz-image').html();
-            /*
-            var html='<div class="pic_del_wrapper">' +
+            var img = $(file.previewElement).find('.dz-image').html();
+            
+            var html='<div class="pic_del_wrapper picWrapper_'+response.id+'">' +
                         '<div class="pic_del">' +
-                            '<form method="POST" action="http://localhost:8000/gallery/deletePic">' +
-                                    '<input type="hidden" name="_token" value="">'  +                                  
-                                    '<input type="hidden" name="pic_id" value="'+response.id+'">'  +
-                            '</form>' +
-                            '<a class="javascript:void(0)" onclick="$(this).closest('div').find('form').submit()" href="#">' +
-                                '<i class="text-gray-800 fa fa-trash" aria-hidden="true"></i></a>' +
-                            '</div>'+ img + ' +                         
-                        '</div>';
-            */            
+                            '<i class="fa fa-trash text-orange-500" aria-hidden="true" onclick="deletePic('+response.id+')"></i>' + 
+                        '</div>'+ img +                        
+                    '</div>';
+                        
             
             $(file.previewElement).remove();
             //alert(html);
-            $('.preview').append(html);    
+            $('.preview').append(html);  
+            $('.picWrapper_'+response.id).find('img').addClass("mb-3 w-full  mx-auto rounded-lg shadow-2xl shadow-cyan-500/50 max-h-full");  
         },
         error: function (file, response) {
             console.log(response);
