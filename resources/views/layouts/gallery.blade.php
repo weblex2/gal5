@@ -58,6 +58,13 @@
             <a href="{{ route("gallery.index") }}">
                 <img src="{{ Storage::url('me.png')}}" class="rounded-full w-8 ml-3 mb-2 mt-[-5px]">
             </a>
+            <span class="text-orange-500">
+                @if (Auth::user())
+                    {{ Auth::user()->email }}
+                @else
+                    nich eingelogged.
+                @endif        
+            </span>
         </div>
         <div class="float-right flex px-3 z-20">
           

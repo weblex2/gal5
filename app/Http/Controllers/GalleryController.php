@@ -27,12 +27,9 @@ class GalleryController extends Controller
         else{
             $galleries = Gallery::where('public' , "=", 1 )->get();
         }
-        #if (count($galleries)==0 && \Auth::id()){   
-        #    return redirect()->route("gallery.new");
-        #}
-        #else {
-            return view("gallery.index", compact('galleries'));        
-        #}
+        
+        return view("gallery.index", compact('galleries'));        
+        
         
     }
 
@@ -69,9 +66,13 @@ class GalleryController extends Controller
             $req['public']=1;
         }
         $gal->fill($req);
-        dump($req);
-        dump($gal);
-        $gal->update();
+        $res = $gal->update();
+        if ($res){
+            $saved = 1;
+        }
+        else{
+            $saved = 0;
+        }
         return redirect()->route("gallery.edit" , [$gal_id]);
     }
 
@@ -145,6 +146,20 @@ class GalleryController extends Controller
     public function editPic($id){
         $pic  = GalleryPics::find($id);
         return view('gallery.editpic', compact('pic') );
+    }
+
+    public function togglePicPublic(Request $request){
+        $pic_id = $request->all()['pic_id'];
+        $pic  = GalleryPics::find($pic_id);
+        if ($pic->public==1){
+            $pic->public = 0;
+        }
+        else {
+            $pic->public = 1;
+        }
+        $res = $pic->update();
+        $success = $res ? 1 : 0;
+        return json_encode(['success' => $success, 'public' => $pic->public]);
     }
     
 

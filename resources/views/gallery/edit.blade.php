@@ -2,6 +2,14 @@
 @section('options')
     <div class="container_menu_header">
         menu
+
+        {{-- @if ($saved){
+            <div>saved!!</div>
+        }
+        @else{
+            <div>Nöööööö</div>
+        }
+        @endif --}}
     </div>
     <div class="galleryEditMenu">
         <form id="frmSaveGallery" method="POST" action="{{ route("gallery.save") }}">    
@@ -59,7 +67,7 @@
                             <div class="pic_del">
                                 <i class="cursor-pointer mr-1 text-orange-500 fa fa-trash" aria-hidden="true" onclick="deletePic({{ $pic->id }})"></i>       
                                 <i class="cursor-pointer mr-1 text-orange-500 fa fa-image"  onclick="setGalleryBackground({{ $pic->id }})"></i>   
-                                <i class="cursor-pointer mr-1 text-orange-500 fa fa-user"  onclick="makePicPublic({{ $pic->id }})"></i>   
+                                <i class="cursor-pointer mr-1 text-orange-500 fa fa-user"  onclick="togglePicPublic({{ $pic->id }})"></i>   
                                 </a>
                             </div>
                             
@@ -88,6 +96,39 @@
     <div id="upload_status" class="hidden"></div>
     <script type="text/javascript">
    
+        function togglePicPublic(id){
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },        
+                type: 'POST',
+                url: '{{ url("gallery/togglePicPublic") }}',
+                data: {
+                        pic_id: id
+                },
+                success: function (data){
+                    data  = JSON.parse(data);
+                    console.log(data.public);
+                    var p = "";
+                    if (data.public == 1) {
+                        p = 'public'
+                    } 
+                    else {
+                        p = 'private';
+                    }
+                    console.log("Pic is "+ p + " now");
+                    $('.fa-user').each(function(index){
+                         $(this).removeClass('picPublic');   
+                    });
+                    var picPublicClass = "";
+                    $('.picWrapper_'+id).find('.pic_del').find('.fa-user').addClass(picPublicClass);
+                },
+                error: function( data) {
+                    console.log(data);
+                }
+            });
+        }
+
         function setGalleryBackground(id){
             $.ajax({
                 headers: {

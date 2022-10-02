@@ -24,7 +24,7 @@
 }
 
 .gallery_overview_item {
-    @apply border bg-slate-900 rounded-lg h-48 bg-cover border-slate-900 flex items-stretch
+    @apply shadow-2xl shadow-cyan-500/50  border bg-slate-900 rounded-lg h-48 bg-cover border-slate-900 flex items-stretch
 }
 
 #gallery_overview a{

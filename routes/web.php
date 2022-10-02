@@ -55,6 +55,7 @@ Route::controller(GalleryController::class)->group(function () {
     Route::get('/gallery/editPic/{id}', 'editPic')->middleware(['auth'])->name('gallery.editPic');
     Route::post('/gallery/savePic', 'savePic')->middleware(['auth'])->name('gallery.savePic');
     Route::post('/gallery/setBackground', 'setGalleryBackground')->middleware(['auth'])->name('gallery.setBackground');
+    Route::post('/gallery/togglePicPublic', 'togglePicPublic')->middleware(['auth'])->name('gallery.togglePicPublic');
 
 });
 Route::resource('files', FileUploadController::class);
