@@ -1,8 +1,8 @@
 @extends('layouts.gallery')
 
 @php
-  echo \Auth::id();
-  dump ($galleries);
+  #echo \Auth::id();
+  #dump ($galleries);
 @endphp
 @section('content')
 <div class="py-12 w-full h-full">
