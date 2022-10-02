@@ -1,8 +1,25 @@
 @extends('layouts.gallery')
 @section('options')
     <div class="container_menu_header">
-                menu
+        menu
     </div>
+    <div class="galleryEditMenu">
+        <form id="frmSaveGallery" method="POST" action="{{ route("gallery.save") }}">    
+            @csrf
+            <input type="hidden" name="gal_id" value="{{$gal_id}}">
+            <table>
+                <tr>
+                    <td>Public:</td> 
+                    <td><input type="checkbox" name="public" {{  ($gallery->public == 1 ? ' checked' : '') }}></td>
+                </tr>    
+                <tr>
+                    <td>Gallery Name</td>
+                    <td><input class="galInput" type="text" name="gal_name" value="{{ $gallery->gal_name }}"></td>
+                </tr>
+            </table>        
+            <div class="row-span-2"><button type="submit" class="btn_save">Save</a></div>
+        </form>
+    </div>    
 @endsection
 
 @section('content')
@@ -19,28 +36,15 @@
                         </div>
                     </div>
                 </div>   
-                <div class="container mb-6">      
+                <div class="container mb-6 ">      
                     <form method="post" action="{{ route('files.store') }}" enctype="multipart/form-data"
-                        class="dropzone" id="dropzone">
+                        class="dropzone h-40 overflow-auto" id="dropzone">
                         @csrf
                         <input type="hidden" name="gal_id" value="{{ $gal_id }}">
                         <input type="hidden" name="user_id" value="{{ $gal_id }}">
                     </form>
                     <div class="flex content-center w-full items-center bg-slate-800 mt-3">
-                    <form id="frmSaveGallery" method="POST" action="{{ route("gallery.save") }}">    
-                        @csrf
-                        <input type="hidden" name="gal_id" value="{{$gal_id}}">
-                        <div class="grid grid-cols-2 fon-orange-500">
-                            
-                            <div>Is Public:</div> 
-                            <div><input type="checkbox" name="public" {{  ($gallery->public == 1 ? ' checked' : '') }}></div>
-                            
-                            <div>Gallery Name</div>
-                            <div><input class="galInput" type="text" name="gal_name" value="{{ $gallery->gal_name }}"></div>
-                            
-                            <div class="row-span-2"><button type="submit" class="btn_save">Save</a></div>
-                        </div>    
-                    </form>
+                    
                     </div>     
                     
                     <div class="h-full overflow">
@@ -53,11 +57,14 @@
                         @endphp
                         <div class="pic_del_wrapper picWrapper_{{ $pic->id }}">
                             <div class="pic_del">
-                                <a class="javascript:void(0)" onclick="deletePic({{ $pic->id }})" href="#">
-                                    <i class="text-orange-500 fa fa-trash" aria-hidden="true"></i>
-                                           
+                                <a class="mr-2" onclick="deletePic({{ $pic->id }})" href="javascript:void(0)">
+                                    <i class="text-orange-500 fa fa-trash" aria-hidden="true"></i>       
+                                </a>
+                                <a class="mr-2" onclick="setGalleryBackground({{ $pic->id }})" href="javascript:void(0)">
+                                    <i class="text-orange-500 fa-solid fa-image"></i>   
                                 </a>
                             </div>
+                            
                         @if (in_array($extension,['JPG','JPEG','GIF','PNG']))
                             <img class="mb-3 w-full  mx-auto rounded-lg shadow-2xl shadow-cyan-500/50 max-h-full" src="{{ Storage::url('gal/'.$gal_id."/" . $pic->file_name) }}">
                         @else
@@ -83,6 +90,29 @@
     <div id="upload_status" class="hidden"></div>
     <script type="text/javascript">
    
+        function setGalleryBackground(id){
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },        
+                type: 'POST',
+                url: '{{ url("gallery/setBackground") }}',
+                data: {
+                        pic_id: id
+                },
+                success: function (data){
+                    console.log("Background has been successfully set!!");
+                    $('.fa-image').each(function(index){
+                         $(this).removeClass('isGalleryBackgroundImage');   
+                    });
+                    $('.picWrapper_'+id).find('.pic_del').find('.fa-image').addClass('isGalleryBackgroundImage');
+                },
+                error: function( data) {
+                    console.log(data);
+                }
+            });
+        }
+
         function deletePic(id){
             $.ajax({
                 headers: {

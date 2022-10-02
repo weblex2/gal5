@@ -11249,6 +11249,9 @@ select {
 .h-full {
     height: 100%;
 }
+.h-48 {
+    height: 12rem;
+}
 .h-96 {
     height: 24rem;
 }
@@ -11266,6 +11269,12 @@ select {
 }
 .h-auto {
     height: auto;
+}
+.h-44 {
+    height: 11rem;
+}
+.h-40 {
+    height: 10rem;
 }
 .max-h-full {
     max-height: 100%;
@@ -11425,14 +11434,14 @@ select {
 .grid-cols-1 {
     grid-template-columns: repeat(1, minmax(0, 1fr));
 }
-.grid-cols-2 {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-}
 .grid-cols-8 {
     grid-template-columns: repeat(8, minmax(0, 1fr));
 }
 .grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 .grid-cols-10 {
     grid-template-columns: repeat(10, minmax(0, 1fr));
@@ -12260,6 +12269,19 @@ select {
 .ease-in {
     transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
 }
+.gallery_body {
+    --tw-bg-opacity: 1;
+    background-color: rgb(30 41 59 / var(--tw-bg-opacity));
+}
+.galleryEditMenu {
+    padding: 0.75rem;
+}
+.galleryEditMenu table td {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    font-size: 0.75rem;
+    line-height: 1rem;
+}
 #loginWrapper {
     position: absolute;
     right: 0px;
@@ -12597,8 +12619,23 @@ header {
     --tw-shadow: var(--tw-shadow-colored);
 }
 .pic_del {
+    z-index: 20;
+    width: -moz-fit-content;
+    width: fit-content;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    background-image: linear-gradient(to right, var(--tw-gradient-stops));
+    --tw-gradient-from: #111827;
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(17 24 39 / 0));
+    --tw-gradient-to: transparent;
+    padding: 0.5rem;
+    font-size: 0.75rem;
+    line-height: 1rem;
+}
+.setBg {
     position: absolute;
     z-index: 20;
+    margin-left: 1.5rem;
     width: -moz-fit-content;
     width: fit-content;
     border-top-left-radius: 0.5rem;
@@ -12611,6 +12648,8 @@ header {
     padding: 0.5rem;
     font-size: 0.75rem;
     line-height: 1rem;
+    --tw-text-opacity: 1;
+    color: rgb(249 115 22 / var(--tw-text-opacity));
 }
 #frmSaveGallery {
     --tw-text-opacity: 1;
@@ -12665,6 +12704,10 @@ header {
 .galInput:active {
     --tw-bg-opacity: 1;
     background-color: rgb(71 85 105 / var(--tw-bg-opacity));
+}
+.isGalleryBackgroundImage {
+    --tw-text-opacity: 1;
+    color: rgb(34 197 94 / var(--tw-text-opacity));
 }
 .hover\:border-gray-300:hover {
     --tw-border-opacity: 1;

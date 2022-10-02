@@ -75,6 +75,16 @@ class GalleryController extends Controller
         return redirect()->route("gallery.edit" , [$gal_id]);
     }
 
+    public function setGalleryBackground(request $request){
+        $id  = $request->all()['pic_id'];
+        $pic = GalleryPics::find($id);
+        $file_name = $pic->file_name;
+        $gallery = Gallery::find($pic->gal_id);
+        $gallery->background_pic = $file_name;
+        $gallery->update();
+        return json_encode(['success', 1]);
+    }
+
     public function createGallery(REQUEST $request){
         
         $gallery = New Gallery();

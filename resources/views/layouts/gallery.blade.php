@@ -44,7 +44,7 @@
 
 
 </head>
-<body>
+<body class="gallery_body">
 <div class="h-screen  flex flex-col" id="maindiv">
     <div class="bg-slate-800 border-b border-slate-900 pt-3  sm:block ">
         <div class="flex space-x-4 float-left">
@@ -146,7 +146,7 @@
             <!-- COLUMN ONE -->
 
             <!-- COLUMN TWO -->
-            <div class="w-4/5 bg-slate-800 border-l border-slate-900 flex flex-col h-full max-h-full overflow-none" id="main">
+            <div class="w-4/5 bg-slate-800 border-l border-slate-900 flex flex-col h-full max-h-full overflow-auto" id="main">
                 @yield('content')
             </div>
             <!-- COLUMN TWO -->
