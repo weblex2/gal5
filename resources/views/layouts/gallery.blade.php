@@ -126,12 +126,12 @@
             @endif
         </div>
     </div>
-    <div class="flex w-full lg:flex-col h-full overflow-y-auto">
+    <div class="flex flex-col h-full overflow-y-auto">
         <!-- THREE COLUMNS LAYOUT -->
         <div class="flex h-full">
 
             <!-- COLUMN ONE -->
-            <div class="w-full lg:w-1/5  flex flex-col bg-slate-800 ">
+            <div class="w-1/5  flex flex-col bg-slate-800">
 
                 <div class="flex flex-col h-full">
 
@@ -146,7 +146,7 @@
             <!-- COLUMN ONE -->
 
             <!-- COLUMN TWO -->
-            <div class="w-full xl:w-4/5 bg-slate-800 border-l border-slate-900 flex flex-col h-full max-h-full overflow-none" id="main">
+            <div class="w-4/5 bg-slate-800 border-l border-slate-900 flex flex-col h-full max-h-full overflow-none" id="main">
                 @yield('content')
             </div>
             <!-- COLUMN TWO -->
