@@ -38,6 +38,10 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 
+Route::get('/php', function () {
+    return phpinfo();
+})->name('php');
+
 
 Route::controller(GalleryController::class)->group(function () {
     Route::get('/gallery', 'index')->name('gallery.index');
