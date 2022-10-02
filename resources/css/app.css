@@ -146,3 +146,11 @@ header{
 .isGalleryBackgroundImage{
     @apply text-green-500
 }
+
+.picPublicClass{
+    @apply text-green-500
+}
+
+.picPrivateClass{
+    @apply text-orange-500
+}

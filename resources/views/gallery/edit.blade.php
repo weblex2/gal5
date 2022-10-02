@@ -121,7 +121,12 @@
                          $(this).removeClass('picPublic');   
                     });
                     var picPublicClass = "";
-                    $('.picWrapper_'+id).find('.pic_del').find('.fa-user').addClass(picPublicClass);
+                    if (data.public ==1) {
+                        $('.picWrapper_'+id).find('.pic_del').find('.fa-user').removeClass('picPrivateClass').addClass('picPublicClass');
+                    }
+                    else {
+                        $('.picWrapper_'+id).find('.pic_del').find('.fa-user').removeClass('picPublicClass').addClass('picPrivateClass');
+                    }    
                 },
                 error: function( data) {
                     console.log(data);
