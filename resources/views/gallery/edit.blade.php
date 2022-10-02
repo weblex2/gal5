@@ -29,10 +29,15 @@
                     <div class="flex content-center w-full items-center bg-slate-800 mt-3">
                     <form id="frmSaveGallery" method="POST" action="{{ route("gallery.save") }}">    
                         @csrf
+                        <input type="hidden" name="gal_id" value="{{$gal_id}}">
                         <div class="grid grid-cols-2 fon-orange-500">
-                            <input type="hidden" name="gal_id" value="{{$gal_id}}">
+                            
                             <div>Is Public:</div> 
                             <div><input type="checkbox" name="public" {{  ($gallery->public == 1 ? ' checked' : '') }}></div>
+                            
+                            <div>Gallery Name</div>
+                            <div><input class="galInput" type="text" name="gal_name" value="{{ $gallery->gal_name }}"></div>
+                            
                             <div class="row-span-2"><button type="submit" class="btn_save">Save</a></div>
                         </div>    
                     </form>
