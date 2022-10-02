@@ -96,7 +96,15 @@
     @endphp
     <div id="myPic" class="h-full max-h-full p-5  items-center justify-center">
     @if (in_array($extension,['JPG','JPEG','GIF','PNG']))
-       <img class="mx-auto rounded-lg shadow-2xl shadow-cyan-500/50 max-h-full" src="{{$picPath}}">
+       <!--img class="mx-auto rounded-lg shadow-2xl shadow-cyan-500/50 max-h-full" src="{{$picPath}}"-->
+
+
+       <img class="mx-auto rounded-lg shadow-2xl shadow-cyan-500/50 max-h-full" 
+            src="{{asset('storage/gal/'.$gal_id.'/large_photos/'.$pic->hash)}}"
+            srcset="{{asset('storage/gal/'.$gal_id.'/medium_photos/'.$pic->hash.' 860w')}},
+                    {{asset('storage/gal/'.$gal_id.'/mobile_photos/'.$pic->hash.' 640w')}},
+                    {{asset('storage/gal/'.$gal_id.'/medium_photos'.$pic->hash.' 420w')}}">
+
        
     @else
        <video   controls class="mx-auto rounded-lg shadow-2xl shadow-cyan-500/50 max-h-full">

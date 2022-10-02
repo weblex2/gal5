@@ -82,28 +82,41 @@ class FileUploadController extends Controller
 
         // to finally create image instances
         #$pic = $manager->make($image->getRealPath());
-        #$image = Image::make($image->getRealPath());//create a new image //resource from file.This is done by the Intervention Image package
-
-
-        $pic = Image::make($image->getRealPath());
-        $hash =  $image->hashName();
-        $pic->save($original_photo_storage.$image->hashName(),100)->resize(860, null, function ($constraint) {
-                    $constraint->aspectRatio();
-                })
-              ->save($large_photos_storage.$image->hashName(),85)->resize(640, null, function ($constraint) {
-                    $constraint->aspectRatio();
-                })->save($medium_photos_storage.$image->hashName(),85)
-              ->resize(420, null, function ($constraint) {
-                    $constraint->aspectRatio();
-                })->save($mobile_photos_storage.$image->hashName(),85)
-              ->resize(10, null, function ($constraint) {
-                    $constraint->aspectRatio();
-              })->blur(1)->save($tiny_photos_storage.$image->hashName(),85);
-        $pic->save();
-        
-
-
+        $pic = Image::make($image->getRealPath());//create a new image //resource from file.This is done by the Intervention Image package
         $FileName = $image->getClientOriginalName();
+        $extension = strtoupper(pathinfo($image->getClientOriginalName(), PATHINFO_EXTENSION));   
+        if (in_array($extension, ["JPG", "PNG", "GIF", "BMP", "WebP"] )) {
+            $pic = Image::make($image->getRealPath());
+            $h  = $pic->height();
+            $w  = $pic->width();
+            if ($h<$w) {
+                $pic->rotate(-90);
+            }
+            $hash =  $image->hashName();
+            $pic->save($original_photo_storage.$image->hashName(),100)->resize(860, null, function ($constraint) {
+                        $constraint->aspectRatio();
+                        $constraint->upsize();
+                    })
+                ->save($large_photos_storage.$image->hashName(),85)->resize(640, null, function ($constraint) {
+                        $constraint->aspectRatio();
+                        $constraint->upsize();
+                    })->save($medium_photos_storage.$image->hashName(),85)
+                ->resize(420, null, function ($constraint) {
+                        $constraint->aspectRatio();
+                        $constraint->upsize();
+                    })->save($mobile_photos_storage.$image->hashName(),85)
+                ->resize(10, null, function ($constraint) {
+                        $constraint->aspectRatio();
+                        $constraint->upsize();
+                })->blur(1)->save($tiny_photos_storage.$image->hashName(),85);
+                $pic->save();
+                $exif = $pic->exif();
+
+        }
+        else{
+           // Video     
+        }
+        
         $status = $image->move(storage_path('app/public/gal/'.$gal_id), $FileName);
         $img_path = 'app/public/gal/'. $gal_id. '/'. $FileName;
         $img_path = storage_path($img_path);    

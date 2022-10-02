@@ -39,21 +39,21 @@
                     </div>     
                     
                     <div class="h-full overflow">
-                    <div class="grid grid-cols-8">
+                    <div class="preview grid grid-cols-8">
                         
                     @foreach ($pics as $i => $pic )
                         @php
                         $path = asset('storage/gal/'.$gal_id."/" . $pic->file_name);
                         $extension = strtoupper(pathinfo($path, PATHINFO_EXTENSION));
                         @endphp
-                        <div class="w-32 h-32 overflow-hidden rounded-lg mb-3 bg-slate-700 rounded-lg shadow-2xl shadow-cyan-500/50">
-                            <div class="pic_del z-20 position absolute bg-gradient-to-r from-transparent to-gray-900 p-2 text-xs text-right">
+                        <div class="pic_del_wrapper picWrapper_{{ $pic->id }}">
+                            <div class="pic_del">
                                 <form method="POST" action="{{ route("gallery.deletePic") }}"> 
                                     @csrf
                                     <input type="hidden" name="pic_id" value="{{ $pic->id }}">
                                 </form> 
-                                <a class="javascript:void(0)" onclick="$(this).closest('div').find('form').submit()" href="#">
-                                    <i class="text-gray-800 fa fa-trash" aria-hidden="true"></i>
+                                <a class="javascript:void(0)" onclick="deletePic({{ $pic->id }})" href="#">
+                                    <i class="text-orange-500 fa fa-trash" aria-hidden="true"></i>
                                            
                                 </a>
                             </div>
@@ -82,6 +82,30 @@
     <div id="upload_status" class="hidden"></div>
     <script type="text/javascript">
    
+        function deletePic(id){
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },        
+                type: 'POST',
+                url: '{{ url("files/destroy") }}',
+                data: {
+                        pic_id: id
+                },
+                success: function (data){
+                    console.log("File has been successfully removed!!");
+                    $('.picWrapper_'+id).remove();
+
+                },
+                error: function(e) {
+                    console.log(e);
+                }
+            });
+        };        
+        
+
+        
+
     Dropzone.options.dropzone =
     {
         maxFilesize: 500,
@@ -93,7 +117,7 @@
         {
             var name = file.upload.filename;
             var pic_id = $(file.previewElement).attr('pic_id');
-            alert(pic_id);
+            //alert(pic_id);
             $.ajax({
                 //headers: {
                 //    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
@@ -119,10 +143,25 @@
         success: function (file, response) {
             console.log(response);
             console.log(file);
-            console.log($(file.previewElement).length);
             $(file.previewElement).attr('pic_id', response.id);
             $('#upload_status').prepend("<div>" + response.timestamp+ ": File " + response.filename + " successfully uploaded. <br>Exif <i class='text-green-700 fa-solid fa-check'></i>OSM <i class='text-green-700 fa-solid fa-check'></i></div>");
+            var html = $(file.previewElement).find('.dz-image').html();
+            /*
+            var html='<div class="pic_del_wrapper">' +
+                        '<div class="pic_del">' +
+                            '<form method="POST" action="http://localhost:8000/gallery/deletePic">' +
+                                    '<input type="hidden" name="_token" value="">'  +                                  
+                                    '<input type="hidden" name="pic_id" value="'+response.id+'">'  +
+                            '</form>' +
+                            '<a class="javascript:void(0)" onclick="$(this).closest('div').find('form').submit()" href="#">' +
+                                '<i class="text-gray-800 fa fa-trash" aria-hidden="true"></i></a>' +
+                            '</div>'+ img + ' +                         
+                        '</div>';
+            */            
             
+            $(file.previewElement).remove();
+            //alert(html);
+            $('.preview').append(html);    
         },
         error: function (file, response) {
             console.log(response);

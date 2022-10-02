@@ -119,7 +119,15 @@ class GalleryController extends Controller
     public function deletePic(Request $request){
         $id = $request->all()['pic_id'];
         $pic  = GalleryPics::find($id);
+        $gal_id = $pic->gal_id;
+        $hash = $pic->hash;
+        $filename = $pic->file_name;
         $pic->delete();
+        $res = Storage::disk('public')->delete('gal/'.$gal_id.'/large_photos/'.$hash);
+        $res = Storage::disk('public')->delete('gal/'.$gal_id.'/medium_photos/'.$hash);
+        $res = Storage::disk('public')->delete('gal/'.$gal_id.'/original_photos/'.$hash);
+        $res = Storage::disk('public')->delete('gal/'.$gal_id.'/tiny_photos/'.$hash);
+        $res = Storage::disk('public')->delete('gal/'.$gal_id.'/'.$filename);
         return redirect()->back()
             ->with('success', 'File deleted successfully');
     }
