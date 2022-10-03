@@ -25,8 +25,8 @@ class GalleryController extends Controller
         
         echo env('FFMPEG');
         $ffmpeg = FFMpeg\FFMpeg::create(array(
-            'ffmpeg.binaries'  => env('FFMPEG'),
-            'ffprobe.binaries' => env('FFPROBE'),
+            'ffmpeg.binaries'  => exec('which ffmpeg'),
+            'ffprobe.binaries' => exec('which ffprobe'),
             'timeout'          => 1200, // The timeout for the underlying process
             'ffmpeg.threads'   => 12,   // The number of threads that FFMpeg should use
         ));
