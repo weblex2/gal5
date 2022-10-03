@@ -42,6 +42,12 @@ Route::get('/php', function () {
     return phpinfo();
 })->name('php');
 
+Route::get('/php2', function () {
+    return php_uname('a') .php_uname('s').php_uname('n').php_uname('r').php_uname('v').php_uname('m');
+})->name('php');
+
+
+
 
 Route::controller(GalleryController::class)->group(function () {
     Route::get('/gallery', 'index')->name('gallery.index');
