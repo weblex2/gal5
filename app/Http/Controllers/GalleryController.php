@@ -34,9 +34,9 @@ class GalleryController extends Controller
         ));
         
         
-        $url  = 'D:\web\gal5\storage\app\public\gal\1\2022_08_23_IMG_3897.MOV';
-        echo $url;
-        echo "<br>";
+        #$url  = 'D:\web\gal5\storage\app\public\gal\1\2022_08_23_IMG_3897.MOV';
+        #echo $url;
+        #echo "<br>";
         $url = storage_path('app\public\gal\1\2022_08_23_IMG_3897.MOV');
         #$url  = Storage::disk('local')->url('gal/1/2022_08_23_IMG_3897.MOV');
         #echo $url;
