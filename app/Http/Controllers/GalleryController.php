@@ -59,13 +59,13 @@ class GalleryController extends Controller
             ->filters()
             ->resize(new FFMpeg\Coordinate\Dimension(320, 240))
             ->synchronize();
-        #$video
-        #    ->frame(FFMpeg\Coordinate\TimeCode::fromSeconds(2))
-        #    ->save(storage_path('app/public/gal/1/frame.jpg'));
         $video
-            ->save(new FFMpeg\Format\Video\X264(), storage_path('app/public/gal/1/export-x264.mp4'))
-            ->save(new FFMpeg\Format\Video\WMV(),  storage_path('app/public/gal/1/export-wmv.wmv'))
-            ->save(new FFMpeg\Format\Video\WebM(), storage_path('app/public/gal/1/export-webm.webm'));
+            ->frame(FFMpeg\Coordinate\TimeCode::fromSeconds(2))
+            ->save(storage_path('app/public/gal/1/frame.jpg'));
+        #$video
+            #->save(new FFMpeg\Format\Video\X264(), storage_path('app/public/gal/1/export-x264.mp4'))
+            #->save(new FFMpeg\Format\Video\WMV(),  storage_path('app/public/gal/1/export-wmv.wmv'))
+            #->save(new FFMpeg\Format\Video\WebM(), storage_path('app/public/gal/1/export-webm.webm'));
         #die();
 
         dump($logger);
