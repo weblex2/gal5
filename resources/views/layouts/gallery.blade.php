@@ -138,7 +138,7 @@
         <div class="flex h-full">
 
             <!-- COLUMN ONE -->
-            <div class="w-1/5  flex flex-col bg-slate-800">
+            <div class="menue w-1/5  flex flex-col bg-slate-800">
 
                 <div class="flex flex-col h-full">
 

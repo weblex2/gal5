@@ -135,6 +135,10 @@
         }
 
         $(function() {
+
+          $('#gmaps_wrapper').addClass('absolute').css('width', )
+
+
             var h = $('#myPic').outerHeight();
             var cl = "h-["+ h +"]";
             var w  = $('#myPic').outerWidth() / 3;

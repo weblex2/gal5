@@ -65,14 +65,17 @@
                         @endphp
                         <div class="pic_del_wrapper picWrapper_{{ $pic->id }}">
                             <div class="pic_del">
-                                <i class="cursor-pointer mr-1 text-orange-500 fa fa-trash" aria-hidden="true" onclick="deletePic({{ $pic->id }})"></i>       
-                                <i class="cursor-pointer mr-1 text-orange-500 fa fa-image"  onclick="setGalleryBackground({{ $pic->id }})"></i>   
-                                <i class="cursor-pointer mr-1 text-orange-500 fa fa-user"  onclick="togglePicPublic({{ $pic->id }})"></i>   
+                                <i class="cursor-pointer mr-1 text-slate-500 fa fa-trash" aria-hidden="true" onclick="deletePic({{ $pic->id }})"></i>       
+                                <i class="cursor-pointer mr-1 text-slate-500 fa fa-image"  onclick="setGalleryBackground({{ $pic->id }})"></i>   
+                                <i class="cursor-pointer mr-1 text-slate-500 fa fa-user"  onclick="togglePicPublic({{ $pic->id }})"></i>   
+                                <i class="cursor-pointer mr-1 text-slate-500 fa fa-location-pin"></i>
+                                <i class="cursor-pointer mr-1 text-slate-500 fa fa-calendar"></i>
+                                <i class="cursor-pointer mr-1 text-slate-500 fa fa-date"></i>
                                 </a>
                             </div>
                             
                         @if (in_array($extension,['JPG','JPEG','GIF','PNG']))
-                            <img class="mb-3 w-full  mx-auto rounded-lg shadow-2xl shadow-cyan-500/50 max-h-full" src="{{ Storage::url('gal/'.$gal_id."/" . $pic->file_name) }}">
+                            <img class="mb-3 w-full  mx-auto rounded-b-lg shadow-2xl shadow-cyan-500/50 max-h-full" src="{{ Storage::url('gal/'.$gal_id."/medium_photos/" . $pic->hash) }}">
                         @else
                             <video class="w-full mx-auto ">
                             <source src="{{ Storage::url('gal/'.$gal_id."/" . $pic->file_name) }}" type="video/mp4">

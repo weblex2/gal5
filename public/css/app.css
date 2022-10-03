@@ -11572,6 +11572,10 @@ select {
     border-top-right-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
 }
+.rounded-b-lg {
+    border-bottom-right-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+}
 .border {
     border-width: 1px;
 }
@@ -12728,6 +12732,9 @@ header {
     background-color: rgb(71 85 105 / var(--tw-bg-opacity));
     --tw-text-opacity: 1;
     color: rgb(249 115 22 / var(--tw-text-opacity));
+}
+.dropzone .dz-preview.dz-image-preview {
+    background-color: transparent;
 }
 .hover\:border-gray-300:hover {
     --tw-border-opacity: 1;

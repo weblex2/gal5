@@ -124,6 +124,12 @@ class FileUploadController extends Controller
         $mime  = mime_content_type($img_path);
         $getID3 = new \getID3;
         $thisFileInfo = $getID3->analyze($img_path);
+        if (isset($thisFileInfo['jpg']['exif']['EXIF']['DateTimeOriginal'])){
+        $taken  = str_replace(':','-',substr($thisFileInfo['jpg']['exif']['EXIF']['DateTimeOriginal'],0,10))." ".substr($thisFileInfo['jpg']['exif']['EXIF']['DateTimeOriginal'],11, 100); 
+        }
+        else{
+            $taken = '9999-12-31 23:59:59';
+        }
         $osm_status = false;
         if (isset($thisFileInfo['jpg']['exif']['GPS']['computed'])) {   
             $lat = $thisFileInfo['jpg']['exif']['GPS']['computed']['latitude'];
@@ -163,6 +169,7 @@ class FileUploadController extends Controller
         $imageUpload->lon = $lon;
         $imageUpload->hash = $hash;
         $imageUpload->lat = $lat;
+        $imageUpload->taken = $taken;
         $imageUpload->save();
         $id = $imageUpload->id;
         $timestamp  = date('Y-m-d H:i:s');
