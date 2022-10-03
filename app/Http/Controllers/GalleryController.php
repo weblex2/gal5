@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Gallery;
 use App\Models\GalleryPics;
 use Http\Controllers\FileUploadController;
+use FFMpeg;
 
 
 class GalleryController extends Controller
@@ -20,6 +21,52 @@ class GalleryController extends Controller
 
     public function index(){
        
+
+        
+        echo env('FFMPEG');
+        $ffmpeg = FFMpeg\FFMpeg::create(array(
+            'ffmpeg.binaries'  => env('FFMPEG'),
+            'ffprobe.binaries' => env('FFPROBE'),
+            'timeout'          => 1200, // The timeout for the underlying process
+            'ffmpeg.threads'   => 12,   // The number of threads that FFMpeg should use
+        ));
+        
+        
+        $url  = 'D:\web\gal5\storage\app\public\gal\1\2022_08_23_IMG_3897.MOV';
+        echo $url;
+        echo "<br>";
+        $url = storage_path('app\public\gal\1\2022_08_23_IMG_3897.MOV');
+        #$url  = Storage::disk('local')->url('gal/1/2022_08_23_IMG_3897.MOV');
+        #echo $url;
+
+        #$url =  storage_path('app/public/gal/1/2022_08_23_IMG_3897.MOV');
+        #$url =  storage_path('storage/gal/1/2022_08_23_IMG_3897.MOV');
+        #$url = asset('storage/gal/1/2022_08_23_IMG_3897.MOV');
+        #echo $url."<br>";
+        if (file_exists($url)){
+            echo "Ja";
+            #die();
+        }
+
+        else{
+            echo "nöö";
+            die();
+        }
+        
+        $video = $ffmpeg->open($url);
+        $video
+            ->filters()
+            ->resize(new FFMpeg\Coordinate\Dimension(320, 240))
+            ->synchronize();
+        $video
+            ->frame(FFMpeg\Coordinate\TimeCode::fromSeconds(2))
+            ->save(storage_path('app\public\gal\1\frame.jpg'));
+        $video
+            ->save(new FFMpeg\Format\Video\X264(), storage_path('app\public\gal\1\export-x264.mp4'))
+            ->save(new FFMpeg\Format\Video\WMV(),  storage_path('app\public\gal\1\export-wmv.wmv'))
+            ->save(new FFMpeg\Format\Video\WebM(), storage_path('app\public\gal\1\export-webm.webm'));
+        #die();
+        
         $create_user_id = \Auth::id();
         if ($create_user_id) {
             $galleries = Gallery::where('create_user_id' , "=", $create_user_id )->get();

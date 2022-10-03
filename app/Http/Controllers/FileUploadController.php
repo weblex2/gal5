@@ -82,7 +82,6 @@ class FileUploadController extends Controller
 
         // to finally create image instances
         #$pic = $manager->make($image->getRealPath());
-        $pic = Image::make($image->getRealPath());//create a new image //resource from file.This is done by the Intervention Image package
         $FileName = $image->getClientOriginalName();
         $extension = strtoupper(pathinfo($image->getClientOriginalName(), PATHINFO_EXTENSION));   
         if (in_array($extension, ["JPG", "PNG", "GIF", "BMP", "WebP"] )) {
@@ -114,6 +113,8 @@ class FileUploadController extends Controller
 
         }
         else{
+
+            $hash =  $FileName;
            // Video     
         }
         
@@ -140,7 +141,7 @@ class FileUploadController extends Controller
             
         }
         else{
-            
+           
         }
 
         $getID3->CopyTagsToComments($thisFileInfo);
