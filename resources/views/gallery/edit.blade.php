@@ -65,12 +65,11 @@
                         @endphp
                         <div class="pic_del_wrapper picWrapper_{{ $pic->id }}">
                             <div class="pic_del">
-                                <i class="cursor-pointer mr-1 text-slate-500 fa fa-trash" aria-hidden="true" onclick="deletePic({{ $pic->id }})"></i>       
-                                <i class="cursor-pointer mr-1 text-slate-500 fa fa-image"  onclick="setGalleryBackground({{ $pic->id }})"></i>   
-                                <i class="cursor-pointer mr-1 text-slate-500 fa fa-user"  onclick="togglePicPublic({{ $pic->id }})"></i>   
-                                <i class="cursor-pointer mr-1 text-slate-500 fa fa-location-pin"></i>
-                                <i class="cursor-pointer mr-1 text-slate-500 fa fa-calendar"></i>
-                                <i class="cursor-pointer mr-1 text-slate-500 fa fa-date"></i>
+                                <i title="Delete" class="cursor-pointer mr-1 text-slate-500 fa fa-trash" aria-hidden="true" onclick="deletePic({{ $pic->id }})"></i>       
+                                <i title="Set as Background" class="cursor-pointer mr-1 text-slate-500 fa fa-image"  onclick="setGalleryBackground({{ $pic->id }})"></i>   
+                                <i title="Toggle Public" class="cursor-pointer mr-1 text-slate-500 fa fa-user"  onclick="togglePicPublic({{ $pic->id }})"></i>   
+                                <i title="Open Street Map data availible" class="cursor-pointer mr-1 text-slate-500 fa fa-location-pin"></i>
+                                <i title="Creation Date availible" class="cursor-pointer mr-1 text-slate-500 fa fa-calendar"></i>
                                 </a>
                             </div>
                             
