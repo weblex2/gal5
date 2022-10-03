@@ -92,22 +92,19 @@ class FileUploadController extends Controller
                 $pic->rotate(-90);
             }
             $hash =  $image->hashName();
+            $percentage = 100; // 85 was recommended
             $pic->save($original_photo_storage.$image->hashName(),100)->resize(860, null, function ($constraint) {
                         $constraint->aspectRatio();
-                        $constraint->upsize();
                     })
-                ->save($large_photos_storage.$image->hashName(),85)->resize(640, null, function ($constraint) {
+                ->save($large_photos_storage.$image->hashName(),$percentage)->resize(640, null, function ($constraint) {
                         $constraint->aspectRatio();
-                        $constraint->upsize();
-                    })->save($medium_photos_storage.$image->hashName(),85)
+                    })->save($medium_photos_storage.$image->hashName(),$percentage)
                 ->resize(420, null, function ($constraint) {
                         $constraint->aspectRatio();
-                        $constraint->upsize();
-                    })->save($mobile_photos_storage.$image->hashName(),85)
+                    })->save($mobile_photos_storage.$image->hashName(),$percentage)
                 ->resize(10, null, function ($constraint) {
                         $constraint->aspectRatio();
-                        $constraint->upsize();
-                })->blur(1)->save($tiny_photos_storage.$image->hashName(),85);
+                })->blur(1)->save($tiny_photos_storage.$image->hashName(),$percentage);
                 $pic->save();
                 $exif = $pic->exif();
 
