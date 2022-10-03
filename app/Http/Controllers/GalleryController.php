@@ -53,7 +53,7 @@ class GalleryController extends Controller
             echo "nöö";
             die();
         }
-        
+        chmod('app/public/gal/1/',777);
         $video = $ffmpeg->open($url);
         $video
             ->filters()
