@@ -24,7 +24,7 @@ class GalleryController extends Controller
 
         
         echo env('FFMPEG');
-        echo "<br>;"
+        echo "<br>";
         echo env('FFPROBE');
         $ffmpeg = FFMpeg\FFMpeg::create(array(
             'ffmpeg.binaries'  => exec('which ffmpeg'),
