@@ -22,6 +22,7 @@ class GalleryController extends Controller
     }
 
     public function index(){
+        /*
         $logger = \Log::getLogger();
         $ffmpeg = FFMpeg\FFMpeg::create(array(
             'ffmpeg.binaries'  => env('FFMPEG'),
@@ -30,7 +31,7 @@ class GalleryController extends Controller
             'ffmpeg.threads'   => 12,   // The number of threads that FFMpeg should use
         ), $logger);
         
-        dump($logger);
+        
         
         #$url  = 'D:\web\gal5\storage\app\public\gal\1\2022_08_23_IMG_3897.MOV';
         #echo $url;
@@ -66,6 +67,9 @@ class GalleryController extends Controller
             ->save(new FFMpeg\Format\Video\WMV(),  storage_path('app/public/gal/1/export-wmv.wmv'))
             ->save(new FFMpeg\Format\Video\WebM(), storage_path('app/public/gal/1/export-webm.webm'));
         #die();
+
+        dump($logger);
+        */
         
         $create_user_id = \Auth::id();
         if ($create_user_id) {
