@@ -57,11 +57,11 @@ class GalleryController extends Controller
             ->synchronize();
         $video
             ->frame(FFMpeg\Coordinate\TimeCode::fromSeconds(2))
-            ->save(storage_path('app\public\gal\1\frame.jpg'));
+            ->save(storage_path('app/public/gal/1/frame.jpg'));
         $video
-            ->save(new FFMpeg\Format\Video\X264(), storage_path('app\public\gal\1\export-x264.mp4'))
-            ->save(new FFMpeg\Format\Video\WMV(),  storage_path('app\public\gal\1\export-wmv.wmv'))
-            ->save(new FFMpeg\Format\Video\WebM(), storage_path('app\public\gal\1\export-webm.webm'));
+            ->save(new FFMpeg\Format\Video\X264(), storage_path('app/public/gal/1/export-x264.mp4'))
+            ->save(new FFMpeg\Format\Video\WMV(),  storage_path('app/public/gal/1/export-wmv.wmv'))
+            ->save(new FFMpeg\Format\Video\WebM(), storage_path('app/public/gal/1/export-webm.webm'));
         #die();
         
         $create_user_id = \Auth::id();
