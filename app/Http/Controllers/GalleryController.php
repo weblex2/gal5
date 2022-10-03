@@ -20,12 +20,7 @@ class GalleryController extends Controller
     }
 
     public function index(){
-       
 
-        
-        echo env('FFMPEG');
-        echo "<br>";
-        echo env('FFPROBE');
         $ffmpeg = FFMpeg\FFMpeg::create(array(
             'ffmpeg.binaries'  => env('FFMPEG'),
             'ffprobe.binaries' => env('FFPROBE'),
@@ -44,7 +39,7 @@ class GalleryController extends Controller
         #$url =  storage_path('app/public/gal/1/2022_08_23_IMG_3897.MOV');
         #$url =  storage_path('storage/gal/1/2022_08_23_IMG_3897.MOV');
         #$url = asset('storage/gal/1/2022_08_23_IMG_3897.MOV');
-        #echo $url."<br>";
+        echo $url."<br>";
         if (file_exists($url)){
             echo "Ja";
             #die();
