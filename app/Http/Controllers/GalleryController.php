@@ -8,6 +8,8 @@ use App\Models\Gallery;
 use App\Models\GalleryPics;
 use Http\Controllers\FileUploadController;
 use FFMpeg;
+use Illuminate\Log\Logger;
+
 
 
 class GalleryController extends Controller
@@ -20,19 +22,19 @@ class GalleryController extends Controller
     }
 
     public function index(){
-
+        $logger = \Log::getLogger();
         $ffmpeg = FFMpeg\FFMpeg::create(array(
             'ffmpeg.binaries'  => env('FFMPEG'),
             'ffprobe.binaries' => env('FFPROBE'),
             'timeout'          => 1200, // The timeout for the underlying process
             'ffmpeg.threads'   => 12,   // The number of threads that FFMpeg should use
-        ));
+        ), $logger);
         
         
         #$url  = 'D:\web\gal5\storage\app\public\gal\1\2022_08_23_IMG_3897.MOV';
         #echo $url;
         #echo "<br>";
-        $url = storage_path('app/public/gal/1/2022_08_23_IMG_3897.MOV');
+        $url = storage_path('app/public/gal/1/a.MOV');
         #$url  = Storage::disk('local')->url('gal/1/2022_08_23_IMG_3897.MOV');
         #echo $url;
 
