@@ -30,6 +30,7 @@ class GalleryController extends Controller
             'ffmpeg.threads'   => 12,   // The number of threads that FFMpeg should use
         ), $logger);
         
+        dump($logger);
         
         #$url  = 'D:\web\gal5\storage\app\public\gal\1\2022_08_23_IMG_3897.MOV';
         #echo $url;
