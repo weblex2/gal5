@@ -7,10 +7,10 @@
 
 
     <div class="py-12 w-full">
-        <div class="bg-slate-300 w-full px-3  ">
+        <div class="w-full px-3">
             @include("kb.search")
-            <div class="float-left w-4/5">
-                <div class="w-full mx-auto sm:px-6 lg:px-8">
+            <div class=" w-full float-left lg:w-4/5 lg:float-left ">
+                <div class="w-full mx-auto lg:px-8">
                     <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                         <div class="bg-gray-200 bg-opacity-25 ">
                             <div class="p-6 w-full">

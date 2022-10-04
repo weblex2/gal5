@@ -1,5 +1,5 @@
-<div class="float-left bg-gray-200 bg-opacity-25 shadow-xl sm:rounded-lg w-1/5 ">
-    <div class="bg-white shadow-xs p-3 rounded border border-slate-200">Search</div>
+<div class=" search_wrapper bg-gray-200 mb-3 bg-opacity-25 shadow-xl w-full float-left  sm:rounded-lg lg:w-1/5  lg:block lg:float-left lg:mb-1">
+    <div class="bg-gray-100 shadow-xs p-3 rounded-t border-b border-slate-100 font-bold lg:text-orange-500 ">Search</div>
     <div class="p-3">
         <form method="GET" action="{{route("kb.show")}}">
             <div >Topic:</div>
@@ -14,3 +14,4 @@
         </form>
     </div>
 </div>
+

@@ -6,9 +6,9 @@
     </x-slot>
 
     <div class="py-12 w-full">
-        <div class="bg-slate-300 w-full px-3  ">
+        <div class="bg-slate-300 w-full px-3">
              @include("kb.search")
-            <div class="float-left w-4/5">
+            <div class="float-left w-full lg:w-4/5 alex">
                 <div class="w-full mx-auto sm:px-6 lg:px-8">
                     <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                         <div class="bg-gray-200 bg-opacity-25 ">
@@ -39,5 +39,5 @@
         $('#detail a').each(function(index){
             $(this).attr('target','_blank');
         });
-    </script>    
+    </script>
 </x-app-layout>
