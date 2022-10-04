@@ -6,7 +6,7 @@
     </x-slot>
 
 
-    <div class="py-12 w-full">
+    <div class="py-6 lg:py-12 w-full">
         <div class="w-full px-3">
             @include("kb.search")
             <div class=" w-full float-left lg:w-4/5 lg:float-left ">
@@ -14,10 +14,10 @@
                     <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                         <div class="bg-gray-200 bg-opacity-25 ">
                             <div class="p-6 w-full">
-                                <div class="w-full block  text-right">
-                                    <a class="px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition " href="{{route('kb.new')}}"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
+                                <div class="w-full block text-right mb-4">
+                                    <!--a class="px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition " href="{{route('kb.new')}}"><i class="fa-solid fa-pen-to-square"></i> Edit</a-->
 
-                                    <a class="px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition " href="{{route('kb.new')}}"><i class="fa-solid fa-plus"></i> New</a>
+                                    <a class="px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition my-3 " href="{{route('kb.new')}}"><i class="fa-solid fa-plus"></i> New</a>
                                 </div>
                                 <div class="w-full">
                                     <div class="grid grid-cols-2">
