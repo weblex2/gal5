@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    
+
     <title>Noppal - Gallery</title>
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
@@ -46,6 +46,7 @@
 </head>
 <body class="gallery_body">
 <div class="h-screen  flex flex-col" id="maindiv">
+
     <div class="bg-slate-800 border-b border-slate-900 pt-3  sm:block ">
         <div class="flex space-x-4 float-left">
             <!--a href="/" class="menu_item">
@@ -58,23 +59,25 @@
             <a href="{{ route("gallery.index") }}">
                 <img src="{{ Storage::url('me.png')}}" class="rounded-full w-8 ml-3 mb-2 mt-[-5px]">
             </a>
+
             <span class="text-orange-500">
                 @if (Auth::user())
                     {{ Auth::user()->email }}
                 @else
                     nich eingelogged.
-                @endif        
+                @endif
             </span>
         </div>
+
         <div class="float-right flex px-3 z-20">
-          
+
             @if (!Auth::user())
 
                 <a href="{{ route("gallery.index") }}">
                     <i class="float-right mb-3 mx-2 text-white fa fa-home"></i>
                 </a>
-                    
-                @isset($gal_id) 
+
+                @isset($gal_id)
                 <a href="{{ route("gallery.show", ['id' => $gal_id] ) }}">
                     <i class="float-right mb-3 mx-2 text-white fa fa-arrow-up"></i>
                 </a>
@@ -83,7 +86,7 @@
                 <a href="#" onclick="$('#loginWrapper').toggle(200)">
                     <i class="float-right mb-3 mx-2 text-white fa fa-user"></i>
                 </a>
-                
+
                 <div id="loginWrapper" class="">
                     <form METHOD="POST" action="{{ route("login") }}">
                         @csrf
@@ -97,7 +100,7 @@
                     </form>
                 </div>
             @else
-                @isset($gal_id) 
+                @isset($gal_id)
                     <a href="{{ route("gallery.index") }}">
                         <i class="float-right mb-3 mx-2 text-white fa fa-home"></i>
                     </a>
@@ -121,9 +124,9 @@
                     <a href="{{ route("gallery.index") }}">
                         <i class="float-right mb-3 mx-2 text-white fa fa-home"></i>
                     </a>
-                    
+
                 @endisset
-                
+
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <a href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();">
@@ -133,7 +136,16 @@
             @endif
         </div>
     </div>
+
+
+
     <div class="flex flex-col h-full overflow-y-auto">
+
+        <div class="sm-menu  absolute left-0 w-full">
+            <div class="bg-slate-400">Menu 1</div>
+            <div class="bg-slate-400">Menu 2</div>
+            <div class="bg-slate-400">Menu 3</div>
+        </div>
         <!-- THREE COLUMNS LAYOUT -->
         <div class="flex h-full">
 

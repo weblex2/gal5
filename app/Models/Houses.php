@@ -11,4 +11,8 @@ class Houses extends Model
     protected $fillable = [
         'name', 'detail','active'
     ];
+
+    public function articles(){
+        return $this->hasMany(HousesArticle::class);
+    }
 }

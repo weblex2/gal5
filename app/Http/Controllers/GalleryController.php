@@ -15,24 +15,25 @@ use Illuminate\Log\Logger;
 class GalleryController extends Controller
 {
 
-    
+
     public function __construct()
     {
-        
+
     }
 
     public function index(){
-        
+
         $logger = \Log::getLogger();
+        /*
         $ffmpeg = FFMpeg\FFMpeg::create(array(
             'ffmpeg.binaries'  => env('FFMPEG'),
             'ffprobe.binaries' => env('FFPROBE'),
             'timeout'          => 1200, // The timeout for the underlying process
             'ffmpeg.threads'   => 12,   // The number of threads that FFMpeg should use
         ), $logger);
-        
-        
-        
+
+
+
         #$url  = 'D:\web\gal5\storage\app\public\gal\1\2022_08_23_IMG_3897.MOV';
         #echo $url;
         #echo "<br>";
@@ -70,8 +71,8 @@ class GalleryController extends Controller
         #die();
 
         dump($logger);
-        
-        
+        */
+
         $create_user_id = \Auth::id();
         if ($create_user_id) {
             $galleries = Gallery::where('create_user_id' , "=", $create_user_id )->get();
@@ -79,10 +80,10 @@ class GalleryController extends Controller
         else{
             $galleries = Gallery::where('public' , "=", 1 )->get();
         }
-        
-        return view("gallery.index", compact('galleries'));        
-        
-        
+
+        return view("gallery.index", compact('galleries'));
+
+
     }
 
     public function newGallery(){
@@ -110,7 +111,7 @@ class GalleryController extends Controller
         $req = $request->all();
         $gal_id = $req['gal_id'];
         $gal  = Gallery::find($gal_id);
-        
+
         if (!isset($req['public'])) {
             $req['public']=0;
         }
@@ -139,7 +140,7 @@ class GalleryController extends Controller
     }
 
     public function createGallery(REQUEST $request){
-        
+
         $gallery = New Gallery();
         $gallery->fill($request->all());
         $res = $gallery->save();
@@ -147,7 +148,7 @@ class GalleryController extends Controller
         return redirect()->route("gallery.edit" , [$gal_id]);
     }
 
-    
+
 
     public function showPic($pic_id){
 
@@ -157,7 +158,7 @@ class GalleryController extends Controller
                 $gal_id = $pic->gal_id;
                 $prev = GalleryPics::where('id', '<', $pic_id)->where('gal_id', "=", $gal_id)->max('id');
                 $next = GalleryPics::where('id', '>', $pic_id)->where('gal_id', "=", $gal_id)->min('id');
-            }    
+            }
         }
         else {
             $pic  = GalleryPics::where('id','=', $pic_id)->where('public',"=",1)->firstorfail();
@@ -171,11 +172,11 @@ class GalleryController extends Controller
                                     ->where('gal_id', "=", $gal_id)
                                     ->where('public', "=", 1)
                                     ->min('id');
-            }                    
+            }
         }
 
-        
-        
+
+
         return view("gallery.showpic2", compact('pic','prev','next'));
     }
 
@@ -213,6 +214,6 @@ class GalleryController extends Controller
         $success = $res ? 1 : 0;
         return json_encode(['success' => $success, 'public' => $pic->public]);
     }
-    
+
 
 }

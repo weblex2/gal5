@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HousesController;
+use App\Http\Controllers\HouseController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\EasyDB;
 use App\Http\Controllers\LaravelMyAdminController;
@@ -77,4 +77,12 @@ Route::controller(KnowledgeBaseController::class)->group(function () {
     Route::get('/kb/show/{topic?}', 'show')->middleware(['auth'])->name('kb.show');
     Route::get('/kb/detail/{id}', 'detail')->middleware(['auth'])->name('kb.detail');
     Route::post('/kb/delete', 'delete')->middleware(['auth'])->name('kb.delete');
+});
+
+
+Route::controller(HouseController::class)->group(function () {
+    Route::get('/house', 'index')->middleware(['auth'])->name('house.index');
+    Route::get('/house/edit/{id}', 'edit')->middleware(['auth'])->name('house.edit');
+    Route::get('/house/create', 'create')->middleware(['auth'])->name('house.create');
+    Route::post('/house/update', 'update')->middleware(['auth'])->name('house.update');
 });
