@@ -17,10 +17,52 @@ function makeFormField($contrl, $house){
     }
     switch ($contrl->field_type) {
         case 'TEXT':
-            $ff .=  '<div class="col-span-'.$width.'">
+            $lang = "";
+            if ($contrl->field_data_src=="translations") {
+                $ff .= '<div class="col-span-' . $width . '">
+                        <div class="grid grid-cols-3 gap-3">';
+                            foreach ($house->translations as $trans) {
+                                if ($trans->field == $contrl->field_name) {
+                                    $translation = $trans->translation;
+                                    switch ($trans->language) {
+                                        case 'D':
+                                            $lang = "Deutsch";
+                                            break;
+                                        case 'E':
+                                            $lang = "Englisch";
+                                            break;
+                                        case "F":
+                                            $lang = "Französisch";
+                                            break;
+                                    }
+
+                                    $ff .='<div>
+                                             <span>'.$lang.'</span><br>
+                                             <input type="text" name="' . $contrl->field_name . '" id="trans_' . $contrl->field_name . '['.$lang.']" value="' . $translation . '">
+                                           </div>';
+                                }
+                            }
+
+               $ff.="</div></div>";
+            }
+            else {
+                $ff .= '<div class="col-span-' . $width . '">
                         <input type="text" name="' . $contrl->field_name . '" id="txt_' . $contrl->field_name . '" value="' . $house->{$contrl->field_name} . '">
                     </div>';
+            }
             break;
+        case 'RADIO':
+            $ff .=  '<div class="col-span-'.$width.'">';
+            foreach ($contrl->inputs as $inp){
+                $checked = "";
+                if ($inp->code == $house->{$contrl->field_name}) {
+                    $checked = " checked ";
+                }
+                $ff .= '<div><input '. $checked .' type="radio" name="' . $contrl->field_name . '" id="ckbx_' . $contrl->field_name . '" value="' . $inp->code . '" > '.$inp->value.'</div>';
+            }
+            $ff .='</div>';
+            break;
+
         case 'CKBX':
             $checked = "";
             if ($house->{$contrl->field_name}==1) {
@@ -49,15 +91,12 @@ function makeFormField($contrl, $house){
 
             break;
         case 'DATE':
-            $ff .=  '<div class="col-span-'.$width.'">
-                        <label class="relative block">
-                            <input name="' . $contrl->field_name . '" id="dat_' . $contrl->field_name . '" value="' . $house->{$contrl->field_name} . '" class="" type="text" />
-                                <span class="absolute inset-y-0 right-0 flex items-center pr-2">
-                                    <i class="fa fa-calendar" aria-hidden="true"></i>
-                                </span>
-                        </label>
-                    </div>';
 
+            $ff .= '<div class="col-span-'.$width.'"><div class="datepicker" data-mdb-toggle-button="true">
+                    <input name="' . $contrl->field_name . '" id="dat_' . $contrl->field_name . '" value="' . $house->{$contrl->field_name} . '" type="text"
+                        class="form-control block w-full font-normal text-gray-700 bg-white border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                    />
+                    </div></div>';
 
             break;
 

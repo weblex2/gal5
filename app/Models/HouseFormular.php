@@ -12,7 +12,6 @@ class HouseFormular extends Model
 
     public function inputs(){
         return $this->hasMany(HouseFormularInput::class);
-
     }
 
 }

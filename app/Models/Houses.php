@@ -15,4 +15,8 @@ class Houses extends Model
     public function articles(){
         return $this->hasMany(HousesArticle::class);
     }
+
+    public function translations(){
+        return $this->hasMany(HouseTranslation::class);
+    }
 }

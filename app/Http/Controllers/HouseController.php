@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Houses;
 use App\Models\HousesArticle;
 use App\Models\HouseFormular;
+use App\Models\HouseTranslation;
 
 class HouseController extends Controller
 {
@@ -22,9 +23,13 @@ class HouseController extends Controller
     public function edit($id){
         $house  = Houses::find($id);
         $house->load('articles');
+        $house->load('translations');
+        $trans = HouseTranslation::all();
+        dump($house);
+
         #dump($house);
 
-        $frmHouse = HouseFormular::orderBy('ord','ASC')->get();
+        $frmHouse = HouseFormular::orderBy('section','ASC')->orderBy('ord','ASC')->get();
         $frmHouse->load('inputs');
         #dump($frmHouse);
         return view ('house.edit', compact('house', 'frmHouse'));
@@ -35,8 +40,9 @@ class HouseController extends Controller
         $house  = Houses::find($req['id']);
         $house->fill($req);
         #dump($req);
-        $house->update();
-        return redirect()->route('house.edit', ['id'=>$req['id']]);
+        $res = $house->update();
+        #dump($res);
+        return redirect()->route('house.edit', ['id'=>$req['id']])->with('success','House saved successfully.');;
     }
 
     public function configHouse(){

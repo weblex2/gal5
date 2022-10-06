@@ -21,6 +21,7 @@
 
 
 
+
         {{--  dropbox CDN  --}}
        <link rel="stylesheet" href="{{asset('css/dropzone.min.css')}}">
        <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.0/dropzone.js"></script>
