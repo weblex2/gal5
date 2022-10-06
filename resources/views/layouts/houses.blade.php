@@ -16,8 +16,8 @@
 
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
-        <script src="{{ asset('js/jquery360.js') }}"></script>
-        <script src="{{ asset('js/jquery-ui.js') }}"></script>
+        <script src="{{ mix('js/jquery360.js') }}"></script>
+        <script src="{{ mix('js/jquery-ui.js') }}"></script>
 
 
 

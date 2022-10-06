@@ -85,4 +85,5 @@ Route::controller(HouseController::class)->group(function () {
     Route::get('/house/edit/{id}', 'edit')->middleware(['auth'])->name('house.edit');
     Route::get('/house/create', 'create')->middleware(['auth'])->name('house.create');
     Route::post('/house/update', 'update')->middleware(['auth'])->name('house.update');
+    Route::get('/house/config', 'configHouse')->middleware(['auth'])->name('house.config');
 });

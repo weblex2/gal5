@@ -11061,6 +11061,10 @@ select {
     bottom: 0px;
     left: 0px;
 }
+.inset-y-0 {
+    top: 0px;
+    bottom: 0px;
+}
 .left-0 {
     left: 0px;
 }
@@ -11085,17 +11089,32 @@ select {
 .col-span-6 {
     grid-column: span 6 / span 6;
 }
-.col-span-2 {
-    grid-column: span 2 / span 2;
-}
-.col-span-4 {
-    grid-column: span 4 / span 4;
+.col-span-1 {
+    grid-column: span 1 / span 1;
 }
 .col-span-9 {
     grid-column: span 9 / span 9;
 }
-.col-span-1 {
-    grid-column: span 1 / span 1;
+.col-span-2 {
+    grid-column: span 2 / span 2;
+}
+.col-span-8 {
+    grid-column: span 8 / span 8;
+}
+.col-span-3 {
+    grid-column: span 3 / span 3;
+}
+.col-span-7 {
+    grid-column: span 7 / span 7;
+}
+.col-span-4 {
+    grid-column: span 4 / span 4;
+}
+.col-span-5 {
+    grid-column: span 5 / span 5;
+}
+.col-span-10 {
+    grid-column: span 10 / span 10;
 }
 .row-span-2 {
     grid-row: span 2 / span 2;
@@ -11636,6 +11655,10 @@ select {
     --tw-border-opacity: 1;
     border-color: rgb(243 244 246 / var(--tw-border-opacity));
 }
+.border-slate-400 {
+    --tw-border-opacity: 1;
+    border-color: rgb(148 163 184 / var(--tw-border-opacity));
+}
 .border-green-500 {
     --tw-border-opacity: 1;
     border-color: rgb(34 197 94 / var(--tw-border-opacity));
@@ -11699,10 +11722,6 @@ select {
 .border-slate-600 {
     --tw-border-opacity: 1;
     border-color: rgb(71 85 105 / var(--tw-border-opacity));
-}
-.border-red-500 {
-    --tw-border-opacity: 1;
-    border-color: rgb(239 68 68 / var(--tw-border-opacity));
 }
 .bg-white {
     --tw-bg-opacity: 1;
@@ -11961,6 +11980,12 @@ select {
 }
 .pb-1 {
     padding-bottom: 0.25rem;
+}
+.pr-10 {
+    padding-right: 2.5rem;
+}
+.pr-3 {
+    padding-right: 0.75rem;
 }
 .pt-8 {
     padding-top: 2rem;
@@ -12253,6 +12278,10 @@ select {
 }
 .ring-opacity-5 {
     --tw-ring-opacity: 0.05;
+}
+.drop-shadow-md {
+    --tw-drop-shadow: drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.06));
+    filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 .filter {
     filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
@@ -12757,7 +12786,7 @@ header {
     background-color: transparent;
 }
 /* Houses */
-#frmHouse button, #frmHouse input[type=text] {
+#frmHouse button {
     display: inline-flex;
     align-items: center;
     border-radius: 0.375rem;
@@ -12775,30 +12804,115 @@ header {
     line-height: 1rem;
     --tw-text-opacity: 1;
     color: rgb(107 114 128 / var(--tw-text-opacity));
+    --tw-drop-shadow: drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.06));
+    filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
     transition-property: color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
     transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
     transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 150ms;
 }
-#frmHouse button:hover, #frmHouse input[type=text]:hover {
+#frmHouse button:hover {
     --tw-bg-opacity: 1;
     background-color: rgb(249 250 251 / var(--tw-bg-opacity));
     --tw-text-opacity: 1;
     color: rgb(55 65 81 / var(--tw-text-opacity));
 }
-#frmHouse button:focus, #frmHouse input[type=text]:focus {
+#frmHouse button:focus {
     --tw-bg-opacity: 1;
     background-color: rgb(249 250 251 / var(--tw-bg-opacity));
     outline: 2px solid transparent;
     outline-offset: 2px;
 }
-#frmHouse button:active, #frmHouse input[type=text]:active {
+#frmHouse button:active {
     --tw-bg-opacity: 1;
     background-color: rgb(249 250 251 / var(--tw-bg-opacity));
 }
+#frmHouse input[type=text] {
+    display: inline-flex;
+    width: 100%;
+    align-items: center;
+    border-radius: 0.375rem;
+    border-width: 1px;
+    --tw-border-opacity: 1;
+    border-color: rgb(203 213 225 / var(--tw-border-opacity));
+    --tw-bg-opacity: 1;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1rem;
+    --tw-text-opacity: 1;
+    color: rgb(107 114 128 / var(--tw-text-opacity));
+    --tw-drop-shadow: drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.06));
+    filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+    transition-property: color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+}
+#frmHouse input[type=text]:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(249 250 251 / var(--tw-bg-opacity));
+    --tw-text-opacity: 1;
+    color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+#frmHouse input[type=text]:focus {
+    --tw-bg-opacity: 1;
+    background-color: rgb(249 250 251 / var(--tw-bg-opacity));
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+}
+#frmHouse input[type=text]:active {
+    --tw-bg-opacity: 1;
+    background-color: rgb(249 250 251 / var(--tw-bg-opacity));
+}
+frmHouse .dp {
+    width: 100%;
+    border-radius: 0.375rem;
+    border-width: 1px;
+    --tw-border-opacity: 1;
+    border-color: rgb(148 163 184 / var(--tw-border-opacity));
+    --tw-bg-opacity: 1;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0.75rem;
+    padding-right: 2.5rem;
+    --tw-drop-shadow: drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.06));
+    filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+frmHouse .dp:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+}
 #frmHouse input[type=checkbox] {
     border-radius: 0.25rem;
+}
+.dp-icon {
+    position: absolute;
+    margin-left: -25px;
+}
+.field_descr {
+    display: flex;
+    align-items: center;
+    border-radius: 0.375rem;
+    --tw-bg-opacity: 1;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-transform: capitalize;
+    line-height: 1rem;
+    --tw-text-opacity: 1;
+    color: rgb(107 114 128 / var(--tw-text-opacity));
 }
 .hover\:border-gray-300:hover {
     --tw-border-opacity: 1;

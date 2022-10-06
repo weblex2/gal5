@@ -166,10 +166,26 @@ header{
 
 /* Houses */
 
-#frmHouse button, #frmHouse input[type=text] {
-    @apply inline-flex items-center px-3 py-2 border border-slate-300 text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:bg-gray-50 hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition
+#frmHouse button {
+    @apply drop-shadow-md inline-flex items-center px-3 py-2 border border-slate-300 text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:bg-gray-50 hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition
+}
+
+#frmHouse input[type=text] {
+    @apply w-full drop-shadow-md inline-flex items-center px-3 py-2 border border-slate-300 text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:bg-gray-50 hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition
+}
+
+frmHouse .dp{
+   @apply w-full bg-white  border border-slate-400 drop-shadow-md rounded-md py-2 pl-3 pr-10 focus:outline-none
 }
 
 #frmHouse input[type=checkbox]{
     @apply rounded
+}
+
+.dp-icon {
+    @apply absolute  ml-[-25px]
+}
+
+.field_descr{
+    @apply capitalize px-3 py-2 flex  items-center text-sm leading-4 font-medium rounded-md text-gray-500 bg-white
 }

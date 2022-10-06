@@ -34,8 +34,15 @@ class HouseController extends Controller
         $req = $request->all();
         $house  = Houses::find($req['id']);
         $house->fill($req);
-        dump($req);
-        #$house->update();
-        #return redirect()->route('house.edit', ['id'=>$req['id']]);
+        #dump($req);
+        $house->update();
+        return redirect()->route('house.edit', ['id'=>$req['id']]);
+    }
+
+    public function configHouse(){
+        $house  = Houses::find(1);
+        $house->load('articles');
+        $frmHouse = HouseFormular::orderBy('ord','ASC')->get();
+        return view('house.confighouse', compact('house', 'frmHouse'));
     }
 }
