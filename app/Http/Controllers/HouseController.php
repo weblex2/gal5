@@ -25,8 +25,8 @@ class HouseController extends Controller
         #dump($house);
 
         $frmHouse = HouseFormular::orderBy('ord','ASC')->get();
-
-        #dump($houseArticle);
+        $frmHouse->load('inputs');
+        #dump($frmHouse);
         return view ('house.edit', compact('house', 'frmHouse'));
     }
 

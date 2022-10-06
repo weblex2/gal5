@@ -12828,7 +12828,7 @@ header {
     --tw-bg-opacity: 1;
     background-color: rgb(249 250 251 / var(--tw-bg-opacity));
 }
-#frmHouse input[type=text] {
+#frmHouse input[type=text], #frmHouse select {
     display: inline-flex;
     width: 100%;
     align-items: center;
@@ -12855,19 +12855,19 @@ header {
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 150ms;
 }
-#frmHouse input[type=text]:hover {
+#frmHouse input[type=text]:hover, #frmHouse select:hover {
     --tw-bg-opacity: 1;
     background-color: rgb(249 250 251 / var(--tw-bg-opacity));
     --tw-text-opacity: 1;
     color: rgb(55 65 81 / var(--tw-text-opacity));
 }
-#frmHouse input[type=text]:focus {
+#frmHouse input[type=text]:focus, #frmHouse select:focus {
     --tw-bg-opacity: 1;
     background-color: rgb(249 250 251 / var(--tw-bg-opacity));
     outline: 2px solid transparent;
     outline-offset: 2px;
 }
-#frmHouse input[type=text]:active {
+#frmHouse input[type=text]:active, #frmHouse select:active {
     --tw-bg-opacity: 1;
     background-color: rgb(249 250 251 / var(--tw-bg-opacity));
 }

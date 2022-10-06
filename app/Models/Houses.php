@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Houses extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'name', 'detail','active'
+    protected $guarded = [
+        'id'
     ];
 
     public function articles(){

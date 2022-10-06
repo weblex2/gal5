@@ -9,4 +9,10 @@ class HouseFormular extends Model
 {
     use HasFactory;
     protected $table = 'house_formular';
+
+    public function inputs(){
+        return $this->hasMany(HouseFormularInput::class);
+
+    }
+
 }

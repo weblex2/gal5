@@ -30,6 +30,24 @@ function makeFormField($contrl, $house){
                         <input type="checkbox" name="' . $contrl->field_name . '" id="ckbx_' . $contrl->field_name . '" value="' . $house->{$contrl->field_name} . '"' .$checked.' >
                      </div>';
             break;
+
+        case 'SELECT':
+            $options="";
+
+            foreach ($contrl->inputs as $inp){
+                $selected = "";
+                if ($house->{$contrl->field_name}==$inp->code){
+                    $selected = " selected ";
+                }
+                $options.='<option value="'.$inp->code.' "'. $selected .' >'.$inp->value.'</option>';
+            }
+            $ff .=  '<div class="col-span-'.$width.'">
+                        <select  name="' . $contrl->field_name . '" id="ckbx_' . $contrl->field_name . '"  >
+                        '.$options.
+                        '</select>
+                     </div>';
+
+            break;
         case 'DATE':
             $ff .=  '<div class="col-span-'.$width.'">
                         <label class="relative block">
