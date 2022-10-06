@@ -22,15 +22,12 @@ class HouseController extends Controller
 
     public function edit($id){
         $house  = Houses::find($id);
-        $house->load('articles');
         $house->load('translations');
-        $trans = HouseTranslation::all();
-        dump($house);
-
-        #dump($house);
-
         $frmHouse = HouseFormular::orderBy('section','ASC')->orderBy('ord','ASC')->get();
         $frmHouse->load('inputs');
+        #dump($frmHouse);
+
+
         #dump($frmHouse);
         return view ('house.edit', compact('house', 'frmHouse'));
     }

@@ -1,7 +1,7 @@
 <?php
 
 function makeFormField($contrl, $house){
-    $value = $house->{$contrl->field_name};
+
     $width = $contrl->field_width-1;
     if (in_array($contrl->field_type,['HIDD','SEP','SPACE'])){
         $ff = "";
@@ -37,8 +37,8 @@ function makeFormField($contrl, $house){
                                     }
 
                                     $ff .='<div>
-                                             <span>'.$lang.'</span><br>
-                                             <input type="text" name="' . $contrl->field_name . '" id="trans_' . $contrl->field_name . '['.$lang.']" value="' . $translation . '">
+                                             <span class="text-xs ml-1">'.$lang.'</span><br>
+                                             <input type="text" name="trans[' . $contrl->field_name . ']['.$trans->language.']"  id="trans_' . $contrl->field_name . '_'.$trans->language.'" value="' . $translation . '">
                                            </div>';
                                 }
                             }
