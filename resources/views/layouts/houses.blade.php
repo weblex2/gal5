@@ -33,8 +33,11 @@
         </script>
 
         <!-- Bootstrap CSS CDN -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+        <link rel="stylesheet" href="mix{{"css/bootstrap.min.css"}}"
             integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+
+        <script src="https://cdn.jsdelivr.net/bootstrap.datepicker-fork/1.3.0/js/locales/bootstrap-datepicker.it.js"></script>
+        <script src="/jquery/jquery.ui.datepicker-it.js" type="text/javascript"></script>
 
     </head>
     <body class="font-sans antialiased">

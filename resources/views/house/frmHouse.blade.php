@@ -9,6 +9,7 @@
         else{
             $configClass="";
         }
+
     @endphp
 
     @foreach( $frmHouse as $i => $contrl)
@@ -29,6 +30,12 @@
         <div class="house_grid my-2 grid grid-cols-10 gap-1">
         @php
             $showLang = Session::get('showLanguages');
+            $language_label = [
+              'D'   => 'Deutsch',
+              'E'   => 'Englisch',
+              'F'   => 'Französisch',
+            ];
+            $lang_cnt = count($showLang);
             $section = $contrl->section;
         @endphp
         @endif
@@ -80,7 +87,7 @@
                             @php $translations = $house->{$contrl->field_data_src}; @endphp
 
                             {{-- Only translations for this field --}}
-                            <div class="grid grid-cols-3 gap-3">
+                            <div class="grid grid-cols-{{ $lang_cnt }} gap-3">
                                 {{--@foreach  ($translations as $item)--}}
                                   @foreach  ($house->showLang as $lang)
                                         @php
@@ -100,7 +107,7 @@
                                             if ($item_id == "") $item_id = $lang;
                                         @endphp
                                         <div class="translation">
-                                            <span class="translation_header">sprache {{ $lang }}</span>
+                                            <span class="translation_header">{{ $language_label[$lang] }}</span>
                                             <input type="text" f="{{$contrl->field_name}}"
                                                    name="trans[{{ $contrl->field_name }}][{{ $item_id }}]"
                                                    id="trans_{{$contrl->field_name}}_{{ $item->language }}"
@@ -201,7 +208,7 @@
                     {{-- Datepicker --}}
                     @case('DATE')
                     <div class="col-span-{{$width}}  {{$configClass}}">
-                        <div class="datepicker" data-mdb-toggle-button="true" data-mdb-format="dd.mm.yyyy">
+                        <div class="datepicker" data-mdb-toggle-button="true" data-mdb-format="dd.mm.yyyy" data-mdb-language="de">
                             <input name="{{$contrl->field_name}}"
                                    id="dat_{{$contrl->field_name}}"
                                    value="{{ $house->{$contrl->field_name} }}"
@@ -270,5 +277,9 @@
     </label>
 
 </form>
+
+<script>
+
+</script>
 
 

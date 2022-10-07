@@ -3,6 +3,8 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+
+
 .gallery_body{
     @apply bg-slate-800
 }

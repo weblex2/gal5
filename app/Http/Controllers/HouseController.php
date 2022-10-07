@@ -51,38 +51,32 @@ class HouseController extends Controller
         $translatons->fill($trans);
         #dump($translatons);
         foreach($trans as $fieldname => $section){
-            echo $fieldname."<br>";
+            #echo $fieldname."<br>";
             foreach($section as $key => $value) {
 
                 if (is_numeric($key)) {
-                    echo "Key found ->Update -" .$value;
+                    #echo "Key found ->Update -" .$value;
                     $translatons = HouseTranslation::find($key);
                     $translatons->translation = $value;
-                    dump($translatons);
+                    #dump($translatons);
                     $translatons->update();
                 }
                 else{
-                    echo "Key new ->Insert";
+                    #echo "Key new ->Insert";
                     $translatons = new HouseTranslation();
                     $translatons->houses_id = $house_id;
                     $translatons->field = $fieldname;
                     $translatons->language = $key;
                     $translatons->translation = $value;
-                    dump($translatons);
+                    #dump($translatons);
                     $translatons->save();
 
                 }
-
-                #dump($translatons);
             }
         }
-
-
         $house  = Houses::find($req['id']);
         $house->fill($req);
-
         $res = $house->update();
-        #dump($res);
         return redirect()->route('house.edit', ['id'=>$req['id']])->with('success','House saved successfully.');;
     }
 
