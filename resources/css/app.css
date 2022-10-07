@@ -170,7 +170,11 @@ header{
     @apply drop-shadow-md inline-flex items-center px-3 py-2 border border-slate-300 text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:bg-gray-50 hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition
 }
 
-#frmHouse input[type=text], #frmHouse select, #frmHouse .datepicker  {
+#frmHouse input[type=text], #frmHouse select, #frmHouse .datepicker {
+    @apply w-full drop-shadow-md inline-flex items-center px-3 py-2 border border-slate-300 text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:bg-gray-50 hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition
+}
+
+#frmHouse textarea{
     @apply w-full drop-shadow-md inline-flex items-center px-3 py-2 border border-slate-300 text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:bg-gray-50 hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition
 }
 
@@ -204,10 +208,18 @@ frmHouse .db{
     @apply capitalize px-3 py-2 flex  items-center text-sm leading-4 font-medium rounded-md text-gray-500 bg-white
 }
 
+.translation_header{
+    @apply w-full text-sm leading-4 font-medium rounded-md  bg-white ml-1 text-gray-700
+}
+
 .house_section{
     @apply mb-4 border border-slate-200 rounded-t-lg
 }
 
 .house_section_header{
     @apply p-3 bg-gray-100 rounded-t-md  mb-3 text-sm leading-4 font-medium  text-gray-500
+}
+
+.field{
+    @apply hover:border-2 hover:border-yellow-300 rounded-md
 }
