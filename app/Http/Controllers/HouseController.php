@@ -81,9 +81,11 @@ class HouseController extends Controller
     }
 
     public function configHouse(){
+        $config=1;
+        $showLanguages = session('showLanguages');
         $house  = Houses::find(1);
-        $house->load('articles');
+        $house->showLang =  $showLanguages;
         $frmHouse = HouseFormular::orderBy('ord','ASC')->get();
-        return view('house.confighouse', compact('house', 'frmHouse'));
+        return view('house.confighouse', compact('house', 'frmHouse','config'));
     }
 }

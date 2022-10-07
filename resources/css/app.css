@@ -172,7 +172,7 @@ header{
     @apply drop-shadow-md inline-flex items-center px-3 py-2 border border-slate-300 text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:bg-gray-50 hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition
 }
 
-#frmHouse input[type=text], #frmHouse select, #frmHouse .datepicker {
+#frmHouse input[type=text], #frmHouse select, #frmHouse .datepicker, #newFieldType {
     @apply w-full drop-shadow-md inline-flex items-center px-3 py-2 border border-slate-300 text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:bg-gray-50 hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition
 }
 
@@ -222,6 +222,17 @@ frmHouse .db{
     @apply p-3 bg-gray-100 rounded-t-md  mb-3 text-sm leading-4 font-medium  text-gray-500
 }
 
-.field{
+.context-menu{
     @apply hover:border-2 hover:border-yellow-300 rounded-md
+}
+#context-menu ul{
+    @apply bg-gray-200 rounded-md border border-gray-700
+}
+/* Each of the items in the list */
+#context-menu ul li {
+    @apply p-2 cursor-pointer list-none hover:bg-gray-700
+}
+
+.frmField {
+    @apply border-2 border-transparent
 }

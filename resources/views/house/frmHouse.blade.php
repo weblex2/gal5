@@ -4,7 +4,7 @@
         #dump($house);
         $section = -1;
         if(isset($config)){
-            $configClass="field";
+            $configClass="context-menu";
         }
         else{
             $configClass="";
@@ -53,8 +53,12 @@
                     </div>
 
                     {{-- Hidden Field --}}
-                @elseif ($contrl->field_type=='HIDD')
+                @elseif ($contrl->field_type=='HIDD' && !isset($config))
                     <input type="hidden" name="{{ $contrl->field_name }}" value="{{ $house->{$contrl->field_name} }}">
+
+                @elseif ($contrl->field_type=='HIDD' && isset($config))
+                    <div class="col-span-1 field_descr">{{ $contrl->field_name }} (Hidden)</div><div class="frmField col-span-9 {{$configClass}}" field="{{ $contrl->field_name }}">
+                    <input type="text" name="{{ $contrl->field_name }}" value="{{ $house->{$contrl->field_name} }}"></div>
 
                     {{-- Plain Text --}}
                 @elseif ($contrl->field_type=='TEXT')
@@ -79,7 +83,7 @@
                     @case('TEXT')
 
 
-                    <div class="col-span-{{ $width }} {{$configClass}}">
+                    <div class="frmField col-span-{{ $width }} {{$configClass}}" field="{{ $contrl->field_name }}">
 
                         {{-- TextField from another Table--}}
                         {{-- Translation --}}
@@ -137,7 +141,7 @@
                     @case('TEXTA')
 
 
-                    <div class="col-span-{{ $width }} {{$configClass}}">
+                    <div class="frmField col-span-{{ $width }} {{$configClass}}" field="{{ $contrl->field_name }}">
 
                         {{-- TextField from another Table--}}
                         {{-- Translation --}}
@@ -175,7 +179,7 @@
 
                     {{-- Checkboxes --}}
                     @case('CKBX')
-                    <div class="col-span-{{$width}}  {{$configClass}}">
+                    <div class="frmField col-span-{{$width}}  {{$configClass}}" field="{{ $contrl->field_name }}">
                         <input type="hidden" name="{{ $contrl->field_name }}" value="0">
                         <input type="checkbox"
                                name="{{ $contrl->field_name }}"
@@ -188,7 +192,7 @@
 
                     {{-- Radio --}}
                     @case('RADIO')
-                    <div class="col-span-{{$width}}  {{$configClass}}">
+                    <div class="frmField col-span-{{$width}}  {{$configClass}}" field="{{ $contrl->field_name }}">
                         @foreach ($contrl->inputs as $inp)
                             <div>
                                 <input type="radio"
@@ -207,7 +211,7 @@
 
                     {{-- Datepicker --}}
                     @case('DATE')
-                    <div class="col-span-{{$width}}  {{$configClass}}">
+                    <div class="frmField col-span-{{$width}}  {{$configClass}}" $field="{{ $contrl->field_name }}">
                         <div class="datepicker" data-mdb-toggle-button="true" data-mdb-format="dd.mm.yyyy" data-mdb-language="de">
                             <input name="{{$contrl->field_name}}"
                                    id="dat_{{$contrl->field_name}}"
@@ -220,7 +224,7 @@
 
                     {{-- Select --}}
                     @case ('SELECT')
-                    <div class="col-span-{{ $width }}  {{$configClass}}">
+                    <div class="frmField col-span-{{ $width }}  {{$configClass}}">
                         <select name="{{ $contrl->field_name }}" id="sel_{{$contrl->field_name}}">
                             @foreach($contrl->inputs as $inp)
                                 <option
