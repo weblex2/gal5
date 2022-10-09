@@ -86,4 +86,6 @@ Route::controller(HouseController::class)->group(function () {
     Route::get('/house/create', 'create')->middleware(['auth'])->name('house.create');
     Route::post('/house/update', 'update')->middleware(['auth'])->name('house.update');
     Route::get('/house/config', 'configHouse')->middleware(['auth'])->name('house.config');
+    Route::post('/house/create/field', 'createNewField')->middleware(['auth'])->name('house.createField');
+    Route::post('/house/delete/field', 'deleteField')->middleware(['auth'])->name('house.deleteField');
 });

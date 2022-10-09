@@ -168,37 +168,39 @@ header{
 
 /* Houses */
 
-#frmHouse button {
+.frmHouse button {
     @apply drop-shadow-md inline-flex items-center px-3 py-2 border border-slate-300 text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:bg-gray-50 hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition
 }
 
-#frmHouse input[type=text], #frmHouse select, #frmHouse .datepicker, #newFieldType {
+.frmHouse input[type=text], #frmHouse select,  #newFieldType {
     @apply w-full drop-shadow-md inline-flex items-center px-3 py-2 border border-slate-300 text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:bg-gray-50 hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition
 }
 
-#frmHouse textarea{
+#frmHouse .dp{
+    @apply w-full inline-flex items-center  text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:bg-gray-50 hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition
+}
+
+.frmHouse textarea{
     @apply w-full drop-shadow-md inline-flex items-center px-3 py-2 border border-slate-300 text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:bg-gray-50 hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition
 }
 
-#frmHouse .datepicker{
+.frmHouse .datepicker{
     @apply bg-transparent border-0 hover:bg-transparent m-0 p-0
 }
 
-
-
-#frmHouse .datepicker button{
+.frmHouse .datepicker button{
     @apply border-0 bg-transparent pr-0
 }
 
-frmHouse .db{
+.frmHouse .db{
    @apply w-full bg-white  border border-slate-400 drop-shadow-md rounded-md py-2 pl-3 pr-10 focus:outline-none
 }
 
-#frmHouse input[type=checkbox]{
+.frmHouse input[type=checkbox]{
     @apply rounded drop-shadow-md
 }
 
-#frmHouse input[type=radio]{
+.frmHouse input[type=radio]{
     @apply  drop-shadow-md
 }
 
@@ -215,24 +217,26 @@ frmHouse .db{
 }
 
 .house_section{
-    @apply mb-4 border border-slate-200 rounded-t-lg
+    @apply border border-slate-200 rounded-t-lg mb-3
 }
 
 .house_section_header{
-    @apply p-3 bg-gray-100 rounded-t-md  mb-3 text-sm leading-4 font-medium  text-gray-500
+    @apply p-3 bg-gray-100 rounded-t-md  text-sm leading-4 font-medium  text-gray-500
 }
 
 .context-menu{
     @apply hover:border-2 hover:border-yellow-300 rounded-md
 }
 #context-menu ul{
-    @apply bg-gray-200 rounded-md border border-gray-700
+    @apply bg-gray-100 rounded-md border border-gray-500
 }
 /* Each of the items in the list */
 #context-menu ul li {
-    @apply p-2 cursor-pointer list-none hover:bg-gray-700
+    @apply p-2 cursor-pointer list-none hover:bg-gray-300
 }
 
 .frmField {
     @apply border-2 border-transparent
 }
+
+

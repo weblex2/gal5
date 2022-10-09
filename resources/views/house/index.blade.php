@@ -6,7 +6,7 @@
     </x-slot>
 
 
-    <div class="py-12 w-full">
+    <div class="py-2 w-full">
         <div class="w-full mx-auto px-6">
             <div class="bg-white w-full overflow-hidden shadow-xl sm:rounded-lg grid grid-cols-4">
                 @foreach ($houses as $house)

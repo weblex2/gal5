@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class FrmHouseAddHomepage extends Migration
+class HouseFormularAddTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class FrmHouseAddHomepage extends Migration
      */
     public function up()
     {
-        Schema::table('houses', function (Blueprint $table) {
-            $table->string('homepage',100)->after('lvb');
+        Schema::table('houses_formular', function($table)
+        {
+            $table->string('table',50)->after('id');
         });
     }
 

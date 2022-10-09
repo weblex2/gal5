@@ -1,4 +1,4 @@
-<form id="frmHouse" method="POST" action="{{ route('house.update') }}">
+<form id="frmHouse" class="frmHouse" method="POST" action="{{ route('house.update') }}">
     @csrf
     @php
         #dump($house);
@@ -27,7 +27,7 @@
                    onclick="$(this).closest('.house_section').find('.house_grid').toggle()"></i>
             </div>
         </div>
-        <div class="house_grid my-2 grid grid-cols-10 gap-1">
+        <div class="house_grid py-2 grid grid-cols-10 gap-1">
         @php
             $showLang = Session::get('showLanguages');
             $language_label = [
@@ -75,7 +75,16 @@
             @else
 
                 {{-- Label --}}
-                <div class='col-span-1 field_descr'>{{ $contrl->field_name}}</div>
+                <div class='col-span-1 field_descr'>
+                    @isset($config)
+                    <form id="frm_del_{{ $contrl->field_name}}" action="{{route('house.deleteField')}}" method="POST">
+                        @csrf
+                        <input type="hidden" name="del_field" value="{{ $contrl->id}}">
+                    </form>    
+                    <i class="cursor-pointer fa-solid fa-trash-can mr-1 text-red-700 text-xs" onclick="$('#frm_del_{{ $contrl->field_name}}').submit()"></i>
+                    @endisset
+                    {{ $contrl->field_name}}
+                </div>
 
                 @switch ($contrl->field_type)
 
@@ -84,7 +93,6 @@
 
 
                     <div class="frmField col-span-{{ $width }} {{$configClass}}" field="{{ $contrl->field_name }}">
-
                         {{-- TextField from another Table--}}
                         {{-- Translation --}}
                         @if ($contrl->field_data_src!="" && $contrl->field_data_src=="translations")
@@ -114,7 +122,7 @@
                                             <span class="translation_header">{{ $language_label[$lang] }}</span>
                                             <input type="text" f="{{$contrl->field_name}}"
                                                    name="trans[{{ $contrl->field_name }}][{{ $item_id }}]"
-                                                   id="trans_{{$contrl->field_name}}_{{ $item->language }}"
+                                                   id="trans_{{$contrl->field_name}}_{{ $lang }}"
                                                    value="{{ $val }}"
                                             />
                                         </div>
@@ -179,12 +187,15 @@
 
                     {{-- Checkboxes --}}
                     @case('CKBX')
+                   @php 
+                   #dump ($house); 
+                   @endphp
                     <div class="frmField col-span-{{$width}}  {{$configClass}}" field="{{ $contrl->field_name }}">
                         <input type="hidden" name="{{ $contrl->field_name }}" value="0">
                         <input type="checkbox"
                                name="{{ $contrl->field_name }}"
                                id="ckbx_{{ $contrl->field_name }}"
-                               value="{{ $house->{$contrl->field_name} }}"
+                               value="1"
                             {{ $house->{$contrl->field_name}==1 ? "checked" : ""}}
                         />
                     </div>
@@ -211,8 +222,8 @@
 
                     {{-- Datepicker --}}
                     @case('DATE')
-                    <div class="frmField col-span-{{$width}}  {{$configClass}}" $field="{{ $contrl->field_name }}">
-                        <div class="datepicker" data-mdb-toggle-button="true" data-mdb-format="dd.mm.yyyy" data-mdb-language="de">
+                    <div class="frmField col-span-{{$width}}  {{$configClass}}" field="{{ $contrl->field_name }}">
+                        <div class="dp" data-mdb-toggle-button="true" data-mdb-format="yyyy-mm-dd" data-mdb-language="de">
                             <input name="{{$contrl->field_name}}"
                                    id="dat_{{$contrl->field_name}}"
                                    value="{{ $house->{$contrl->field_name} }}"
@@ -224,7 +235,7 @@
 
                     {{-- Select --}}
                     @case ('SELECT')
-                    <div class="frmField col-span-{{ $width }}  {{$configClass}}">
+                    <div class="frmField col-span-{{ $width }}  {{$configClass}}" field="{{ $contrl->field_name }}">
                         <select name="{{ $contrl->field_name }}" id="sel_{{$contrl->field_name}}">
                             @foreach($contrl->inputs as $inp)
                                 <option

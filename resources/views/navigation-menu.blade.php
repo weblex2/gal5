@@ -32,6 +32,25 @@
                             {{ __('Home') }}
                         </x-jet-nav-link>
                     @endif
+
+                    @if (request()->is('house*'))
+
+                    <x-jet-nav-link href="{{ route('house.index') }}" :active="request()->routeIs('gallery.index')">
+                        {{ __('Home') }}
+                    </x-jet-nav-link>
+                    
+                    <x-jet-nav-link href="{{ route('gallery.index') }}" :active="request()->routeIs('gallery.index')">
+                        {{ __('New House') }}
+                    </x-jet-nav-link>
+
+                    <x-jet-nav-link href="{{ route('house.config') }}" :active="request()->routeIs('gallery.index')">
+                        {{ __('Edit Fields') }}
+                    </x-jet-nav-link>
+
+                    @endif
+
+                    
+
                 </div>
             </div>
 

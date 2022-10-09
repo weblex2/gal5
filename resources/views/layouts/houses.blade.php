@@ -22,13 +22,14 @@
 
 
 
-        {{--  dropbox CDN  --}}
+        {{--  dropbox CDN  
        <link rel="stylesheet" href="{{asset('css/dropzone.min.css')}}">
        <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.0/dropzone.js"></script>
+        --}}
 
        <!-- Font Awesome JS -->
         <script defer src="{{asset('js/solid.js')}}"></script>
-        <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
+        <script defer src="{{asset('fontawesome.js' }}"
             integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous">
         </script>
 
