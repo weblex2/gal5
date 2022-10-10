@@ -23,12 +23,12 @@
                         <div>After Field</div>
                         <div>
                             <input type="text"   id="afterFieldNameDisplay" disabled>
-                            <input type="hidden" id="afterFieldName"        name="afterFieldName"> 
+                            <input type="hidden" id="afterFieldName"        name="afterFieldName">
                         </div>
-                        
+
                         <div>Name</div>
-                        <div><input type="TEXT" name="newFieldName" id="newFieldName"></div> 
-                        
+                        <div><input type="TEXT" name="newFieldName" id="newFieldName"></div>
+
                         <div>Type</div>
                         <div id="">
                             <select id="newFieldType" name="newFieldType">
@@ -45,7 +45,7 @@
                         </div>
 
                         <div>Length</div>
-                        <div><input type="TEXT" name="newFieldLength" id="newFieldLength"></div> 
+                        <div><input type="TEXT" name="newFieldLength" id="newFieldLength"></div>
 
                         <div>Display With (1-10)</div>
                         <div>
@@ -60,8 +60,8 @@
                                 <option value="8">8</option>
                                 <option value="9">9</option>
                                 <option value="10">10</option>
-                            </select>    
-                        </div> 
+                            </select>
+                        </div>
 
                     </div>
                     <button type="button" data-bs-dismiss="modal">Close</button>
@@ -69,7 +69,7 @@
                 </form>
             </div>
             <div class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
-                
+
             </div>
         </div>
     </div>
@@ -77,12 +77,12 @@
 
 
 <script>
-    
+
     function checkNewFieldForm(){
         var err = [];
         if ($('#newFieldName').val()=="") {
             err.push('Give the field a name!')
-        }   
+        }
         if ($('#newFieldType').val()=="TEXT" &&  $('#newFieldLength').val()=="") {
             err.push('Please specify a length!')
         }
@@ -94,7 +94,7 @@
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },        
+                },
                 type: 'POST',
                 url: '{{ route("house.createField") }}',
                 data: $('#frmCreateField').serialize(),
@@ -103,13 +103,14 @@
                 },
                 error: function( data) {
                     console.log(data);
+                    console.log(data.responseJSON);
                 }
             });
-        }    
+        }
     }
 
     function deleteField(){
-        
+
     }
 
-</script>    
+</script>

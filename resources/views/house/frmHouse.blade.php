@@ -80,7 +80,7 @@
                     <form id="frm_del_{{ $contrl->field_name}}" action="{{route('house.deleteField')}}" method="POST">
                         @csrf
                         <input type="hidden" name="del_field" value="{{ $contrl->id}}">
-                    </form>    
+                    </form>
                     <i class="cursor-pointer fa-solid fa-trash-can mr-1 text-red-700 text-xs" onclick="$('#frm_del_{{ $contrl->field_name}}').submit()"></i>
                     @endisset
                     {{ $contrl->field_name}}
@@ -138,6 +138,7 @@
                             <input type="text"
                                    name="{{ $contrl->field_name }}"
                                    id="txt_{{$contrl->field_name}}"
+                                   field_id="{{$contrl->id}}"
                                    value="{{ $house->{$contrl->field_name} }}"
                             />
 
@@ -147,9 +148,7 @@
 
                     {{-- Text Area --}}
                     @case('TEXTA')
-
-
-                    <div class="frmField col-span-{{ $width }} {{$configClass}}" field="{{ $contrl->field_name }}">
+                        <div class="frmField col-span-{{ $width }} {{$configClass}}" field="{{ $contrl->field_name }}">
 
                         {{-- TextField from another Table--}}
                         {{-- Translation --}}
@@ -165,6 +164,7 @@
                                             <textarea
                                                 name="trans[{{ $contrl->field_name }}][{{ $item->id }}]"
                                                 id="trans_{{$contrl->field_name}}_{{ $item->language }}"
+                                                field_id="{{$contrl->id}}"
                                                 value=""
                                             />{{ $item->translation }}</textarea>
                                         </div>
@@ -175,9 +175,12 @@
 
                             {{-- Normal Text field--}}
                         @else
+                            @php dump($contrl); @endphp
+                            do samma
                             <input type="text"
                                    name="{{ $contrl->field_name }}"
                                    id="txt_{{$contrl->field_name}}"
+                                   field_id = "{{$contrl->id}}"
                                    value="{{ $house->{$contrl->field_name} }}"
                             />
 
@@ -187,18 +190,17 @@
 
                     {{-- Checkboxes --}}
                     @case('CKBX')
-                   @php 
-                   #dump ($house); 
-                   @endphp
-                    <div class="frmField col-span-{{$width}}  {{$configClass}}" field="{{ $contrl->field_name }}">
-                        <input type="hidden" name="{{ $contrl->field_name }}" value="0">
-                        <input type="checkbox"
-                               name="{{ $contrl->field_name }}"
-                               id="ckbx_{{ $contrl->field_name }}"
-                               value="1"
-                            {{ $house->{$contrl->field_name}==1 ? "checked" : ""}}
-                        />
-                    </div>
+
+                        <div class="frmField col-span-{{$width}}  {{$configClass}}" field="{{ $contrl->field_name }}">
+                            <input type="hidden" name="{{ $contrl->field_name }}" value="0">
+                            <input type="checkbox"
+                                   name="{{ $contrl->field_name }}"
+                                   id="ckbx_{{ $contrl->field_name }}"
+                                   field_id="{{$contrl->id}}"
+                                   value="1"
+                                {{ $house->{$contrl->field_name}==1 ? "checked" : ""}}
+                            />
+                        </div>
                     @break
 
                     {{-- Radio --}}
@@ -222,12 +224,26 @@
 
                     {{-- Datepicker --}}
                     @case('DATE')
+                    @php $date = substr($house->{$contrl->field_name},0,10); @endphp
                     <div class="frmField col-span-{{$width}}  {{$configClass}}" field="{{ $contrl->field_name }}">
-                        <div class="dp" data-mdb-toggle-button="true" data-mdb-format="yyyy-mm-dd" data-mdb-language="de">
+                        <div class="datetimepicker" data-mdb-toggle-button="true" data-mdb-format="yyyy-mm-dd" data-mdb-language="de">
+                            <input name="{{$contrl->field_name}}" data-date-format="YYYY DD MMMM "
+                                   id="dat_{{$contrl->field_name}}"
+                                   value="{{ $date }}"
+                                   type="date"
+                            />
+                        </div>
+                    </div>
+                    @break
+
+                    {{-- Datetimepicker --}}
+                    @case('DATETIME')
+                    <div class="frmField col-span-{{$width}}  {{$configClass}}" field="{{ $contrl->field_name }}">
+                        <div class="datetimepicker" data-mdb-toggle-button="true" data-mdb-format="yyyy-mm-dd" data-mdb-language="de">
                             <input name="{{$contrl->field_name}}"
                                    id="dat_{{$contrl->field_name}}"
                                    value="{{ $house->{$contrl->field_name} }}"
-                                   type="text"
+                                   type="datetime-local"
                             />
                         </div>
                     </div>
@@ -293,7 +309,8 @@
 
 </form>
 
-<script>
+
+<script type="text/javascript">
 
 </script>
 

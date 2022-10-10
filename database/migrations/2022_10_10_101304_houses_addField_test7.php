@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class HousesAddFieldTest1 extends Migration
+class HousesAddFieldTest7 extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,9 @@ class HousesAddFieldTest1 extends Migration
     public function up()
     {
         
+        
                 Schema::table('houses', function (Blueprint $table) {
-                    $table->string('test1',100)->after('name');
+                    $table->string('test7',100)->after('created_at');
                 });
     }
 
@@ -27,7 +28,7 @@ class HousesAddFieldTest1 extends Migration
     public function down()
     {
         Schema::table('houses', function($table) {
-            $table->dropColumn('test1');
+            $table->dropColumn('test7');
         });
     }
 }

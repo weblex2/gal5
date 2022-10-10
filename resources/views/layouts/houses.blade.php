@@ -16,29 +16,31 @@
 
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
-        <script src="{{ mix('js/jquery360.js') }}"></script>
-        <script src="{{ mix('js/jquery-ui.js') }}"></script>
+        <script src="{{ asset('js/jquery360.js') }}"></script>
+        <script src="{{ asset('js/jquery-ui.js') }}"></script>
 
 
 
-
-        {{--  dropbox CDN  
+        {{--  dropbox CDN  --}}
        <link rel="stylesheet" href="{{asset('css/dropzone.min.css')}}">
        <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.0/dropzone.js"></script>
-        --}}
 
        <!-- Font Awesome JS -->
         <script defer src="{{asset('js/solid.js')}}"></script>
-        <script defer src="{{asset('fontawesome.js' }}"
+        <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
             integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous">
         </script>
 
         <!-- Bootstrap CSS CDN -->
-        <link rel="stylesheet" href="mix{{"css/bootstrap.min.css"}}"
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
             integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 
-        <script src="https://cdn.jsdelivr.net/bootstrap.datepicker-fork/1.3.0/js/locales/bootstrap-datepicker.it.js"></script>
-        <script src="/jquery/jquery.ui.datepicker-it.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
+
+
 
     </head>
     <body class="font-sans antialiased">

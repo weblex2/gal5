@@ -25,6 +25,7 @@ class HouseController extends Controller
         #$af = HouseFormular::where('field_name', '=', 'asdd')->get();
         #dump($af);
         #die();
+        #phpinfo();
         $languages = ['D','E','F'];
         Session::put('showLanguages', $languages);
         $houses = Houses::all();
@@ -107,7 +108,7 @@ class HouseController extends Controller
         $length     = $data['newFieldLength'];
         $afterField = $data['afterFieldName'];
         switch($data['newFieldType']){
-            
+
             case "TEXT":
                 $up = "
                 Schema::table('$table', function (Blueprint \$table) {
@@ -122,27 +123,30 @@ class HouseController extends Controller
                 });";
                 break;
 
-            case "CKBX":    
+            case "CKBX":
                 $up = "
                 Schema::table('$table', function (Blueprint \$table) {
                     \$table->integer('$field')->after('$afterField')->nullable();
                 });";
-            
-            case "SELECT":    
+
+            case "SELECT":
                 $up = "
                 Schema::table('$table', function (Blueprint \$table) {
                     \$table->string('$field',10)->after('$afterField')->nullable();
                 });";
-                
+
             default:
                 break;
-        }   
+        }
 
         $down = "Schema::table('$table', function(\$table) {
             \$table->dropColumn('$field');
         });";
 
         $p = 'D:\web\gal5\storage\app\public\house\a.txt';
+        //$p = Storage::disk('public')->url('app\public\houses\a.txt');
+
+        $p = storage_path('app\public\houses\a.txt');
         $migration_class_name = ucfirst($table)."AddField".ucfirst($field);
         $migration  = file_get_contents($p);
         $migration  = str_replace('%migration_class_name%', $migration_class_name, $migration);
@@ -161,8 +165,10 @@ class HouseController extends Controller
         $down = "";
         $up = "Schema::table('clients', function (Blueprint \$table) {
                     \$table->dropColumn('UserDomainName');
-               });"; 
-               $p = 'D:\web\gal5\storage\app\public\house\a.txt';
+               });";
+
+               //$p = 'D:\web\gal5\storage\app\public\house\a.txt';
+               $p = Storage::disk('public')->url('house\a.txt');
                $migration_class_name = ucfirst($table)."AddField".ucfirst($field);
                $migration  = file_get_contents($p);
                $migration  = str_replace('%migration_class_name%', $migration_class_name, $migration);
@@ -173,11 +179,11 @@ class HouseController extends Controller
                $fh = fopen($migration_path, 'w');
                fwrite($fh, $migration);
                fclose($fh);
-               return $migration_path;       
+               return $migration_path;
     }
 
     public function createNewField(Request $request){
-     
+
         $req            = $request->all();
         $table          = "houses";
         $field          = strtolower($req['newFieldName']);
@@ -186,33 +192,46 @@ class HouseController extends Controller
         $afterField     = $req['afterFieldName'];
         $displayWidth   = $req['displayWidth'];
         $req['table']   = $table;
+
+        if (Schema::hasColumn($table, $field)){
+            $err =  ['error'=> 'Field '. $field .' already exists'];
+            return \Response::json(['error'=>'Field '. $field .' already exists'], 500);
+        }
+
         // no migration needed
         $no_mig = [
             0 => 'SEP'
         ];
-            
+
 
         if (!in_array($type, $no_mig)) {
 
             $migration = $this->makeMigration($req);
             Artisan::call('migrate');
             $res = Artisan::output();
+
+
+            $af = HouseFormular::where('table', '=', $table)
+                ->where('field_name', '=', $afterField)
+                ->first();
+
+            if (!$af) {
+                return \Response::json(['error'=>'Field '. $afterField .' not found ('.$table. ')'], 500);
+            }
+
+            if ($af && $af->count()>0) {
+                $ord = $af->ord;
+                $updateOrd = HouseFormular::where('table', '=', $table)
+                    ->where('ord', '>', $ord)->get();
+                if ($updateOrd->count()>0){
+                    foreach ($updateOrd as $i => $item) {
+                        $updateOrd[$i]->ord = $item->ord +10;
+                        $updateOrd[$i]->update();
+                    }
+                }
+            }
+
             if (Schema::hasColumn($table, $field)) {
-                echo "Yes success!";
-                $af = HouseFormular::where('table', '=', $table)
-                                   ->where('field_name', '=', $afterField)
-                                   ->first();
-                if ($af->count()>0) {
-                    $ord = $af->ord;
-                    $updateOrd = HouseFormular::where('table', '=', $table)
-                                              ->where('ord', '>', $ord)->get();
-                    if ($updateOrd->count()>0){
-                        foreach ($updateOrd as $i => $item) {
-                                $updateOrd[$i]->ord = $item->ord +10; 
-                                $updateOrd[$i]->update();
-                        }
-                    }                               
-                }    
 
                 $housesFormular = new HouseFormular();
                 $housesFormular->ord=$ord+10;
@@ -244,16 +263,12 @@ class HouseController extends Controller
                 //DB::update('update users set votes = 1');
                 //DB::delete('delete from posts');
                 $newFormField->save();
-            }, 5);    
-
-            
-            
-
+            }, 5);
         }
-       
+
     }
 
-    
+
 
     public function deleteField(Request $request){
         $req = $request->all();
