@@ -143,9 +143,6 @@ class HouseController extends Controller
             \$table->dropColumn('$field');
         });";
 
-        $p = 'D:\web\gal5\storage\app\public\house\a.txt';
-        //$p = Storage::disk('public')->url('app\public\houses\a.txt');
-
         $p = storage_path('app\public\houses\a.txt');
         $migration_class_name = ucfirst($table)."AddField".ucfirst($field);
         $migration  = file_get_contents($p);
@@ -162,13 +159,13 @@ class HouseController extends Controller
 
     public function makeDropMigration($data){
         $table = $data['table'];
+        $field = $data['field'];
         $down = "";
         $up = "Schema::table('clients', function (Blueprint \$table) {
                     \$table->dropColumn('UserDomainName');
                });";
 
-               //$p = 'D:\web\gal5\storage\app\public\house\a.txt';
-               $p = Storage::disk('public')->url('house\a.txt');
+               $p = storage_path('app\public\houses\a.txt');
                $migration_class_name = ucfirst($table)."AddField".ucfirst($field);
                $migration  = file_get_contents($p);
                $migration  = str_replace('%migration_class_name%', $migration_class_name, $migration);
@@ -207,8 +204,13 @@ class HouseController extends Controller
         if (!in_array($type, $no_mig)) {
 
             $migration = $this->makeMigration($req);
-            Artisan::call('migrate');
-            $res = Artisan::output();
+            try {
+                Artisan::call('migrate');
+                $res = Artisan::output();
+            }
+            catch(Exception $e){
+                return \Response::json(['error'=>'Migration failed.'. $e->getMessage()], 500);
+            }
 
 
             $af = HouseFormular::where('table', '=', $table)
@@ -271,10 +273,20 @@ class HouseController extends Controller
 
 
     public function deleteField(Request $request){
+
         $req = $request->all();
+        //$id = $req['id'];
+        $dumpField = HouseFormular->find($id);
+        dump($req);
+        die();
         $this->makeDropMigration($req);
-        Artisan::call('migrate');
-        $res = Artisan::output();
+        try {
+            Artisan::call('migrate');
+            $res = Artisan::output();
+        }
+        catch(Exception $e){
+            return \Response::json(['error'=>'Migration failed.'. $e->getMessage()], 500);
+        }
         dump ($request);
     }
 
