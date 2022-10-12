@@ -13964,6 +13964,9 @@ textarea.form-control.is-invalid {
 .items-stretch {
     align-items: stretch;
 }
+.justify-start {
+    justify-content: flex-start;
+}
 .justify-end {
     justify-content: flex-end;
 }

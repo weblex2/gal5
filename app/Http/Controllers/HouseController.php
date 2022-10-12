@@ -144,12 +144,12 @@ class HouseController extends Controller
         });";
 
         $p = storage_path('app\public\houses\a.txt');
-        $migration_class_name = ucfirst($table)."AddField".ucfirst($field);
+        $migration_class_name = ucfirst($table)."AddField".ucfirst($field).date('YmdHis');
         $migration  = file_get_contents($p);
         $migration  = str_replace('%migration_class_name%', $migration_class_name, $migration);
         $migration  = str_replace('%up%', $up, $migration);
         $migration  = str_replace('%down%', $down, $migration);
-        $migation_name = date('Y_m_d_His')."_".$table."_addField_".$field.".php";
+        $migation_name = date('Y_m_d_His')."_".$table."_addField_".$field."_".date('YmdHis').".php";
         $migration_path = '../database/migrations/'. $migation_name;
         $fh = fopen($migration_path, 'w');
         fwrite($fh, $migration);
@@ -166,7 +166,7 @@ class HouseController extends Controller
                });";
 
                $p = storage_path('app\public\houses\a.txt');
-               $migration_class_name = ucfirst($table)."AddField".ucfirst($field);
+               $migration_class_name = ucfirst($table)."AddField".ucfirst($field)."_".date('YmdHis');
                $migration  = file_get_contents($p);
                $migration  = str_replace('%migration_class_name%', $migration_class_name, $migration);
                $migration  = str_replace('%up%', $up, $migration);
@@ -181,6 +181,9 @@ class HouseController extends Controller
 
     public function createNewField(Request $request){
 
+        // no migration needed
+        $no_mig = ['SEP','SPACE'];
+
         $req            = $request->all();
         $table          = "houses";
         $field          = strtolower($req['newFieldName']);
@@ -191,14 +194,9 @@ class HouseController extends Controller
         $req['table']   = $table;
 
         if (Schema::hasColumn($table, $field)){
-            $err =  ['error'=> 'Field '. $field .' already exists'];
-            return \Response::json(['error'=>'Field '. $field .' already exists'], 500);
+            $err =  ['message'=> 'Field '. $field .' already exists'];
+            return \Response::json($err, 500);
         }
-
-        // no migration needed
-        $no_mig = [
-            0 => 'SEP'
-        ];
 
 
         if (!in_array($type, $no_mig)) {
@@ -206,25 +204,25 @@ class HouseController extends Controller
             $migration = $this->makeMigration($req);
             try {
                 Artisan::call('migrate');
-                $res = Artisan::output();
+                //$res = Artisan::output();
             }
             catch(Exception $e){
-                return \Response::json(['error'=>'Migration failed.'. $e->getMessage()], 500);
+                return \Response::json(['message'=>'Migration failed.'. $e->getMessage()], 500);
             }
 
 
             $af = HouseFormular::where('table', '=', $table)
-                ->where('field_name', '=', $afterField)
-                ->first();
+                               ->where('field_name', '=', $afterField)
+                               ->first();
 
             if (!$af) {
-                return \Response::json(['error'=>'Field '. $afterField .' not found ('.$table. ')'], 500);
+                return \Response::json(['message'=>'Field '. $afterField .' not found ('.$table. ')'], 500);
             }
 
-            if ($af && $af->count()>0) {
+            if ($af && $af->count()>0) { // need to update order
                 $ord = $af->ord;
                 $updateOrd = HouseFormular::where('table', '=', $table)
-                    ->where('ord', '>', $ord)->get();
+                                          ->where('ord', '>', $ord)->get();
                 if ($updateOrd->count()>0){
                     foreach ($updateOrd as $i => $item) {
                         $updateOrd[$i]->ord = $item->ord +10;
@@ -233,8 +231,8 @@ class HouseController extends Controller
                 }
             }
 
+            // Check if field was created successfully
             if (Schema::hasColumn($table, $field)) {
-
                 $housesFormular = new HouseFormular();
                 $housesFormular->ord=$ord+10;
                 $housesFormular->table=$table;
@@ -246,26 +244,23 @@ class HouseController extends Controller
                 $housesFormular->save();
             }
             else{
-                unset($migration_path);
+                // if not delete migration file
+                //unset($migration_path);
             }
         }
         else {
+            //create new field in HouseFormular
             $af = HouseFormular::where('field', '=', $afterField);
-            $ord = $af->ord;
+            $ord = $af->ord+10;
             $newFormField = new HouseFormular();
-            $newFormField->ord=100;
+            $newFormField->ord=$ord;
             $newFormField->table=$table;
             $newFormField->field_name=$field;
             $newFormField->field_type=$type;
             $newFormField->field_data_src="";
             $newFormField->field_width=10;
             $newFormField->section="1";
-
-            DB::transaction(function () {
-                //DB::update('update users set votes = 1');
-                //DB::delete('delete from posts');
-                $newFormField->save();
-            }, 5);
+            $newFormField->save();
         }
 
     }
@@ -273,11 +268,11 @@ class HouseController extends Controller
 
 
     public function deleteField(Request $request){
-
         $req = $request->all();
-        //$id = $req['id'];
-        $dumpField = HouseFormular->find($id);
+        $id = $req['del_field'];
         dump($req);
+        $dumpField = HouseFormular::find($id);
+        dump($dumpField);
         die();
         $this->makeDropMigration($req);
         try {

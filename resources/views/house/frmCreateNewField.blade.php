@@ -26,8 +26,10 @@
                             <input type="hidden" id="afterFieldName"        name="afterFieldName">
                         </div>
 
-                        <div>Name</div>
-                        <div><input type="TEXT" name="newFieldName" id="newFieldName"></div>
+                        <div>Name1</div>
+                        <div>
+                            <input type="text" name="newFieldName" id="newFieldName" value="test9">
+                        </div>
 
                         <div>Type</div>
                         <div id="">
@@ -45,7 +47,7 @@
                         </div>
 
                         <div>Length</div>
-                        <div><input type="TEXT" name="newFieldLength" id="newFieldLength"></div>
+                        <div><input type="TEXT" name="newFieldLength" id="newFieldLength" value="100"></div>
 
                         <div>Display With (1-10)</div>
                         <div>
@@ -59,7 +61,7 @@
                                 <option value="7">7</option>
                                 <option value="8">8</option>
                                 <option value="9">9</option>
-                                <option value="10">10</option>
+                                <option value="10" selected>10</option>
                             </select>
                         </div>
 
@@ -68,8 +70,8 @@
                     <button type="button" onclick="checkNewFieldForm()">Save</button>
                 </form>
             </div>
-            <div class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
-
+            <div class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-start p-4 border-t border-gray-200 rounded-b-md">
+                   <div id="newFieldFooter">Footer</div>
             </div>
         </div>
     </div>
@@ -104,6 +106,7 @@
                 error: function( data) {
                     console.log(data);
                     console.log(data.responseJSON);
+                    $('#newFieldFooter').html('<div class="alert alert-danger">Error'+ data.responseJSON.message  +"</div>");
                 }
             });
         }
