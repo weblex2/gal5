@@ -24,10 +24,10 @@
         </ul>
     </div>
 
-    {{-- include the Modal --}}                
+    {{-- include the Modal --}}
     @include('house.frmCreateNewField')
-                    
-                
+
+
 
     <script>
         $(function() {
@@ -44,7 +44,7 @@
                 $('#context-menu').offset({'top':mouseY,'left':mouseX})
                 $('#afterFieldName').val($(this).attr('field'));
                 $('#afterFieldNameDisplay').val($(this).attr('field'));
-                $('#newFieldName').val('');
+                //$('#newFieldName').val('');
             });
 
             $(document).bind("mousedown", function (e) {

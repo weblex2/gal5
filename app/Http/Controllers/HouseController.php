@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Facade\Ignition\DumpRecorder\Dump;
 use Illuminate\Http\Request;
 use App\Models\Houses;
 use App\Models\HousesArticle;
@@ -165,22 +166,22 @@ class HouseController extends Controller
                     \$table->dropColumn('UserDomainName');
                });";
 
-               $p = storage_path('app\public\houses\a.txt');
-               $migration_class_name = ucfirst($table)."AddField".ucfirst($field)."_".date('YmdHis');
-               $migration  = file_get_contents($p);
-               $migration  = str_replace('%migration_class_name%', $migration_class_name, $migration);
-               $migration  = str_replace('%up%', $up, $migration);
-               $migration  = str_replace('%down%', $down, $migration);
-               $migation_name = date('Y_m_d_His')."_".$table."_addField_".$field.".php";
-               $migration_path = '../database/migrations/'. $migation_name;
-               $fh = fopen($migration_path, 'w');
-               fwrite($fh, $migration);
-               fclose($fh);
-               return $migration_path;
+        $p = storage_path('app\public\houses\a.txt');
+        $migration_class_name = ucfirst($table)."AddField".ucfirst($field).date('YmdHis');
+        $migration  = file_get_contents($p);
+        $migration  = str_replace('%migration_class_name%', $migration_class_name, $migration);
+        $migration  = str_replace('%up%', $up, $migration);
+        $migration  = str_replace('%down%', $down, $migration);
+        $migation_name = date('Y_m_d_His')."_".$table."_addField_".$field.".php";
+        $migration_path = '../database/migrations/'. $migation_name;
+        $fh = fopen($migration_path, 'w');
+        fwrite($fh, $migration);
+        fclose($fh);
+        return $migration_path;
     }
 
     public function createNewField(Request $request){
-
+        #dump($request);
         // no migration needed
         $no_mig = ['SEP','SPACE'];
 
@@ -193,12 +194,13 @@ class HouseController extends Controller
         $displayWidth   = $req['displayWidth'];
         $req['table']   = $table;
 
+        //Check if field already exists
         if (Schema::hasColumn($table, $field)){
             $err =  ['message'=> 'Field '. $field .' already exists'];
             return \Response::json($err, 500);
         }
 
-
+        //Check if migration is needed - if yes create it
         if (!in_array($type, $no_mig)) {
 
             $migration = $this->makeMigration($req);
@@ -210,7 +212,7 @@ class HouseController extends Controller
                 return \Response::json(['message'=>'Migration failed.'. $e->getMessage()], 500);
             }
 
-
+            // Get all field which are after the new created field and update order
             $af = HouseFormular::where('table', '=', $table)
                                ->where('field_name', '=', $afterField)
                                ->first();
@@ -232,6 +234,7 @@ class HouseController extends Controller
             }
 
             // Check if field was created successfully
+            // If yes create the field in the houses formular
             if (Schema::hasColumn($table, $field)) {
                 $housesFormular = new HouseFormular();
                 $housesFormular->ord=$ord+10;
@@ -245,22 +248,43 @@ class HouseController extends Controller
             }
             else{
                 // if not delete migration file
-                //unset($migration_path);
+                unset($migration_path);
             }
         }
-        else {
+        else {  // No migration needed - just insert into Formular
             //create new field in HouseFormular
-            $af = HouseFormular::where('field', '=', $afterField);
+            $af = HouseFormular::where('table', '=', $table)
+                               ->where('field_name', '=', $afterField)
+                               ->first();
+
+            if ($af && $af->count()>0) { // need to update order
+                $ord = $af->ord;
+                $updateOrd = HouseFormular::where('table', '=', $table)
+                    ->where('ord', '>', $ord)->get();
+                if ($updateOrd->count()>0){
+                    foreach ($updateOrd as $i => $item) {
+                        $updateOrd[$i]->ord = $item->ord +10;
+                        $updateOrd[$i]->update();
+                    }
+                }
+            }
             $ord = $af->ord+10;
+
+
             $newFormField = new HouseFormular();
             $newFormField->ord=$ord;
             $newFormField->table=$table;
             $newFormField->field_name=$field;
             $newFormField->field_type=$type;
             $newFormField->field_data_src="";
-            $newFormField->field_width=10;
+            $newFormField->field_width=$displayWidth;
             $newFormField->section="1";
-            $newFormField->save();
+            try {
+                $res = $newFormField->save();
+                return \Response::json(['message'=> $newFormField], 200);
+            }catch(Exception $e) {
+                return \Response::json(['message' => $e->getMessage()], 500);
+            }
         }
 
     }

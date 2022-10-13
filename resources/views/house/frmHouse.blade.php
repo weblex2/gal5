@@ -66,8 +66,14 @@
 
                     {{-- Spacer --}}
                 @elseif ($contrl->field_type=='SPACE')
-                    @php $wspace = $width +1; @endphp
-                    <div class="col-span-{{$wspace}}">&nbsp;</div>
+                    @php
+                        $sp="&nbsp;";
+                        $wspace = $width +1;
+                        if (isset($config)){
+                            $sp="<hr>";
+                        }
+                    @endphp
+                    <div class="frmField {{ $configClass }} col-span-{{$wspace}}"  field_id="{{$contrl->id}}">{!! $sp !!} </div>
                 @endif
 
 

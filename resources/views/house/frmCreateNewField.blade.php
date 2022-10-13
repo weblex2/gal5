@@ -28,7 +28,7 @@
 
                         <div>Name1</div>
                         <div>
-                            <input type="text" name="newFieldName" id="newFieldName" value="test9">
+                            <input type="text" name="newFieldName" id="newFieldName" value="xxx">
                         </div>
 
                         <div>Type</div>
@@ -101,6 +101,7 @@
                 url: '{{ route("house.createField") }}',
                 data: $('#frmCreateField').serialize(),
                 success: function (data){
+                    console.log(data);
                     console.log("success");
                 },
                 error: function( data) {
