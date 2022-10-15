@@ -49,6 +49,7 @@ class GalleryController extends Controller
         }
         catch(Exception $e){
             echo "Nope!";
+            echo $e->getMessage();
         }
         
         try{
@@ -57,7 +58,6 @@ class GalleryController extends Controller
             $video
                 ->frame(FFMpeg\Coordinate\TimeCode::fromSeconds(1))
                 ->save(storage_path('app/public/gal/1/a.jpg'), true, false );
-            dump($frame);    
         }
         catch(Exception $e){
             echo $e->getMessage();
