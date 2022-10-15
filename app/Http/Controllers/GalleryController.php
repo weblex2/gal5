@@ -6,6 +6,7 @@ use Storage;
 use Illuminate\Http\Request;
 use App\Models\Gallery;
 use App\Models\GalleryPics;
+use Exception;
 use Http\Controllers\FileUploadController;
 use FFMpeg;
 use Illuminate\Log\Logger;
@@ -56,6 +57,7 @@ class GalleryController extends Controller
         }
         echo storage_path('app/public/gal/1/a.jpg');
         #chmod(storage_path('app/public/gal/1/'),770);
+        try{
         $video = $ffmpeg->open($url);
         $video
             ->filters()
@@ -65,10 +67,15 @@ class GalleryController extends Controller
             ->frame(FFMpeg\Coordinate\TimeCode::fromSeconds(1))
             ->save(storage_path('app/public/gal/1/a.jpg'));
         #$video
-            #->save(new FFMpeg\Format\Video\X264(), storage_path('app/public/gal/1/export-x264.mp4'))
-            #->save(new FFMpeg\Format\Video\WMV(),  storage_path('app/public/gal/1/export-wmv.wmv'))
-            #->save(new FFMpeg\Format\Video\WebM(), storage_path('app/public/gal/1/export-webm.webm'));
+            ->save(new FFMpeg\Format\Video\X264(), storage_path('app/public/gal/1/export-x264.mp4'))
+            ->save(new FFMpeg\Format\Video\WMV(),  storage_path('app/public/gal/1/export-wmv.wmv'))
+            ->save(new FFMpeg\Format\Video\WebM(), storage_path('app/public/gal/1/export-webm.webm'));
+        }
+        catch(Exception $e){
+            echo $e->getMessage();
+        }    
         dump($logger);
+
         die();
 
         
