@@ -66,7 +66,7 @@ class GalleryController extends Controller
             dump($frame);
             #$video
             #    ->frame(FFMpeg\Coordinate\TimeCode::fromSeconds(1))
-            #$frame->save(storage_path('app/public/gal/1/a.jpg'));
+            $frame->save(storage_path('app/public/gal/1/a.jpg'));
         #$video
         #    ->save(new FFMpeg\Format\Video\X264(), storage_path('app/public/gal/1/export-x264.mp4'))
         #    ->save(new FFMpeg\Format\Video\WMV(),  storage_path('app/public/gal/1/export-wmv.wmv'))
