@@ -44,9 +44,6 @@ class GalleryController extends Controller
         //try to convert .mov to mp4
         try{
             $video = $ffmpeg->open($url);
-            $ffmpeg = FFMpeg\FFMpeg::create();
-
-            $video = $ffmpeg->open($url);
             $format = new FFMpeg\Format\Video\X264();
             $format->setAudioCodec("libmp3lame");
             $video->save($format, storage_path('app/public/gal/1/a.mp4'));
