@@ -58,18 +58,18 @@ class GalleryController extends Controller
         echo storage_path('app/public/gal/1/a.jpg');
         #chmod(storage_path('app/public/gal/1/'),770);
         try{
-        $video = $ffmpeg->open($url);
-        $video
-            ->filters()
-            ->resize(new FFMpeg\Coordinate\Dimension(320, 240))
-            ->synchronize();
-        $video
-            ->frame(FFMpeg\Coordinate\TimeCode::fromSeconds(1))
-            ->save(storage_path('app/public/gal/1/a.jpg'));
-        $video
-            ->save(new FFMpeg\Format\Video\X264(), storage_path('app/public/gal/1/export-x264.mp4'))
-            ->save(new FFMpeg\Format\Video\WMV(),  storage_path('app/public/gal/1/export-wmv.wmv'))
-            ->save(new FFMpeg\Format\Video\WebM(), storage_path('app/public/gal/1/export-webm.webm'));
+            $video = $ffmpeg->open($url);
+            #$video
+            #    ->filters()
+            #    ->resize(new FFMpeg\Coordinate\Dimension(320, 240))
+            #    ->synchronize();
+            $video
+                ->frame(FFMpeg\Coordinate\TimeCode::fromSeconds(1))
+                ->save(storage_path('app/public/gal/1/a.jpg'));
+        #$video
+        #    ->save(new FFMpeg\Format\Video\X264(), storage_path('app/public/gal/1/export-x264.mp4'))
+        #    ->save(new FFMpeg\Format\Video\WMV(),  storage_path('app/public/gal/1/export-wmv.wmv'))
+        #    ->save(new FFMpeg\Format\Video\WebM(), storage_path('app/public/gal/1/export-webm.webm'));
         }
         catch(Exception $e){
             echo $e->getMessage();
