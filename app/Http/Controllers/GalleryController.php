@@ -62,16 +62,17 @@ class GalleryController extends Controller
             ->resize(new FFMpeg\Coordinate\Dimension(320, 240))
             ->synchronize();
         $video
-            ->frame(FFMpeg\Coordinate\TimeCode::fromSeconds(2))
+            ->frame(FFMpeg\Coordinate\TimeCode::fromSeconds(1))
             ->save(storage_path('app/public/gal/1/a.jpg'));
         #$video
             #->save(new FFMpeg\Format\Video\X264(), storage_path('app/public/gal/1/export-x264.mp4'))
             #->save(new FFMpeg\Format\Video\WMV(),  storage_path('app/public/gal/1/export-wmv.wmv'))
             #->save(new FFMpeg\Format\Video\WebM(), storage_path('app/public/gal/1/export-webm.webm'));
-        #die();
-
         dump($logger);
-        */
+        die();
+
+        
+        
 
         $create_user_id = \Auth::id();
         if ($create_user_id) {
