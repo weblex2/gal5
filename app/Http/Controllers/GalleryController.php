@@ -218,7 +218,7 @@ class GalleryController extends Controller
     public function showErrorLog(){
         $file  = storage_path('logs/laravel.log');
         $content = file_get_contents($file);
-        return view('gal.error', comapct('content'));
+        return view('gal.error', compact('content'));
     }
 
 
