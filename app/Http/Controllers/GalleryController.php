@@ -38,7 +38,7 @@ class GalleryController extends Controller
         #$url  = 'D:\web\gal5\storage\app\public\gal\1\2022_08_23_IMG_3897.MOV';
         #echo $url;
         #echo "<br>";
-        $url = storage_path('app/public/gal/1/a.MOV');
+        $url = storage_path('app/public/gal/1/a.MP4');
         #$url  = Storage::disk('local')->url('gal/1/2022_08_23_IMG_3897.MOV');
         #echo $url;
 
@@ -66,7 +66,7 @@ class GalleryController extends Controller
             dump($frame);
             #$video
             #    ->frame(FFMpeg\Coordinate\TimeCode::fromSeconds(1))
-            $frame->export()->save(storage_path('app/public/gal/1/a.jpg'), true, false );
+            $frame->save(storage_path('app/public/gal/1/a.jpg'), true, false );
         #$video
         #    ->save(new FFMpeg\Format\Video\X264(), storage_path('app/public/gal/1/export-x264.mp4'))
         #    ->save(new FFMpeg\Format\Video\WMV(),  storage_path('app/public/gal/1/export-wmv.wmv'))
