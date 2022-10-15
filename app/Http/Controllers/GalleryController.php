@@ -38,13 +38,14 @@ class GalleryController extends Controller
         #$url  = 'D:\web\gal5\storage\app\public\gal\1\2022_08_23_IMG_3897.MOV';
         #echo $url;
         #echo "<br>";
-        $url = storage_path('app/public/gal/1/a.MOV');
+        
 
 
         //try to convert .mov to mp4
         try{
+            $url = storage_path('app/public/gal/1/a.MOV');
             $video = $ffmpeg->open($url);
-            $format = new FFMpeg\Format\Video\X264();
+            $format = new FFMpeg\Format\Video\X264('aac');
             $format->setAudioCodec("libmp3lame");
             $video->save($format, storage_path('app/public/gal/1/a.mp4'));
             
