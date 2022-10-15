@@ -30,7 +30,7 @@ class GalleryController extends Controller
             'ffmpeg.binaries'  => env('FFMPEG'),
             'ffprobe.binaries' => env('FFPROBE'),
             'timeout'          => 1200, // The timeout for the underlying process
-            'ffmpeg.threads'   => 12,   // The number of threads that FFMpeg should use
+            'ffmpeg.threads'   => 1,   // The number of threads that FFMpeg should use
         ), $logger);
 
 
