@@ -74,10 +74,10 @@ class GalleryController extends Controller
         }
         catch(Exception $e){
             echo $e->getMessage();
-            $command = $e->getCommand();
-            $errorLog = $e->getErrorOutput();
-            print_r($command);
-            print_r($errorLog);
+            #$command = $e->getCommand();
+            #$errorLog = $e->getErrorOutput();
+            #print_r($command);
+            #print_r($errorLog);
         }    
         dump($logger);
 
