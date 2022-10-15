@@ -38,46 +38,29 @@ class GalleryController extends Controller
         #$url  = 'D:\web\gal5\storage\app\public\gal\1\2022_08_23_IMG_3897.MOV';
         #echo $url;
         #echo "<br>";
-        $url = storage_path('app/public/gal/1/a.MP4');
-        #$url  = Storage::disk('local')->url('gal/1/2022_08_23_IMG_3897.MOV');
-        #echo $url;
+        $url = storage_path('app/public/gal/1/a.MOV');
 
-        #$url =  storage_path('app/public/gal/1/2022_08_23_IMG_3897.MOV');
-        #$url =  storage_path('storage/gal/1/2022_08_23_IMG_3897.MOV');
-        #$url = asset('storage/gal/1/2022_08_23_IMG_3897.MOV');
-        echo $url."<br>";
-        if (file_exists($url)){
-            echo "Ja";
-            #die();
-        }
 
-        else{
-            echo "nöö";
-            die();
-        }
-        #chmod(storage_path('app/public/gal/1/'),770);
+        //try to convert .mov to mp4
         try{
             $video = $ffmpeg->open($url);
-            #$video
-            #    ->filters()
-            #    ->resize(new FFMpeg\Coordinate\Dimension(320, 240))
-            #    ->synchronize();
-            $frame = $video->frame(FFMpeg\Coordinate\TimeCode::fromSeconds(1)); 
-            dump($frame);
-            #$video
-            #    ->frame(FFMpeg\Coordinate\TimeCode::fromSeconds(1))
-            $frame->save(storage_path('app/public/gal/1/a.jpg'), true, false );
-        #$video
-        #    ->save(new FFMpeg\Format\Video\X264(), storage_path('app/public/gal/1/export-x264.mp4'))
-        #    ->save(new FFMpeg\Format\Video\WMV(),  storage_path('app/public/gal/1/export-wmv.wmv'))
-        #    ->save(new FFMpeg\Format\Video\WebM(), storage_path('app/public/gal/1/export-webm.webm'));
+            $video
+                ->save(new FFMpeg\Format\Video\X264(), storage_path('app/public/gal/1/a.mp4'));
+        }
+        catch(Exception $e){
+            echo "Nope!";
+        }
+        
+        try{
+            $url = storage_path('app/public/gal/1/a.mp4');  
+            $video = $ffmpeg->open($url);
+            $video
+                ->frame(FFMpeg\Coordinate\TimeCode::fromSeconds(1))
+                ->save(storage_path('app/public/gal/1/a.jpg'), true, false );
+            dump($frame);    
         }
         catch(Exception $e){
             echo $e->getMessage();
-            #$command = $e->getCommand();
-            #$errorLog = $e->getErrorOutput();
-            #print_r($command);
-            #print_r($errorLog);
         }    
         dump($logger);
 
