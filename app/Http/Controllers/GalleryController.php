@@ -49,7 +49,6 @@ class GalleryController extends Controller
             $video = $ffmpeg->open($url);
             $format = new FFMpeg\Format\Video\X264();
             $format->setAudioCodec("libmp3lame");
-
             $video->save($format, storage_path('app/public/gal/1/a.mp4'));
             
         }
