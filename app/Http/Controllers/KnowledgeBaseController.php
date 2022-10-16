@@ -15,11 +15,19 @@ class KnowledgeBaseController extends Controller
         return view('kb.new');
     }
 
-    public function create(Request $request){
+    public function create(Request $request, $api=false){
         $kb = new KnowledgeBase();
         $kb->fill($request->all());
-        $kb->save();
-        return redirect()->route('kb.index');
+        $res  = $kb->save();
+        if (!$api) {
+            return redirect()->route('kb.index');
+        }    
+        else {
+            $result  = $res ? 'success' : 'error';
+            $msg     = $res ? 'successfully stored' : 'Error halt.'; 
+            $ret[$result] = $msg;
+            return $ret; 
+        }    
     }
 
     public function edit($id){

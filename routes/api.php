@@ -25,10 +25,5 @@ Route::controller(RegisterController::class)->group(function(){
 });
         
 Route::middleware('auth:sanctum')->group( function () {
-    Route::controller(ApiDataController::class)->group(function(){
-        Route::get('/', 'index');
-        Route::get('/api/detail/{id}', 'detail');
-    });
-    //Route::resource('products', KnowledgeBaseController::class);
-    //Route::post('/kb/index', 'index')->middleware(['auth'])->name('house.deleteField');
+    Route::resource('/kb', ApiDataController::class);
 });

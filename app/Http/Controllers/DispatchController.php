@@ -14,7 +14,7 @@ class DispatchController extends Controller
             return  redirect()->route("kb.index");
         }
         else {
-            echo $_SERVER['HTTP_HOST'];
+           # echo $_SERVER['HTTP_HOST'];
         }
     }    
 }

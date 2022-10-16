@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller as Controller;
+
 
 class BaseController extends Controller
 {
@@ -17,7 +18,7 @@ class BaseController extends Controller
     	$response = [
             'success' => true,
             'data'    => $result,
-            'message' => $message,
+            'message' => $message,  
         ];
 
 
