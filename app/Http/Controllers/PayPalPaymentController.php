@@ -8,9 +8,17 @@ use Srmklive\PayPal\Services\AdaptivePayments;
 class PayPalPaymentController extends Controller{
 
     public function handlePayment(){
+        $provider = new ExpressCheckout;      // To use express checkout.
+        $provider = new AdaptivePayments;     // To use adaptive payments.
+        
+        // Through facade. No need to import namespaces
+        $provider = PayPal::setProvider('express_checkout');      // To use express checkout(used by default).
+        //$provider = PayPal::setProvider('adaptive_payments');     // To use adaptive payments.
+        //$provider->setApiCredentials($config);
+        
 
-        $product = [];
-        $product['items'] = [
+        $data = [];
+        $data['items'] = [
         [
         'name' => 'Nike Joyride 2',
         'price' => 112,
@@ -18,13 +26,15 @@ class PayPalPaymentController extends Controller{
         'qty' => 2
         ]
         ];
-        $product['invoice_id'] = 1;
-        $product['invoice_description'] = "Order #{$product['invoice_id']} Bill";
-        $product['return_url'] = route('success.payment');
-        $product['cancel_url'] = route('cancel.payment');
-        $product['total'] = 224;
+        $data['invoice_id'] = 1;
+        $data['invoice_description'] = "Order #12345 Bill";
+        $data['cancel_url'] = route('cancel.payment');
+        $data['return_url'] = route('success.payment');
+        $data['total'] = 224;
+        $provider->setCurrency('EUR')->setExpressCheckout($data);
+        dump($provider);
         $paypalModule = new ExpressCheckout();
-        $res = $paypalModule->setExpressCheckout($product);
+        $res = $paypalModule->setExpressCheckout($data, true);
         dump($res);
         #return redirect($res['paypal_link']);
 
