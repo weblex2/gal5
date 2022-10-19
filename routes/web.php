@@ -10,6 +10,8 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\KnowledgeBaseController;
 use App\Http\Controllers\DispatchController;
+use App\Http\Controllers\ShopController;
+use App\Http\Controllers\PayPalPaymentController;
 
 
 /*
@@ -94,3 +96,23 @@ Route::controller(HouseController::class)->group(function () {
     Route::post('/house/create/field', 'createNewField')->middleware(['auth'])->name('house.createField');
     Route::post('/house/delete/field', 'deleteField')->middleware(['auth'])->name('house.deleteField');
 });
+
+
+Route::controller(ShopController::class)->group(function () {
+    Route::get('/shop', 'index')->middleware(['auth'])->name('shop.index');
+    Route::get('/shop/showArticle/{id}', 'showArticle')->middleware(['auth'])->name('shop.showArticle');
+    /*Route::get('/kb/new', 'new')->middleware(['auth'])->name('kb.new');
+    Route::post('/kb/create', 'create')->middleware(['auth'])->name('kb.create');
+    Route::get('/kb/edit/{id}', 'edit')->middleware(['auth'])->name('kb.edit');
+    Route::post('/kb/update', 'update')->middleware(['auth'])->name('kb.update');
+    Route::get('/kb/show/{topic?}', 'show')->middleware(['auth'])->name('kb.show');
+    
+    Route::post('/kb/delete', 'delete')->middleware(['auth'])->name('kb.delete');
+    */
+});
+
+Route::controller(PayPalPaymentController::class)->group(function () {
+    Route::get('/handle-payment'  , 'handlePayment')->middleware(['auth'])->name('make.payment');
+    Route::get('/payment-success' , 'paymentSuccess')->name('success.payment');
+    Route::get('/cancel-payment'  , 'paymentCancel')->name('cancel.payment');
+});    

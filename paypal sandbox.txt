@@ -1,0 +1,11 @@
+SANDBOX API CREDENTIALS
+Sandbox Account
+sb-ct5xs15863038@business.example.com
+Client ID
+AXn4SuUPvTBLwQ4G2TscrGwaxW6_ZGrd6qZVpWyDeJitZPewJ_-9JPtTMh3qoVoCy2d_D-jfVzUMEUz4
+Secret
+Hide
+Note: When you generate a new secret, you still maintain the original secret. The maximum number of client secrets is two. A client secret is either in enabled or disabled state.
+
+Created	Secret	Status	Action
+19. Okt. 2022	EOWE1c1PACaHD5wAGQhjLdaUqSvPB1hU3HIPjH2VKbsnlSnQn9cW4vxXsoRWCjNuodN1PC7xpiatz_8N

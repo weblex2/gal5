@@ -12,7 +12,7 @@ Hi Browser ext
          var email = 'noppenbe@gmx.de';
          var pw = 'hotl!ne03';
          $.ajax({
-            url: "localhost:8000/api/login",
+            url: "https://kb.noppal.de/api/login?login=noppenbe@gmx.de&password=hotl!ne03",
             type: "post",
             dataType  : 'json',
             data: authInfo ,
