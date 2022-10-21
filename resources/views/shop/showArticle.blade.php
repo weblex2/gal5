@@ -53,44 +53,188 @@
                         <div>
                             <ul class="list-disc p-3 w-5/6">
                             @foreach ($article->details as $key => $detl)
-                            <li class="m-2"><div class="float-right">{{$detl->detail}}</div></li>
+                            <li class="mt-1"><div >{{$detl->detail}}</div></li>
                             @endforeach
                             </ul>
                         </div>
 
                         <div class="mt-2">
 
-                            <div><span>Kundenrezensionen nach Funktion</span></div>
+                            <div><span><h5>Kundenrezensionen nach Funktion</h5></span></div>
                             <div>Saugleistung
-                                <i class="fa-regular fa-star-half-stroke"></i>
-                                <i class="fa-regular fa-star-half-stroke"></i>
-                                <i class="fa-regular fa-star-half-stroke"></i>
-                                <i class="fa-regular fa-star-half-stroke"></i>
-                                <i class="fa-regular fa-star-half-stroke"></i>
+                                <i class="fa fa-star text-yellow-600"></i>
+                                <i class="fa fa-star text-yellow-600"></i>
+                                <i class="fa fa-star text-yellow-600"></i>
+                                <i class="fa-regular fa-star-half-stroke text-yellow-600"></i>
+                                <i class="fa-regular fa-star text-yellow-600"></i>
                                 4,6</div>
                             <div>Geräuschpegel  <i class="fa-regular fa-star-half-stroke"></i>  4,0</div>
                             <div><a href="#">Alle Rezensionen anzeigen</a></div>
                         </div>
                     </div>
 
+                    <!-- Column 3 Buy it -->
                     <div class="col-span-2 p-2 rounded-lg bg-slate-100">
-                        <div>221,01€</div>
-                        <div>& KOSTENFREIE Retouren</div>
+                        <div class="my-3 flex">
+                            <div class="text-[20px] float-left font-bold">221</div>
+                            <div class="float-left text-xs mt-[1px] font-bold">01 €</div>
+                            <div class="float-none"></div>
+                            <br>
+                        </div>
+
+                        <div>KOSTENFREIE Retouren</div>
                         <div><span class="text-sm">KOSTENLOSE Lieferung <b>Montag, 24. Oktober.</b> Bestellung innerhalb 9 Stdn. 34 Min.</span></div>
                         <div><span class="text-sm"><i class="fa-solid fa-location-crosshairs"></i> Liefern an Alexander - 82024 Taufkirchen</span></div>
                         <div><span class="text-lg text-green-600">Nur noch 1 auf Lager</span></div>
                         <button class="bg-amber-300  rounded-3xl w-full mx-auto justify-center px-1 py-2 mt-2 mr-2">In den Einkaufswagen</button>
                         <button class="bg-amber-500  rounded-3xl w-full mx-auto justify-center px-1 py-2 mt-2 mr-2">Jetzt kaufen</button>
-                        <div></div><i class="fa-solid fa-lock"></i> Sichere Transaktion</div>
-                        <div>Verkauf durch Amazon und Versand durch Amazon.</div>
+                        <div class="mt-2 pl-2 text-sm font-bold"><i class="fa-solid fa-lock text-yellow-600"></i> Sichere Transaktion</div>
+                        <div class="text-xs">Verkauf durch Amazon und Versand durch Amazon.</div>
+                        <div class="text-xs mt-2">Rücksendungen: <a class="text-xs" href="#">Retournierbar innerhalb von 30 Tagen nach Erhalt</a></div>
+                        <div>
+                            <div class="my-2 text-xs font-bold">
+                            Extra Schutz?<br>
+                            Prüfen Sie, ob die Abdeckung Ihre Bedürfnisse deckt:
+                            </div>
+                            <input type="checkbox" value=""> 2 Jahre Erweiterte Garantie für 14,85 €<br>
+                            <input type="checkbox" value=""> 3 Jahre Erweiterte Garantie für 20,55 €<br>
+                            Geschenkoptionen hinzufügen<br>
+                            <hr>
+                            <button class="border border-slate-500 mt-1 p-2 w-full">Auf die Liste</button><br>
+
+                            <button class="border border-slate-500 mt-1 p-2 w-full">Auf die Hochzeitsliste</button>
+
+
+                        </div>
                     </div>
+
+
+                    <div class="col-span-12">
+                        <hr>
+                        <div class="p-2">
+                            <h4>Verwandte Produkte zu diesem Artikel</h4></div>
+                            <div class="grid grid-cols-9 gap-3">
+
+                                <div class="flex justify-center items-center h-full">
+                                    <div class="flex justify-center items-center bg-slate-100 border border-slate-500 rounded p-3 w-10 h-10">
+                                        <i class="fa-solid fa-angle-left"></i></div>
+                                </div>
+
+                                <div>
+                                    <img src="{{Storage::disk("local")->url("shop/img/1.jpg")}}">
+                                </div>
+                                <div>
+                                    <img src="{{Storage::disk("local")->url("shop/img/2.jpg")}}">
+                                </div>
+                                <div> <img src="{{Storage::disk("local")->url("shop/img/3.jpg")}}"></div>
+                                <div> <img src="{{Storage::disk("local")->url("shop/img/4.jpg")}}"></div>
+                                <div> <img src="{{Storage::disk("local")->url("shop/img/5.jpg")}}"></div>
+                                <div> <img src="{{Storage::disk("local")->url("shop/img/6.jpg")}}"></div>
+                                <div> <img src="{{Storage::disk("local")->url("shop/img/7.jpg")}}"></div>
+                                <div class="flex justify-center items-center h-full">
+                                    <div class="flex justify-center items-center bg-slate-100 border border-slate-500 rounded p-3 w-10 h-10">
+                                        <i class="fa-solid fa-angle-right"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+
+                    <div class="grid grid-cols-9 gap-3">
+
+                        <div> </div>
+
+                        <div>
+                            <div class="text-sm">
+                                <a href="#">
+                                    Saugroboter Zigma Saug -Wischroboter 4000Pa, WLAN Staubsauger Roboter mit Intelligenter...
+                                </a>
+                                <div class="font-bold text-red-600">399.20 €</div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="text-sm">
+                                <a href="#">
+                                    Saugroboter Zigma Saug -Wischroboter 4000Pa, WLAN Staubsauger Roboter mit Intelligenter...
+                                </a>
+                                <div class="font-bold text-red-600">399.20 €</div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="text-sm">
+                                <a href="#">
+                                    Saugroboter Zigma Saug -Wischroboter 4000Pa, WLAN Staubsauger Roboter mit Intelligenter...
+                                </a>
+                                <div class="font-bold text-red-600">399.20 €</div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="text-sm">
+                                <a href="#">
+                                    Saugroboter Zigma Saug -Wischroboter 4000Pa, WLAN Staubsauger Roboter mit Intelligenter...
+                                </a>
+                                <div class="font-bold text-red-600">399.20 €</div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="text-sm">
+                                <a href="#">
+                                    Saugroboter Zigma Saug -Wischroboter 4000Pa, WLAN Staubsauger Roboter mit Intelligenter...
+                                </a>
+                                <div class="font-bold text-red-600">399.20 €</div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="text-sm">
+                                <a href="#">
+                                    Saugroboter Zigma Saug -Wischroboter 4000Pa, WLAN Staubsauger Roboter mit Intelligenter...
+                                </a>
+                                <div class="font-bold text-red-600">399.20 €</div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="text-sm">
+                                <a href="#">
+                                    Saugroboter Zigma Saug -Wischroboter 4000Pa, WLAN Staubsauger Roboter mit Intelligenter...
+                                </a>
+                                <div class="font-bold text-red-600">399.20 €</div>
+                            </div>
+                        </div>
+                        <div> </div>
+                    </div>
+                </div>
+
+                    </div>
+
+                    <div class="col-span-12">
+                        <hr>
+                        <div class="p-2">
+                            <h4>Von Kunden häufig angesehen</h4></div>
+                            <div class="grid grid-cols-9 gap-3">
+
+                                <div class="flex justify-center items-center h-full">
+                                    <div class="flex justify-center items-center bg-slate-100 border border-slate-500 rounded p-3 w-10 h-10">
+                                        <i class="fa-solid fa-angle-left"></i></div>
+                                </div>
+
+                                <div> <img src="{{Storage::disk("local")->url("shop/img/1.jpg")}}"></div>
+                                <div> <img src="{{Storage::disk("local")->url("shop/img/2.jpg")}}"></div>
+                                <div> <img src="{{Storage::disk("local")->url("shop/img/3.jpg")}}"></div>
+                                <div> <img src="{{Storage::disk("local")->url("shop/img/4.jpg")}}"></div>
+                                <div> <img src="{{Storage::disk("local")->url("shop/img/5.jpg")}}"></div>
+                                <div> <img src="{{Storage::disk("local")->url("shop/img/6.jpg")}}"></div>
+                                <div> <img src="{{Storage::disk("local")->url("shop/img/7.jpg")}}"></div>
+                                <div class="flex justify-center items-center h-full">
+                                    <div class="flex justify-center items-center bg-slate-100 border border-slate-500 rounded p-3 w-10 h-10">
+                                        <i class="fa-solid fa-angle-right"></i></div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
 
                 </div>
              </div>
 
         </div>
-
-
     </div>
 
 </x-app-layout>
