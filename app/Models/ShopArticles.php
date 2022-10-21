@@ -4,12 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\ShopArticleDetails;
 
-class shopArticles extends Model
+
+class ShopArticles extends Model
 {
     use HasFactory;
 
     public function details(){
-        return $this->hasMany('ShopArticleDetails::class');
+        return $this->hasMany(ShopArticleDetails::class);
     }
 }

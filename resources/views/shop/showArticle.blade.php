@@ -38,7 +38,7 @@
                         </div>
 
                         <div>
-                            <table class="tbl_product_details w-full border  border-slate-500 mt-3 p-3">
+                            <table class="tbl_product_details w-full mt-3 p-3">
                                 <tr><th colspan="2">Produktdetails</th></tr>
                                 <tr><td class="text-xs font-bold">Marke</td><td>Xiaomi</td></tr>
                                 <tr><td class="text-xs font-bold">Modellname</td><td>Mi Robot Vacuum-Mop 2S</td></tr>
@@ -51,8 +51,23 @@
                         </div>
 
                         <div>
+                            <ul class="list-disc p-3 w-5/6">
+                            @foreach ($article->details as $key => $detl)
+                            <li class="m-2"><div class="float-right">{{$detl->detail}}</div></li>
+                            @endforeach
+                            </ul>
+                        </div>
+
+                        <div class="mt-2">
+
                             <div><span>Kundenrezensionen nach Funktion</span></div>
-                            <div>Saugleistung <i class="fa-regular fa-star-half-stroke"></i>  4,6</div>
+                            <div>Saugleistung
+                                <i class="fa-regular fa-star-half-stroke"></i>
+                                <i class="fa-regular fa-star-half-stroke"></i>
+                                <i class="fa-regular fa-star-half-stroke"></i>
+                                <i class="fa-regular fa-star-half-stroke"></i>
+                                <i class="fa-regular fa-star-half-stroke"></i>
+                                4,6</div>
                             <div>Geräuschpegel  <i class="fa-regular fa-star-half-stroke"></i>  4,0</div>
                             <div><a href="#">Alle Rezensionen anzeigen</a></div>
                         </div>
