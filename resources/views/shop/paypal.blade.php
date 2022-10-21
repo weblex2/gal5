@@ -38,7 +38,12 @@
 
                             <div class="col-md-6">
                                 <input id="amount" type="text" class="form-control" name="amount" value="{{ old('amount') }}" autofocus>
-
+                                <input type="hidden" name="prod[0][name]" value="Procuct 1">
+                                <input type="hidden" name="prod[0][quantity]" value="2">
+                                <input type="hidden" name="prod[0][price]" value="2.00">
+                                <input type="hidden" name="prod[1][name]" value="Procuct 2">
+                                <input type="hidden" name="prod[1][quantity]" value="3">
+                                <input type="hidden" name="prod[1][price]" value="3.00">
                                 @if ($errors->has('amount'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('amount') }}</strong>

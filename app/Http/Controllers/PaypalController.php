@@ -41,22 +41,66 @@ class PaypalController extends Controller
 
     public function postPaymentWithpaypal(Request $request)
     {
+        $req = $request->all();
+        $total = 0;
+
+        $item_list = new ItemList();
+
+        foreach ($req['prod'] as $key => $prod){
+
+            $item = new Item();
+            $item->setName($prod['name'])
+                ->setCurrency('EUR')
+                ->setQuantity((float)$prod['quantity'])
+                ->setPrice((float)$prod['price']);
+            $items[] = $item;
+
+            $total = $total + (float)$prod['price'] * (float)$prod['quantity'];
+        }
+
+        $item_list->setItems($items);
+
+
+        $shippingAddress = [
+            "recipient_name" => "John Johnson",
+            "line1" => "Rosenstr. 100",
+            "line2" => "1. Stock",
+            "city" => "Taufkirchen",
+            "country_code" => "DE",
+            "postal_code" => "82024",
+            "state" => "Taufkirchen",
+            "phone" => "3123123123"
+        ];
+
+        $item_list->setShippingAddress($shippingAddress);
+
+
+
         $payer = new Payer();
         $payer->setPaymentMethod('paypal');
-
+        /*
         $item_1 = new Item();
 
         $item_1->setName('Product 1')
-            ->setCurrency('EUR')
+            ->setCurrency('USD')
             ->setQuantity(1)
             ->setPrice($request->get('amount'));
 
-        $item_list = new ItemList();
-        $item_list->setItems(array($item_1));
+
+        $item_2 = new Item();
+
+        $item_2->setName('Product 2')
+            ->setCurrency('USD')
+            ->setQuantity(2)
+            ->setPrice(0.05);
+
+
+        */
 
         $amount = new Amount();
         $amount->setCurrency('EUR')
-            ->setTotal($request->get('amount'));
+            ->setTotal($total);
+
 
         $transaction = new Transaction();
         $transaction->setAmount($amount)
@@ -72,8 +116,12 @@ class PaypalController extends Controller
             ->setPayer($payer)
             ->setRedirectUrls($redirect_urls)
             ->setTransactions(array($transaction));
+
+
+
         try {
             $payment->create($this->_api_context);
+            dump($payment);
         } catch (\PayPal\Exception\PPConnectionException $ex) {
             if (\Config::get('app.debug')) {
                 \Session::put('error','Connection timeout');
@@ -83,6 +131,8 @@ class PaypalController extends Controller
                 return Redirect::route('shop.paypal');
             }
         }
+
+
 
         foreach($payment->getLinks() as $link) {
             if($link->getRel() == 'approval_url') {
@@ -94,11 +144,11 @@ class PaypalController extends Controller
         Session::put('paypal_payment_id', $payment->getId());
 
         if(isset($redirect_url)) {
-            return Redirect::away($redirect_url);
+            return Redirect::away($redirect_url)->with('payment');
         }
 
         \Session::put('error','Unknown error occurred');
-        return Redirect::route('paypal.pay');
+        //return Redirect::route('paypal.pay');
     }
 
     public function getPaymentStatus(Request $request)
