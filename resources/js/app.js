@@ -1,6 +1,6 @@
 require('./bootstrap');
 import './libs/trix';
-import 'tw-elements';
+//import 'tw-elements';
 
 import Alpine from 'alpinejs';
 
