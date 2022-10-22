@@ -109,14 +109,6 @@ Route::controller(ShopController::class)->group(function () {
     Route::get('/shop/cart', 'showcart')->name('shop.showcart');
     Route::post('/shop/deleteItemFromCart', 'deleteItemFromCart')->name('shop.deleteItem');
     Route::post('/shop/search', 'search')->name('shop.search');
-    //Route::get('/shop/pay', 'showArticle')->middleware(['auth'])->name('shop.pay');
-    /*Route::get('/kb/new', 'new')->middleware(['auth'])->name('kb.new');
-    Route::post('/kb/create', 'create')->middleware(['auth'])->name('kb.create');
-    Route::get('/kb/edit/{id}', 'edit')->middleware(['auth'])->name('kb.edit');
-    Route::post('/kb/update', 'update')->middleware(['auth'])->name('kb.update');
-    Route::get('/kb/show/{topic?}', 'show')->middleware(['auth'])->name('kb.show');
-    Route::post('/kb/delete', 'delete')->middleware(['auth'])->name('kb.delete');
-    */
 });
 
 Route::controller(PaypalController::class)->group(function () {
@@ -125,7 +117,4 @@ Route::controller(PaypalController::class)->group(function () {
     Route::get('paypal/payment', 'getPaymentStatus')->name('paypal.getPaypalStatus');
 });
 
-/*
-Route::get('/shop/pay', array('as' => 'paywithpaypal','uses' => 'PaypalController@payWithPaypal',));
 
-*/
