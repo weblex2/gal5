@@ -74,6 +74,7 @@
                 </div>
             </div>
 
+            @if (request()->is('shop*'))
             <div class="w-full mt-2">
                 <form id="frmShopSearch" method="POST" action="{{ route("shop.search")}}" >
                     @csrf
@@ -90,6 +91,7 @@
                     <span class="sr-only">Search</span>
                 </button-->    
             </div>
+            @endif
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
 
