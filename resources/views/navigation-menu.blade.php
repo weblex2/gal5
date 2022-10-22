@@ -24,7 +24,7 @@
                     
 
                     @else
-                    <a href="{{ route('/') }}">
+                    <a href="{{ route('index') }}">
                         <img src="{{ Storage::url('me.png') }}" class="rounded-full h-9" >
                     </a>
                     @endif
