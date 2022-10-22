@@ -102,6 +102,9 @@ Route::controller(HouseController::class)->group(function () {
 Route::controller(ShopController::class)->group(function () {
     Route::get('/shop', 'index')->name('shop.index');
     Route::get('/shop/showArticle/{id}', 'showArticle')->name('shop.showArticle');
+    Route::post('/shop/add2cart', 'add2cart')->name('shop.add2cart');
+    Route::get('/shop/cart', 'showcart')->name('shop.showcart');
+    Route::post('/shop/deleteItemFromCart', 'deleteItemFromCart')->name('shop.deleteItem');
     //Route::get('/shop/pay', 'showArticle')->middleware(['auth'])->name('shop.pay');
     /*Route::get('/kb/new', 'new')->middleware(['auth'])->name('kb.new');
     Route::post('/kb/create', 'create')->middleware(['auth'])->name('kb.create');

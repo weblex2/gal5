@@ -10,12 +10,12 @@
                     <div class="col-span-3 justify-center">
                         <img src="{{Storage::disk("local")->url("shop/img/".$article->image) }}">
 
-                        <div class="grid grid-cols-5 gap-3 mt-3">
-                            <div><img class="w-16 h-16" src="{{Storage::disk("local")->url("shop/img/3.1.jpg") }}"></div>
-                            <div><img class="w-16 h-16" src="{{Storage::disk("local")->url("shop/img/3.2.jpg") }}"></div>
-                            <div><img class="w-16 h-16" src="{{Storage::disk("local")->url("shop/img/".$article->image) }}"></div>
-                            <div><img class="w-16 h-16" src="{{Storage::disk("local")->url("shop/img/".$article->image) }}"></div>
-                            <div><img class="w-16 h-16" src="{{Storage::disk("local")->url("shop/img/".$article->image) }}"></div>
+                        <div class="grid grid-cols-5 gap-2 mt-3 p-2">
+                            <div class="border border-red-500 w-15 h-15"><img class="w-15 h-15" src="{{Storage::disk("local")->url("shop/img/3.1.jpg") }}"></div>
+                            <div class="border border-red-500 w-16 h-16"><img class="w-16 h-16" src="{{Storage::disk("local")->url("shop/img/3.2.jpg") }}"></div>
+                            <div class="border border-red-500 w-16 h-16"><img class="w-16 h-16" src="{{Storage::disk("local")->url("shop/img/".$article->image) }}"></div>
+                            <div class="border border-red-500 w-16 h-16"><img class="w-16 h-16" src="{{Storage::disk("local")->url("shop/img/".$article->image) }}"></div>
+                            <div class="border border-red-500 w-16 h-16"><img class="w-16 h-16" src="{{Storage::disk("local")->url("shop/img/".$article->image) }}"></div>
                         </div>
 
                     </div>
@@ -85,9 +85,23 @@
                         <div>KOSTENFREIE Retouren</div>
                         <div><span class="text-sm">KOSTENLOSE Lieferung <b>Montag, 24. Oktober.</b> Bestellung innerhalb 9 Stdn. 34 Min.</span></div>
                         <div><span class="text-sm"><i class="fa-solid fa-location-crosshairs"></i> Liefern an Alexander - 82024 Taufkirchen</span></div>
+                        <form id="frmAdd2cart" method="POST" action="{{route("shop.add2cart")}}">
+                            @csrf
+                        <div class="mt-2">
+                            <div class="float-left w-1/4 flex pt-2">Menge</div>
+                            <div class="float-left w-3/4"> 
+                            <select name="quantity" class="border-gray-300 text-xs focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 ">
+                                @for ($i=1; $i<11; $i++)
+                                <option value={{$i}}>{{$i}}</option>    
+                                @endfor
+                            </select>        
+                            </div>
+                        </div>    
                         <div><span class="text-lg text-green-600">Nur noch 1 auf Lager</span></div>
-                        <button class="bg-amber-300  rounded-3xl w-full mx-auto justify-center px-1 py-2 mt-2 mr-2">In den Einkaufswagen</button>
-                        <button class="bg-amber-500  rounded-3xl w-full mx-auto justify-center px-1 py-2 mt-2 mr-2">Jetzt kaufen</button>
+                        <button class="bg-amber-300 hover:bg-amber-400 rounded-3xl w-full mx-auto justify-center px-1 py-2 mt-2 mr-2">In den Einkaufswagen</button>
+                        <button class="bg-amber-500 hover:bg-amber-600 rounded-3xl w-full mx-auto justify-center px-1 py-2 mt-2 mr-2">Jetzt kaufen</button>
+                        <input type="hidden" name="article_id" value="{{$article->id}}">
+                        </form>
                         <div class="mt-2 pl-2 text-sm font-bold"><i class="fa-solid fa-lock text-yellow-600"></i> Sichere Transaktion</div>
                         <div class="text-xs">Verkauf durch Amazon und Versand durch Amazon.</div>
                         <div class="text-xs mt-2">Rücksendungen: <a class="text-xs" href="#">Retournierbar innerhalb von 30 Tagen nach Erhalt</a></div>
@@ -112,20 +126,16 @@
                     <div class="col-span-12">
                         <hr>
                         <div class="p-2">
-                            <h4>Verwandte Produkte zu diesem Artikel</h4></div>
+                            <h4>Verwandte Produkte zu diesem Artikel</h4>
                             <div class="grid grid-cols-9 gap-3">
 
                                 <div class="flex justify-center items-center h-full">
                                     <div class="flex justify-center items-center bg-slate-100 border border-slate-500 rounded p-3 w-10 h-10">
-                                        <i class="fa-solid fa-angle-left"></i></div>
+                                        <i class="fa-solid fa-angle-left"></i>
+                                    </div>
                                 </div>
-
-                                <div>
-                                    <img src="{{Storage::disk("local")->url("shop/img/1.jpg")}}">
-                                </div>
-                                <div>
-                                    <img src="{{Storage::disk("local")->url("shop/img/2.jpg")}}">
-                                </div>
+                                <div> <img src="{{Storage::disk("local")->url("shop/img/1.jpg")}}"></div>
+                                <div> <img src="{{Storage::disk("local")->url("shop/img/2.jpg")}}"></div>
                                 <div> <img src="{{Storage::disk("local")->url("shop/img/3.jpg")}}"></div>
                                 <div> <img src="{{Storage::disk("local")->url("shop/img/4.jpg")}}"></div>
                                 <div> <img src="{{Storage::disk("local")->url("shop/img/5.jpg")}}"></div>
@@ -133,7 +143,7 @@
                                 <div> <img src="{{Storage::disk("local")->url("shop/img/7.jpg")}}"></div>
                                 <div class="flex justify-center items-center h-full">
                                     <div class="flex justify-center items-center bg-slate-100 border border-slate-500 rounded p-3 w-10 h-10">
-                                        <i class="fa-solid fa-angle-right"></i></div>
+                                        <i class="fa-solid fa-angle-right"></i>
                                     </div>
                                 </div>
                             </div>
@@ -228,8 +238,9 @@
                                         <i class="fa-solid fa-angle-right"></i></div>
                                 </div>
                             </div>
-                            </div>
                         </div>
+                        <div class="col-span-12 h-48"></div>
+                    </div>
 
                 </div>
              </div>

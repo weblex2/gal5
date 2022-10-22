@@ -1,23 +1,43 @@
 <nav x-data="{ open: false }">
     <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     
+    @php
+        $classWidth='max-w-7xl';
+        if (request()->is('shop*')){
+            $classWidth="w-full";
+        }
+        else{
+            $classWidth = 'max-w-7xl';
+        }
+    @endphp 
+        
+ 
+    <div class="{{$classWidth}} mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
+                    @if (request()->is('shop*'))
+                    <a href="{{ route('shop.index') }}">
+                        <img src="{{ Storage::url('shop/Webshop-logo.png') }}" class="h-14" >
+                    </a>
+                    
 
-                    <a href="{{ route('index') }}">
+                    @else
+                    <a href="{{ route('/') }}">
                         <img src="{{ Storage::url('me.png') }}" class="rounded-full h-9" >
                     </a>
+                    @endif
                     <!--a href="{{ route('dashboard') }}">
                         <x-jet-application-mark class="block h-9 w-auto" />
                     </a-->
                 </div>
 
+                
+
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-
-
+                    
                     @if (request()->is('gallery*'))
 
                     <x-jet-nav-link href="{{ route('gallery.index') }}" :active="request()->routeIs('gallery.index')">
@@ -54,7 +74,35 @@
                 </div>
             </div>
 
+            <div class="w-full mt-2">
+                <input class="text-sm border-gray-300 focus:border-indigo-300 rounded-md shadow-sm mt-1 block w-full" type="text" name="search">    
+            </div>
+
             <div class="hidden sm:flex sm:items-center sm:ml-6">
+
+                @if (request()->is('shop*'))
+                    <div id="logon" class="p-3  border-l border-slate-200 h-full flex justify-center items-center ">
+                        <div class="w-[200px] ">
+                            <span class="text-xs">
+                            <i class="text-amber-500 fa-solid fa-user"></i>
+                             Hello - Melde dich an!
+                             </span><br> 
+                             <span class="text-xs font-bold">Konto & Listen</span>
+                        </div>
+                        
+                    </div> 
+
+                    <div id="cart" class="p-3 border-l border-slate-200  h-full flex justify-center items-center ">
+                        <a href="{{ route("shop.showcart") }}">
+                            <i class="text-amber-500 fa-solid fa-cart-shopping mr-2"></i> 
+                        </a>
+                        <a href="{{ route("shop.showcart") }}"> Warenkorb </a> &nbsp; 
+                        <a href="{{ route("shop.showcart") }}">
+                            <span id="wk_cnt" class="text-amber-500 font-bold"> ({{ Session::get('cartItemsCnt',0)}})
+                        </a>    
+                    </div>            
+                @endif
+
                 <!-- Teams Dropdown -->
                 @if (Laravel\Jetstream\Jetstream::hasTeamFeatures() &&  Auth::user() )
                     <div class="ml-3 relative">
@@ -109,7 +157,9 @@
                 <!-- Settings Dropdown -->
                 <div class="ml-3 relative">
                     <x-jet-dropdown align="right" width="48">
+                        
                         <x-slot name="trigger">
+                            
                             @if (Laravel\Jetstream\Jetstream::managesProfilePhotos() && Auth::check())
                                 <button class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
                                     <img class="h-8 w-8 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
@@ -253,5 +303,13 @@
             </div>
             @endif
         </div>
-    </div>
+    </div>    
 </nav>
+<div class="w-full px-25">
+    <div id="breadcrumbs " class="w-11/12 mx-auto px-6">
+        <a class="text-xs font-bold" href="{{ route("shop.showArticle", ['id' => 1])}}">Produkte</a> / 
+        <a class="text-xs font-bold" href="{{ route("shop.showArticle", ['id' => 2])}}">Staubsauger</a> /
+        <a class="text-xs font-bold" href="{{ route("shop.showArticle", ['id' => 3])}}">Staubsaugerroboter</a>
+    </div>
+</div>    
+

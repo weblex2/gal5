@@ -14,4 +14,8 @@ class ShopArticles extends Model
     public function details(){
         return $this->hasMany(ShopArticleDetails::class);
     }
+
+    public function prices(){
+        return $this->hasMany(ShopArticlePrices::class);
+    }
 }
