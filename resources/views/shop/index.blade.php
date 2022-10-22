@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="py-2 w-full">
-        <div class="w-full mx-auto px-6">
+        <div class="w-11/12 mx-auto px-6">
             <div class="bg-white w-full overflow-hidden shadow-xl sm:rounded-lg ">
                 
                 <div class="grid grid-cols-12 gap-3">

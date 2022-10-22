@@ -84,4 +84,11 @@ class ShopController extends Controller
         $response['wk_totalAmount'] = $totalAmount;
         echo json_encode($response);
     }
+
+    public function search(Request $request){
+        $req = $request->all();
+        $search  = $req['search'];
+        $articles= ShopArticles::where('description', 'like', '%'.$search."%");
+        return view('shop.search', compact('articles'));
+    }
 }

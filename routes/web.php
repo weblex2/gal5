@@ -105,6 +105,7 @@ Route::controller(ShopController::class)->group(function () {
     Route::post('/shop/add2cart', 'add2cart')->name('shop.add2cart');
     Route::get('/shop/cart', 'showcart')->name('shop.showcart');
     Route::post('/shop/deleteItemFromCart', 'deleteItemFromCart')->name('shop.deleteItem');
+    Route::post('/shop/search', 'search')->name('shop.search');
     //Route::get('/shop/pay', 'showArticle')->middleware(['auth'])->name('shop.pay');
     /*Route::get('/kb/new', 'new')->middleware(['auth'])->name('kb.new');
     Route::post('/kb/create', 'create')->middleware(['auth'])->name('kb.create');
