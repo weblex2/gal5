@@ -1,30 +1,125 @@
 <nav x-data="{ open: false }">
     <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     
+    @php
+        $classWidth='max-w-7xl';
+        if (request()->is('shop*')){
+            $classWidth="w-full";
+        }
+        else{
+            $classWidth = 'max-w-7xl';
+        }
+    @endphp 
+        
+ 
+    <div class="{{$classWidth}} mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
-                        <x-jet-application-mark class="block h-9 w-auto" />
+                    @if (request()->is('shop*'))
+                    <a href="{{ route('shop.index') }}">
+                        <img src="{{ Storage::url('shop/Webshop-logo.png') }}" class="h-14" >
                     </a>
+                    
+
+                    @else
+                    <a href="{{ route('index') }}">
+                        <img src="{{ Storage::url('me.png') }}" class="rounded-full h-9" >
+                    </a>
+                    @endif
+                    <!--a href="{{ route('dashboard') }}">
+                        <x-jet-application-mark class="block h-9 w-auto" />
+                    </a-->
                 </div>
+
+                
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    
+                    @if (request()->is('gallery*'))
+
                     <x-jet-nav-link href="{{ route('gallery.index') }}" :active="request()->routeIs('gallery.index')">
                         {{ __('Home') }}
                     </x-jet-nav-link>
-                    
-                    <x-jet-nav-link href="{{ route('gallery.new') }}" :active="request()->routeIs('gallery.new')">
-                        {{ __('Create new Gallery') }}
+
+                    @endif
+
+                    @if (request()->is('kb*'))
+
+                        <x-jet-nav-link href="{{ route('kb.index') }}" :active="request()->routeIs('gallery.index')">
+                            {{ __('Home') }}
+                        </x-jet-nav-link>
+                    @endif
+
+                    @if (request()->is('house*'))
+
+                    <x-jet-nav-link href="{{ route('house.index') }}" :active="request()->routeIs('gallery.index')">
+                        {{ __('Home') }}
                     </x-jet-nav-link>
+
+                    <x-jet-nav-link href="{{ route('gallery.index') }}" :active="request()->routeIs('gallery.index')">
+                        {{ __('New House') }}
+                    </x-jet-nav-link>
+
+                    <x-jet-nav-link href="{{ route('house.config') }}" :active="request()->routeIs('gallery.index')">
+                        {{ __('Edit Fields') }}
+                    </x-jet-nav-link>
+
+                    @endif
+
+
+
                 </div>
             </div>
 
+            @if (request()->is('shop*'))
+            <div class="w-full mt-2">
+                <form id="frmShopSearch" method="POST" action="{{ route("shop.search")}}" >
+                    @csrf
+                    <label for="simple-search" class="sr-only">Search</label>
+                    <div class="relative w-full" onclick="$('#frmShopSearch').submit()">
+                        <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none" >
+                            <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
+                        </div>
+                        <input name="search" type="text" value="Vacuum-Mop 3" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search" required>
+                    </div>
+                </form>
+                <!--button type="submit" class="float-right p-2.5 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    <span class="sr-only">Search</span>
+                </button-->    
+            </div>
+            @endif
+
             <div class="hidden sm:flex sm:items-center sm:ml-6">
+
+                @if (request()->is('shop*'))
+                    <div id="logon" class="p-3  border-l border-slate-200 h-full flex justify-center items-center ">
+                        <div class="w-[200px] ">
+                            <span class="text-xs">
+                            <i class="text-amber-500 fa-solid fa-user"></i>
+                             Hello - Melde dich an!
+                             </span><br> 
+                             <span class="text-xs font-bold">Konto & Listen</span>
+                        </div>
+                        
+                    </div> 
+
+                    <div id="cart" class="p-3 border-l border-slate-200  h-full flex justify-center items-center ">
+                        <a href="{{ route("shop.showcart") }}">
+                            <i class="text-amber-500 fa-solid fa-cart-shopping mr-2"></i> 
+                        </a>
+                        <a href="{{ route("shop.showcart") }}"> Warenkorb </a> &nbsp; 
+                        <a href="{{ route("shop.showcart") }}">
+                            <span id="wk_cnt" class="text-amber-500 font-bold"> ({{ Session::get('cartItemsCnt',0)}})
+                        </a>    
+                    </div>            
+                @endif
+
                 <!-- Teams Dropdown -->
-                @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
+                @if (Laravel\Jetstream\Jetstream::hasTeamFeatures() &&  Auth::user() )
                     <div class="ml-3 relative">
                         <x-jet-dropdown align="right" width="60">
                             <x-slot name="trigger">
@@ -38,6 +133,7 @@
                                     </button>
                                 </span>
                             </x-slot>
+
 
                             <x-slot name="content">
                                 <div class="w-60">
@@ -76,12 +172,15 @@
                 <!-- Settings Dropdown -->
                 <div class="ml-3 relative">
                     <x-jet-dropdown align="right" width="48">
+                        
                         <x-slot name="trigger">
-                            @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
+                            
+                            @if (Laravel\Jetstream\Jetstream::managesProfilePhotos() && Auth::check())
                                 <button class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
                                     <img class="h-8 w-8 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
                                 </button>
                             @else
+                                @if (Auth::user())
                                 <span class="inline-flex rounded-md">
                                     <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition">
                                         {{ Auth::user()->name }}
@@ -91,6 +190,7 @@
                                         </svg>
                                     </button>
                                 </span>
+                                @endif
                             @endif
                         </x-slot>
 
@@ -149,18 +249,20 @@
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="flex items-center px-4">
-                @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
+                @if (Laravel\Jetstream\Jetstream::managesProfilePhotos() && (Auth::user()))
                     <div class="shrink-0 mr-3">
                         <img class="h-10 w-10 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
                     </div>
                 @endif
-
+                @if (Auth::user())
                 <div>
                     <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
                     <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
                 </div>
+                @endif
             </div>
 
+            @if (Auth::user())
             <div class="mt-3 space-y-1">
                 <!-- Account Management -->
                 <x-jet-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
@@ -214,6 +316,15 @@
                     @endforeach
                 @endif
             </div>
+            @endif
         </div>
-    </div>
+    </div>    
 </nav>
+<div class="w-full px-25">
+    <div id="breadcrumbs " class="w-11/12 mx-auto px-6">
+        <a class="text-xs font-bold" href="{{ route("shop.showArticle", ['id' => 1])}}">Produkte</a> / 
+        <a class="text-xs font-bold" href="{{ route("shop.showArticle", ['id' => 2])}}">Staubsauger</a> /
+        <a class="text-xs font-bold" href="{{ route("shop.showArticle", ['id' => 3])}}">Staubsaugerroboter</a>
+    </div>
+</div>    
+
