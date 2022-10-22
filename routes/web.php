@@ -51,11 +51,11 @@ Route::get('/be', function () {
 })->name('php');
 */
 
-
+/*
 Route::get('/php2', function () {
     return php_uname('a') .php_uname('s').php_uname('n').php_uname('r').php_uname('v').php_uname('m').var_dump(PHP_OS);
 })->name('php');
-
+*/
 
 
 
