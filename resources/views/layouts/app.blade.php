@@ -16,7 +16,7 @@
 
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
-        <script src="{{ mix('jquery.min.js')}}" defer></script>
+        <script src="{{ asset('js/jquery.min.js')}}" ></script>
         <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 
 
