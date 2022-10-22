@@ -167,10 +167,12 @@ class PaypalController extends Controller
 
         if ($result->getState() == 'approved') {
             \Session::put('success','Payment success !!');
-            return Redirect::route('paypal.pay');
+            \Session::put('cartItems', []);
+            \Session::put('cartItemsCnt', 0);
+            return Redirect::route('shop.showcart');
         }
 
         \Session::put('error','Payment failed !!');
-        return Redirect::route('paypal.pay');
+        return Redirect::route('shop.showcart');
     }
 }

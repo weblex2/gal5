@@ -1,11 +1,30 @@
 @php
     $cart = session()->get('cartItems',[]);
+    $success = session()->get('success');
+    $error = session()->get('error');
+    #echo "success = ". $success;
+    #echo "error = ". $error;
+    #dump(session()->all());
 @endphp
 <x-app-layout>
     
     <div class="py-2 w-full">
         <div class="w-11/12 mx-auto px-6">
             <div class="bg-white w-full overflow-hidden shadow-xl sm:rounded-lg p-3">
+
+                @if ($success)
+                    <div class="w-fill mb-3 bg-green-300 text-green-700 border border-red-500 p-2 rounded">
+                        Alles bezahlt, supi! 
+                    </div>
+                    <?php Session::forget('success');?>
+                @endif    
+                @if ($error)
+                    <div class="w-fill mb-3  bg-red-300 text-red-800 border border-red-500 p-2 rounded">
+                        Nope, da ist was schiefgelaufen... {{$error}} 
+                    </div>
+                    <?php Session::forget('error');?>
+                @endif
+
                 <h4>Einkaufswagen</h4>
                 
 
