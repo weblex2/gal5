@@ -25,5 +25,5 @@ Route::controller(RegisterController::class)->group(function(){
 });
         
 Route::middleware('auth:sanctum')->group( function () {
-    Route::resource('/kb', ApiDataController::class);
+    //Route::resource('/kb', ApiDataController::class);
 });
