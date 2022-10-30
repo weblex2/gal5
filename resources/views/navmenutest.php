@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }">
+<nav2 x-data="{ open: false }">
     <!-- Primary Navigation Menu -->
      
     @php
@@ -13,6 +13,7 @@
         
  
     <div class="{{$classWidth}} mx-auto px-4 sm:px-6 lg:px-8">
+        Nav menu 2
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
@@ -280,7 +281,7 @@
                     @csrf
 
                     <x-jet-responsive-nav-link href="{{ route('logout') }}"
-                                   @click.prevent="$root.submit();">
+                        @click.prevent="$root.submit();">
                         {{ __('Log Out') }}
                     </x-jet-responsive-nav-link>
                 </form>
