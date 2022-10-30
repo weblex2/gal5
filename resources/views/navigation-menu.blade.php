@@ -30,17 +30,50 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('gallery.index') }}" :active="request()->routeIs('gallery.index')">
-                        {{ __('Home') }}
-                    </x-jet-nav-link>
-                    
-                    <x-jet-nav-link href="{{ route('gallery.new') }}" :active="request()->routeIs('gallery.new')">
-                        {{ __('Create new Gallery') }}
-                    </x-jet-nav-link>
+                    @if (request()->is('gallery*'))
+                        <x-jet-nav-link href="{{ route('gallery.index') }}" :active="request()->routeIs('gallery.index')">
+                            {{ __('Home Gallery') }}
+                        </x-jet-nav-link>
+                        
+                        <x-jet-nav-link href="{{ route('gallery.new') }}" :active="request()->routeIs('gallery.new')">
+                            {{ __('Create new Gallery') }}
+                        </x-jet-nav-link>
+                    @elseif (request()->is('shop*'))
+                        <x-jet-nav-link href="{{ route('shop.index') }}" :active="request()->routeIs('shop.index')">
+                            {{ __('Home Shop') }}
+                        </x-jet-nav-link>
+                    @else 
+                        <x-jet-nav-link href="{{ route('gallery.index') }}" :active="request()->routeIs('gallery.index')">
+                            {{ __('Home Else') }}
+                        </x-jet-nav-link>
+                    @endif
                 </div>
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
+                <!-- Shop Divs -->
+                @if (request()->is('shop*'))
+                    <div id="logon" class="p-3  border-l border-slate-200 h-full flex justify-center items-center ">
+                        <div class="w-[200px] ">
+                            <span class="text-xs">
+                            <i class="text-amber-500 fa-solid fa-user"></i>
+                             Hello - Melde dich an!
+                             </span><br> 
+                             <span class="text-xs font-bold">Konto & Listen</span>
+                        </div>
+                        
+                    </div> 
+
+                    <div id="cart" class="p-3 border-l border-slate-200  h-full flex justify-center items-center ">
+                        <a href="{{ route("shop.showcart") }}">
+                            <i class="text-amber-500 fa-solid fa-cart-shopping mr-2"></i> 
+                        </a>
+                        <a href="{{ route("shop.showcart") }}"> Warenkorb </a> &nbsp; 
+                        <a href="{{ route("shop.showcart") }}">
+                            <span id="wk_cnt" class="text-amber-500 font-bold"> ({{ Session::get('cartItemsCnt',0)}})
+                        </a>    
+                    </div>            
+                @endif
                 <!-- Teams Dropdown -->
                 @if (Laravel\Jetstream\Jetstream::hasTeamFeatures() && Auth::user())
                     <div class="ml-3 relative">
