@@ -40,8 +40,12 @@
                         </x-jet-nav-link>
                     @elseif (request()->is('shop*'))
                         <x-jet-nav-link href="{{ route('shop.index') }}" :active="request()->routeIs('shop.index')">
-                            {{ __('Home Shop') }}
-                        </x-jet-nav-link>
+                            {{ __('Home') }}
+                        </x-jet-nav-link>     
+                        <x-jet-nav-link href="{{ route('shop.index') }}" :active="request()->routeIs('shop.index')" class="pr-3">
+                            {{ __('Home2') }}
+                        </x-jet-nav-link>    
+                          
                     @else 
                         <x-jet-nav-link href="{{ route('gallery.index') }}" :active="request()->routeIs('gallery.index')">
                             {{ __('Home Else') }}
@@ -49,10 +53,29 @@
                     @endif
                 </div>
             </div>
+            
+            @if (request()->is('shop*'))
+            <div class="w-4/5 mt-2 p-2">
+                <form id="frmShopSearch" method="POST" action="{{ route("shop.search")}}" >
+                    @csrf
+                    <div class="relative flex w-full flex-wrap items-stretch mb-3">
+                        <input type="text" name="search" placeholder="Suche" class="px-3 py-2 placeholder-slate-700 text-slate-600 relative bg-white bg-white rounded text-sm border border-slate-300 outline-none w-full"/>
+                        <button onclick="$('#frmShopSearch').submit()" 
+                            class="z-10 h-full font-normal absolute bg-slate-200 
+                                   text-center text-slate-300 absolute  rounded w-12
+                                   text-base items-center justify-center  right-0 px-3 py-2 ">
+                        <i class="fas fa-search"></i>
+                        </button>
+                    </div> 
+                </form>      
+            </div>
+            @endif
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <!-- Shop Divs -->
                 @if (request()->is('shop*'))
+                
+
                     <div id="logon" class="p-3  border-l border-slate-200 h-full flex justify-center items-center ">
                         <div class="w-[200px] ">
                             <span class="text-xs">

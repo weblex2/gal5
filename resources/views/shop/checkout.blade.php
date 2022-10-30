@@ -7,10 +7,10 @@
     
     <div class="py-2 w-full">
         <div class="w-11/12 mx-auto px-6">
-            <div class="bg-white w-full overflow-hidden shadow-xl sm:rounded-lg p-6">
+            <div class="bg-white w-full overflow-hidden shadow-xl sm:rounded-lg p-3">
 
                 @if ($success)
-                    <div class="w-fill mb-3 bg-green-300 text-green-700 border border-green-500 p-2 rounded">
+                    <div class="w-fill mb-3 bg-green-300 text-green-700 border border-red-500 p-2 rounded">
                         Alles bezahlt, supi! 
                     </div>
                     <?php Session::forget('success');?>
@@ -22,13 +22,13 @@
                     <?php Session::forget('error');?>
                 @endif
 
-                <h1 class="text-xl">Einkaufswagen</h1>
-                <div class="spacer">&nbsp;</div>
+                <h4>Einkaufswagen</h4>
+                
 
                 @if (count($cart)>0) 
                 <div class="grid grid-cols-12">
-                    
-                    <div class="col-span-10"> 
+                    <div class="col-span-12"><hr></div>
+                    <div class="col-span-10">
 
                         <form id="frmPay" method="POST" action="{{ route("paypal.doPayment") }}">
                             @csrf
@@ -61,7 +61,6 @@
                                     @money($item['price_per_item']) €
                                 </div>
                                 <div class="wk_id_{{$i}} col-span-12 pr-3"><hr></div>
-                                <div class="spacer">&nbsp;</div>
                                 @endforeach
                             </div>
                         </form>
