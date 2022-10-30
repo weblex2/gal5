@@ -13,6 +13,9 @@ class DispatchController extends Controller
         elseif ($_SERVER['HTTP_HOST']=="kb.noppal.de") {
             return  redirect()->route("kb.index");
         }
+        elseif ($_SERVER['HTTP_HOST']=="shop.noppal.de") {
+            return  redirect()->route("shop.index");
+        }
         else {
            # echo $_SERVER['HTTP_HOST'];
         }
