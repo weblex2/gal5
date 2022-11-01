@@ -2,17 +2,32 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\ShopArticles;
 use App\Models\ShopArticleDetails;
 use App\Models\ShopArticlePrices;
+use App\Models\ShopUserAddress;
+use App\Models\User;
 use GuzzleHttp\Psr7\Request as Psr7Request;
 
 class ShopController extends Controller
 {
 
-
+    
     public function index(){
+        if (Auth::user()) {
+            $user_id = Auth::user()->id;
+            $user  = User::find($user_id);
+            $user->load('shopUserAddress');
+            $deliveryAddress = [];
+            foreach ($user->shopUserAddress as $i => $address) {
+                if ($address['type']=="DELV"){
+                    $deliveryAddress[] = $address;
+                }   
+            }
+            session()->put('deliveryAddress', $deliveryAddress);
+        }
         $articles = ShopArticles::all();
         return view('shop.index', compact('articles'));
     }

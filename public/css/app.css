@@ -13763,6 +13763,15 @@ textarea.form-control.is-invalid {
 .top-20 {
     top: 5rem;
 }
+.left-20 {
+    left: 5rem;
+}
+.left-10 {
+    left: 2.5rem;
+}
+.left-12 {
+    left: 3rem;
+}
 .z-0 {
     z-index: 0;
 }
@@ -13947,6 +13956,54 @@ textarea.form-control.is-invalid {
 }
 .mb-5 {
     margin-bottom: 1.25rem;
+}
+.mt-7 {
+    margin-top: 1.75rem;
+}
+.mt-20 {
+    margin-top: 5rem;
+}
+.mt-16 {
+    margin-top: 4rem;
+}
+.mr-10 {
+    margin-right: 2.5rem;
+}
+.ml-10 {
+    margin-left: 2.5rem;
+}
+.ml-16 {
+    margin-left: 4rem;
+}
+.ml-5 {
+    margin-left: 1.25rem;
+}
+.ml-20 {
+    margin-left: 5rem;
+}
+.-ml-10 {
+    margin-left: -2.5rem;
+}
+.-ml-20 {
+    margin-left: -5rem;
+}
+.-ml-\[200px\] {
+    margin-left: -200px;
+}
+.-ml-\[100px\] {
+    margin-left: -100px;
+}
+.-ml-\[150px\] {
+    margin-left: -150px;
+}
+.-ml-\[120px\] {
+    margin-left: -120px;
+}
+.-ml-\[130px\] {
+    margin-left: -130px;
+}
+.-ml-\[135px\] {
+    margin-left: -135px;
 }
 .box-content {
     box-sizing: content-box;
@@ -16024,6 +16081,14 @@ header {
 .hover\:bg-green-600:hover {
     --tw-bg-opacity: 1;
     background-color: rgb(22 163 74 / var(--tw-bg-opacity));
+}
+.hover\:bg-slate-500:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(100 116 139 / var(--tw-bg-opacity));
+}
+.hover\:bg-slate-200:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(226 232 240 / var(--tw-bg-opacity));
 }
 .hover\:text-gray-500:hover {
     --tw-text-opacity: 1;

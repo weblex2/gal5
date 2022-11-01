@@ -42,10 +42,21 @@
                         <x-jet-nav-link href="{{ route('shop.index') }}" :active="request()->routeIs('shop.index')">
                             {{ __('Home') }}
                         </x-jet-nav-link>     
-                        <x-jet-nav-link href="{{ route('shop.index') }}" :active="request()->routeIs('shop.index')" class="pr-3">
-                            {{ __('Home2') }}
+                        <x-jet-nav-link href="javascript:void(0)" :active="request()->routeIs('shop.index')" class="pr-3">
+                            {{ __('Lieferadresse') }}
                         </x-jet-nav-link>    
-                          
+                        <div >
+                            <div class="absolute -ml-[135px] mt-16 z-10 bg-white rounded border border-slate-300 py-2 shadow-xl sm:rounded-lg">    
+                            @foreach(session('deliveryAddress') as $address)
+                                <div class="hover:bg-slate-200 px-4 py-1 cursor-pointer">
+                                {{ $address->address}},&nbsp;
+                                {{ $address->postal_area}},&nbsp;
+                                {{ $address->city}}
+                                </div>
+                            @endforeach
+                            </div>
+                        </div>                                                
+                        
                     @else 
                         <x-jet-nav-link href="{{ route('gallery.index') }}" :active="request()->routeIs('gallery.index')">
                             {{ __('Home Else') }}
