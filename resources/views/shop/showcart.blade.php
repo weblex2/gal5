@@ -34,7 +34,7 @@
                     
                     <div class="col-span-10"> 
 
-                        <form id="frmPay" method="POST" action="{{ route("paypal.doPayment") }}">
+                        <form id="frmPay" method="POST" action="{{ route("shop.checkout") }}">
                             @csrf
                             <div id="mycart" class="grid grid-cols-12 gap-1">
                                 @foreach($cart as $i => $item)
@@ -75,7 +75,7 @@
                         <div class="text-xs text-green-700 font-bold">
                             Ihre Bestellung qualifiziert sich für GRATIS Standardversand. Details
                         </div>    
-                        <div class="mt-3">  
+                        <div class="mt-3 w-full">  
                             <div class="text-sm">Summe ({{ $totalArticleCnt }} Artikel):
                                 <span id="wk_totalAmount" class="font-bold">  @money($totalAmount)  €</span>
                             </div>
@@ -83,7 +83,7 @@
                                 <input type="checkbox" value="is_present"> 
                                 Bestellung enthält ein Geschenk
                             </div>
-                            <button onclick="$('#frmPay').submit()" class="bg-amber-300 hover:bg-amber-400 rounded-3xl w-full mx-auto justify-center px-1 py-2 mt-2 mr-2">
+                            <button onclick="window.location='{{ route("shop.checkout") }}'" class="bg-amber-300 hover:bg-amber-400 rounded-3xl w-full mx-auto justify-center px-1 py-2 mt-2 mr-2">
                                 Zur Kasse gehen
                             </button>
                         </div>    

@@ -19,14 +19,18 @@ class ShopController extends Controller
         if (Auth::user()) {
             $user_id = Auth::user()->id;
             $user  = User::find($user_id);
-            $user->load('shopUserAddress');
+            $user->load('shopUserAddresses');
             $deliveryAddress = [];
-            foreach ($user->shopUserAddress as $i => $address) {
+            foreach ($user->shopUserAddresses as $i => $address) {
                 if ($address['type']=="DELV"){
                     $deliveryAddress[] = $address;
+                }
+                else{
+                    $paymentAddress[] = $address;
                 }   
             }
             session()->put('deliveryAddress', $deliveryAddress);
+            session()->put('paymentAddress', $paymentAddress);
         }
         $articles = ShopArticles::all();
         return view('shop.index', compact('articles'));
@@ -109,5 +113,16 @@ class ShopController extends Controller
 
     public function logon(){
         return view("shop.logon");
+    }
+
+    public function checkout(){
+        $cart = session()->get('cartItems', []);
+        $totalAmount = 0;
+        $totalArticleCnt = 0;
+        foreach($cart as $i => $item) {
+           $totalAmount += $item['price_per_item'] * $item['quantity'];    
+           $totalArticleCnt += $item['quantity']; 
+        }
+        return view("shop.checkout" , compact('totalAmount','totalArticleCnt'));
     }
 }

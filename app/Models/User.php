@@ -59,9 +59,11 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    public function shopUserAddress(){
+    public function shopUserAddresses(){
         return $this->hasMany(ShopUserAddress::Class);
     }
+
+    
 
     
 }
