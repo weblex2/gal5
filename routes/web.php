@@ -110,6 +110,7 @@ Route::controller(ShopController::class)->group(function () {
     Route::post('/shop/deleteItemFromCart', 'deleteItemFromCart')->name('shop.deleteItem');
     Route::post('/shop/search', 'search')->name('shop.search');
     Route::get('/shop/checkout', 'checkout')->name('shop.checkout');
+    Route::get('/shop/logon', 'logon')->name('shop.logon');
 });
 
 Route::controller(PaypalController::class)->group(function () {

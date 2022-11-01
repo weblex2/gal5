@@ -91,4 +91,8 @@ class ShopController extends Controller
         $articles= ShopArticles::where('description', 'like', '%'.$search."%")->get();
         return view('shop.search', compact('articles'));
     }
+
+    public function logon(){
+        return view("shop.logon");
+    }
 }

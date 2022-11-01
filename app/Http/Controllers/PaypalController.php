@@ -41,6 +41,10 @@ class PaypalController extends Controller
 
     public function postPaymentWithpaypal(Request $request)
     {
+        $deliveryAddress = session()->get('deliveryAddress', false);
+        if (!$deliveryAddress) {
+            return redirect()->route('shop.logon');
+        }
         $req = $request->all();
         $total = 0;
 

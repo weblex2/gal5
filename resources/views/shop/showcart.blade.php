@@ -2,6 +2,7 @@
     $cart = session()->get('cartItems',[]);
     $success = session()->get('success');
     $error = session()->get('error');
+    $deliveryAddress = session()->get('deliveryAddress',[]);
 @endphp
 <x-app-layout>
     
@@ -24,6 +25,9 @@
 
                 <h1 class="text-xl">Einkaufswagen</h1>
                 <div class="spacer">&nbsp;</div>
+
+                
+                
 
                 @if (count($cart)>0) 
                 <div class="grid grid-cols-12">
