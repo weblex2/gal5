@@ -34,7 +34,7 @@
                     
                     <div class="col-span-10"> 
 
-                        <form id="frmPay" method="POST" action="{{ route("shop.checkout") }}">
+                        <form id="frmPay" method="POST" action="{{ route("paypal.pay") }}">
                             @csrf
                             <div id="mycart" class="grid grid-cols-12 gap-1">
                                 @foreach($cart as $i => $item)
