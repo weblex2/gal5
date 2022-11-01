@@ -45,6 +45,7 @@
                         <x-jet-nav-link href="javascript:void(0)" :active="request()->routeIs('shop.index')" class="pr-3">
                             {{ __('Lieferadresse') }}
                         </x-jet-nav-link>    
+                        @if ( session('deliveryAddress')!==null)
                         <div >
                             <div class="absolute -ml-[135px] mt-16 z-10 bg-white rounded border border-slate-300 py-2 shadow-xl sm:rounded-lg">    
                             @foreach(session('deliveryAddress') as $address)
@@ -55,7 +56,8 @@
                                 </div>
                             @endforeach
                             </div>
-                        </div>                                                
+                        </div>   
+                        @endif                                             
                         
                     @else 
                         <x-jet-nav-link href="{{ route('gallery.index') }}" :active="request()->routeIs('gallery.index')">
@@ -69,12 +71,12 @@
             <div class="w-4/5 mt-2 p-2">
                 <form id="frmShopSearch" method="POST" action="{{ route("shop.search")}}" >
                     @csrf
-                    <div class="relative flex w-full flex-wrap items-stretch mb-3">
+                    <div class="ml-6 relative flex w-full flex-wrap items-stretch mb-3">
                         <input type="text" name="search" placeholder="Suche" class="px-3 py-2 placeholder-slate-700 text-slate-600 relative bg-white bg-white rounded text-sm border border-slate-300 outline-none w-full"/>
                         <button onclick="$('#frmShopSearch').submit()" 
                             class="z-10 h-full font-normal absolute bg-slate-200 
                                    text-center text-slate-300 absolute  rounded w-12
-                                   text-base items-center justify-center  right-0 px-3 py-2 ">
+                                   text-base items-center justify-center  right-0 px-3 py-2 "> 
                         <i class="fas fa-search"></i>
                         </button>
                     </div> 
