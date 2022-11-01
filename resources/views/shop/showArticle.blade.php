@@ -12,12 +12,11 @@
 
                         <div class="grid grid-cols-5 gap-2 mt-3 p-2">
                             <div class="border border-red-500 w-15 h-15"><img class="w-15 h-15" src="{{Storage::disk("local")->url("shop/img/3.1.jpg") }}"></div>
-                            <div class="border border-red-500 w-16 h-16"><img class="w-16 h-16" src="{{Storage::disk("local")->url("shop/img/3.2.jpg") }}"></div>
-                            <div class="border border-red-500 w-16 h-16"><img class="w-16 h-16" src="{{Storage::disk("local")->url("shop/img/".$article->image) }}"></div>
-                            <div class="border border-red-500 w-16 h-16"><img class="w-16 h-16" src="{{Storage::disk("local")->url("shop/img/".$article->image) }}"></div>
-                            <div class="border border-red-500 w-16 h-16"><img class="w-16 h-16" src="{{Storage::disk("local")->url("shop/img/".$article->image) }}"></div>
+                            <div class="border border-red-500 w-15 h-15"><img class="w-15 h-15" src="{{Storage::disk("local")->url("shop/img/3.2.jpg") }}"></div>
+                            <div class="border border-red-500 w-15 h-15"><img class="w-15 h-15" src="{{Storage::disk("local")->url("shop/img/".$article->image) }}"></div>
+                            <div class="border border-red-500 w-15 h-15"><img class="w-15 h-15" src="{{Storage::disk("local")->url("shop/img/".$article->image) }}"></div>
+                            <div class="border border-red-500 w-15 h-15"><img class="w-15 h-15" src="{{Storage::disk("local")->url("shop/img/".$article->image) }}"></div>
                         </div>
-
                     </div>
 
                     <!-- Column 2 / Details -->

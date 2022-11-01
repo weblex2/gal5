@@ -6,7 +6,21 @@ use Illuminate\Http\Request;
 
 class DispatchController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
+        #dump($request->server['parameters']);
+        dump ($request->server);
+        $referer = request()->headers->get('referer');
+        echo $referer;
+        dump ($request->path());
+
+        if ($referer){
+            return  redirect()->to($referer);
+        }
+
+        #if (isset($_SERVER['HTTP_REFERER'])) {
+        #    return  redirect($_SERVER['HTTP_REFERER']);
+        #}
+        
         if ($_SERVER['HTTP_HOST']=="gallery.noppal.de") {
             return  redirect()->route("gallery.index");
         }

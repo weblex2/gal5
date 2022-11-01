@@ -75,17 +75,33 @@
                 <!-- Shop Divs -->
                 @if (request()->is('shop*'))
                 
-
-                    <div id="logon" class="p-3  border-l border-slate-200 h-full flex justify-center items-center ">
-                        <div class="w-[200px] ">
-                            <span class="text-xs">
-                            <i class="text-amber-500 fa-solid fa-user"></i>
-                             Hello - Melde dich an!
-                             </span><br> 
-                             <span class="text-xs font-bold">Konto & Listen</span>
+                    @if (!Auth::user())
+                        <div id="logon" onclick="$('#logon_div').toggle()" class="p-3  border-l border-slate-200 h-full flex justify-center items-center ">
+                            <div class="w-[200px] ">
+                                <span class="text-xs">
+                                <i class="text-amber-500 fa-solid fa-user"></i>
+                                Hello - Melde dich an!
+                                </span><br> 
+                                <span class="text-xs font-bold">Konto & Listen</span>
+                            </div>
                         </div>
-                        
-                    </div> 
+                    @else
+                        <div id="logged_in" class="p-3 border-l border-slate-200 h-full flex justify-center items-center ">
+                            <div class="w-[200px]">
+                                <div>{{Auth::user()->name}}</div>
+                                <div class="font-bold text-amber-500 text-xs"><a href="#">Logout</a>
+                            </div>        
+                        </div>    
+                    @endif
+                    <div id="logon_div" class="hidden z-3 absolute w-25 rounded-lg top-20 bg-slate-200 border border-slate-500 p-3">
+                        <form id="frmLogon" action="{{ route("login") }}" method="POST"> 
+                        @csrf    
+                        <input type="text" name="email"><br>
+                        <input type="password" name="password"><br>
+                        <input type="hidden" name="gobackto" value="shop.index">
+                        <button type="submit">Login</button>
+                        </form>
+                    </div>
 
                     <div id="cart" class="p-3 border-l border-slate-200  h-full flex justify-center items-center ">
                         <a href="{{ route("shop.showcart") }}">
@@ -98,7 +114,7 @@
                     </div>            
                 @endif
                 <!-- Teams Dropdown -->
-                @if (Laravel\Jetstream\Jetstream::hasTeamFeatures() && Auth::user())
+                @if (Laravel\Jetstream\Jetstream::hasTeamFeatures() && Auth::user() && !(request()->is('shop*')))
                     <div class="ml-3 relative">
                         <x-jet-dropdown align="right" width="60">
                             <x-slot name="trigger">
@@ -155,12 +171,12 @@
                 <div class="ml-3 relative">
                     <x-jet-dropdown align="right" width="48">
                         <x-slot name="trigger">
-                            @if (Laravel\Jetstream\Jetstream::managesProfilePhotos() && Auth::user())
+                            @if (Laravel\Jetstream\Jetstream::managesProfilePhotos() && Auth::user() && !(request()->is('shop*')))
                                 <button class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
                                     <img class="h-8 w-8 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
                                 </button>
                             @else
-                                @if (Auth::user())
+                                @if (Auth::user() && !(request()->is('shop*')))
                                 <span class="inline-flex rounded-md">
                                     <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition">
                                         {{ Auth::user()->name }}

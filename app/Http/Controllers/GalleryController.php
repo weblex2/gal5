@@ -26,6 +26,7 @@ class GalleryController extends Controller
 
         $logger = \Log::getLogger();
         
+        
         $ffmpeg = FFMpeg\FFMpeg::create(array(
             'ffmpeg.binaries'  => env('FFMPEG'),
             'ffprobe.binaries' => env('FFPROBE'),
@@ -65,12 +66,7 @@ class GalleryController extends Controller
         catch(Exception $e){
             echo $e->getMessage();
         }    
-        dump($logger);
-
-        die();
-
-        
-        
+        #dump($logger);
 
         $create_user_id = \Auth::id();
         if ($create_user_id) {

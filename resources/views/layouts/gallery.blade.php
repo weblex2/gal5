@@ -141,7 +141,7 @@
 
     <div class="flex flex-col h-full overflow-y-auto">
 
-        <div class="sm-menu  absolute left-0 w-full">
+        <div class="sm-menu  absolute left-0 w-full lg:hidden">
             <div class="bg-slate-400">Menu 1</div>
             <div class="bg-slate-400">Menu 2</div>
             <div class="bg-slate-400">Menu 3</div>
