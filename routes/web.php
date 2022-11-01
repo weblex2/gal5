@@ -117,6 +117,6 @@ Route::controller(PaypalController::class)->group(function () {
     Route::get('/shop/pay', 'payWithPaypal')->name('paypal.pay');
     Route::post('/shop/pay', 'postPaymentWithpaypal')->name('paypal.doPayment');
     Route::get('paypal/payment', 'getPaymentStatus')->name('paypal.getPaypalStatus');
-});
+}); 
 
 
