@@ -24,7 +24,7 @@
                 @endif
 
                 <h1 class="text-xl">Einkaufswagen</h1>
-                <div class="spacer">&nbsp;</div>
+                <div class="spacer colspan-12">&nbsp;</div>
 
                 
                 
@@ -40,7 +40,8 @@
                                 @foreach($cart as $i => $item)
                                 <div class="wk_id_{{$i}} col-span-2">
                                     <img class="col-span-4 w-48 h-48 rounded-lg" src="{{Storage::disk("local")->url("shop/img/".$item['img'])}}">
-                                </div>    
+                                </div>
+
                                 <div class="wk_id_{{$i}} col-span-9 pt-2">
                                     <div>
                                         {{ $item['name']}} 
@@ -61,11 +62,13 @@
                                     </div>  
                                     
                                 </div>
+
                                 <div class="wk_id_{{$i}} col-span-1 font-bold pt-2 ">
                                     @money($item['price_per_item']) €
-                                </div>
+                                </div> 
+
                                 <div class="wk_id_{{$i}} col-span-12 pr-3"><hr></div>
-                                <div class="spacer">&nbsp;</div>
+                                <div class="spacer blubb col-span-12">&nbsp;</div> 
                                 @endforeach
                             </div>
                         </form>

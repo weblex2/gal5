@@ -65,7 +65,7 @@
                                     @money($item['price_per_item']) €
                                 </div>
                                 <div class="wk_id_{{$i}} col-span-12 pr-3"><hr></div>
-                                <div class="spacer">&nbsp;</div>
+                                <div class="spacer col-span-12">&nbsp;</div>
                                 @endforeach
                             </div>
                         </form>
