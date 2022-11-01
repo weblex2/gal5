@@ -2,15 +2,16 @@
     $cart = session()->get('cartItems',[]);
     $success = session()->get('success');
     $error = session()->get('error');
+    $deliveryAddress = session()->get('deliveryAddress',[]);
 @endphp
 <x-app-layout>
     
     <div class="py-2 w-full">
         <div class="w-11/12 mx-auto px-6">
-            <div class="bg-white w-full overflow-hidden shadow-xl sm:rounded-lg p-3">
+            <div class="bg-white w-full overflow-hidden shadow-xl sm:rounded-lg p-6">
 
                 @if ($success)
-                    <div class="w-fill mb-3 bg-green-300 text-green-700 border border-red-500 p-2 rounded">
+                    <div class="w-fill mb-3 bg-green-300 text-green-700 border border-green-500 p-2 rounded">
                         Alles bezahlt, supi! 
                     </div>
                     <?php Session::forget('success');?>
@@ -22,15 +23,18 @@
                     <?php Session::forget('error');?>
                 @endif
 
-                <h4>Einkaufswagen</h4>
+                <h1 class="text-xl">Einkaufswagen</h1>
+                <div class="spacer">&nbsp;</div>
+
+                
                 
 
                 @if (count($cart)>0) 
                 <div class="grid grid-cols-12">
-                    <div class="col-span-12"><hr></div>
-                    <div class="col-span-10">
+                    
+                    <div class="col-span-10"> 
 
-                        <form id="frmPay" method="POST" action="{{ route("paypal.doPayment") }}">
+                        <form id="frmPay" method="POST" action="{{ route("shop.checkout") }}">
                             @csrf
                             <div id="mycart" class="grid grid-cols-12 gap-1">
                                 @foreach($cart as $i => $item)
@@ -61,6 +65,7 @@
                                     @money($item['price_per_item']) €
                                 </div>
                                 <div class="wk_id_{{$i}} col-span-12 pr-3"><hr></div>
+                                <div class="spacer">&nbsp;</div>
                                 @endforeach
                             </div>
                         </form>
@@ -70,7 +75,7 @@
                         <div class="text-xs text-green-700 font-bold">
                             Ihre Bestellung qualifiziert sich für GRATIS Standardversand. Details
                         </div>    
-                        <div class="mt-3">  
+                        <div class="mt-3 w-full">  
                             <div class="text-sm">Summe ({{ $totalArticleCnt }} Artikel):
                                 <span id="wk_totalAmount" class="font-bold">  @money($totalAmount)  €</span>
                             </div>

@@ -42,12 +42,12 @@
                         <x-jet-nav-link href="{{ route('shop.index') }}" :active="request()->routeIs('shop.index')">
                             {{ __('Home') }}
                         </x-jet-nav-link>     
-                        <x-jet-nav-link href="javascript:void(0)" :active="request()->routeIs('shop.index')" class="pr-3">
+                        <x-jet-nav-link href="javascript:void(0)" :active="request()->routeIs('shop.index')" class="pr-3" onclick="$('#deliv_address_div').toggle()">
                             {{ __('Lieferadresse') }}
                         </x-jet-nav-link>    
                         @if ( session('deliveryAddress')!==null)
-                        <div >
-                            <div class="absolute -ml-[135px] mt-16 z-10 bg-white rounded border border-slate-300 py-2 shadow-xl sm:rounded-lg">    
+                        <div>
+                            <div id="deliv_address_div" class="hidden absolute -ml-[135px] mt-16 z-10 bg-white rounded border border-slate-300 py-2 shadow-xl sm:rounded-lg">    
                             @foreach(session('deliveryAddress') as $address)
                                 <div class="hover:bg-slate-200 px-4 py-1 cursor-pointer">
                                 {{ $address->address}},&nbsp;
