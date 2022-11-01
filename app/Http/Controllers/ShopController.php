@@ -21,6 +21,7 @@ class ShopController extends Controller
             $user  = User::find($user_id);
             $user->load('shopUserAddresses');
             $deliveryAddress = [];
+            $paymentAddress = [];
             foreach ($user->shopUserAddresses as $i => $address) {
                 if ($address['type']=="DELV"){
                     $deliveryAddress[] = $address;
