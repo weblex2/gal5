@@ -125,7 +125,7 @@ class PaypalController extends Controller
 
         try {
             $payment->create($this->_api_context);
-            dump($payment);
+            #dump($payment);
         } catch (\PayPal\Exception\PPConnectionException $ex) {
             if (\Config::get('app.debug')) {
                 \Session::put('error','Connection timeout');
