@@ -9,6 +9,8 @@ class DispatchController extends Controller
     public function index(Request $request){
         #dump($request->server['parameters']);
         dump ($request->server);
+        dump ($request);
+        
         $referer = request()->headers->get('referer');
         echo $referer;
         dump ($request->path());

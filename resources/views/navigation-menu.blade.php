@@ -76,7 +76,7 @@
                 @if (request()->is('shop*'))
                 
                     @if (!Auth::user())
-                        <div id="logon" onclick="$('#logon_div').toggle()" class="p-3  border-l border-slate-200 h-full flex justify-center items-center ">
+                        <div id="logon" onclick="$('#logon_div').toggle()" class="cursor-pointer p-3  border-l border-slate-200 h-full flex justify-center items-center ">
                             <div class="w-[200px] ">
                                 <span class="text-xs">
                                 <i class="text-amber-500 fa-solid fa-user"></i>
@@ -86,7 +86,7 @@
                             </div>
                         </div>
                     @else
-                        <div id="logged_in" class="p-3 border-l border-slate-200 h-full flex justify-center items-center ">
+                        <div id="logged_in" onclick="$('#logout_div').toggle()" class="p-3 border-l border-slate-200 h-full flex justify-center items-center ">
                             <div class="w-[200px]">
                                 <div>{{Auth::user()->name}}</div>
                                 <div class="font-bold text-amber-500 text-xs"><a href="#">Logout</a>
@@ -100,6 +100,13 @@
                         <input type="password" name="password"><br>
                         <input type="hidden" name="gobackto" value="shop.index">
                         <button type="submit">Login</button>
+                        </form>
+                    </div>
+                    <div id="logout_div" class="hidden z-3 absolute w-25 rounded-lg top-20 bg-slate-200 border border-slate-500 p-3">
+                        <form id="frmLogout" action="{{ route("logout") }}" method="POST"> 
+                        @csrf    
+                        <input type="hidden" name="gobackto" value="shop.index">
+                        <button type="submit">Logout</button>
                         </form>
                     </div>
 
