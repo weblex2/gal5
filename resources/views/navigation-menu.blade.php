@@ -55,6 +55,12 @@
                                 {{ $address->city}}
                                 </div>
                             @endforeach
+                            @if (count(session('deliveryAddress'))==0) 
+                                <div class="px-4 py-1 cursor-pointer">
+                                    <div>Keine Lieferadresse gefunden.</div>
+                                    <div><button class="bg-amber-300 hover:bg-amber-400 rounded-3xl w-full mx-auto justify-center px-1 py-2 mt-2 mr-2">Lieferadresse hinzufügen</button></div>
+                                </div>    
+                            @endif
                             </div>
                         </div>   
                         @endif                                             
