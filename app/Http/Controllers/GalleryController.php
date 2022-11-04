@@ -25,8 +25,9 @@ class GalleryController extends Controller
     public function index(){
 
         $logger = \Log::getLogger();
-        
-        
+
+        echo env('FFMPEG');
+        die();
         $ffmpeg = FFMpeg\FFMpeg::create(array(
             'ffmpeg.binaries'  => env('FFMPEG'),
             'ffprobe.binaries' => env('FFPROBE'),
@@ -39,7 +40,7 @@ class GalleryController extends Controller
         #$url  = 'D:\web\gal5\storage\app\public\gal\1\2022_08_23_IMG_3897.MOV';
         #echo $url;
         #echo "<br>";
-        
+
 
 
         //try to convert .mov to mp4
@@ -49,15 +50,15 @@ class GalleryController extends Controller
             $format = new FFMpeg\Format\Video\X264('aac');
             $format->setAudioCodec("libmp3lame");
             $video->save($format, storage_path('app/public/gal/1/a.mp4'));
-            
+
         }
         catch(Exception $e){
             echo "Nope!";
             echo $e->getMessage();
         }
-        
+
         try{
-            $url = storage_path('app/public/gal/1/a.mp4');  
+            $url = storage_path('app/public/gal/1/a.mp4');
             $video = $ffmpeg->open($url);
             $video
                 ->frame(FFMpeg\Coordinate\TimeCode::fromSeconds(1))
@@ -65,7 +66,7 @@ class GalleryController extends Controller
         }
         catch(Exception $e){
             echo $e->getMessage();
-        }    
+        }
         #dump($logger);
 
         $create_user_id = \Auth::id();
