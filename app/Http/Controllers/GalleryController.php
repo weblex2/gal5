@@ -56,7 +56,7 @@ class GalleryController extends Controller
 
         //try to convert .mov to mp4
         try{
-            $url = storage_path('app/public/gal/1/a.MOV');
+            $url = storage_path('app/public/gal/1/a.mp4');
             $video = $ffmpeg->open($url);
 
             #$format = new FFMpeg\Format\Video\X264('aac');
@@ -64,7 +64,7 @@ class GalleryController extends Controller
             #$format = new FFMpeg\Format\Video\X264('libmp3lame', 'libx264');
             $format = new \FFMpeg\Format\Video\X264('aac', 'libx264');
             $format->setAdditionalParameters(explode(' ', '-pix_fmt yuv420p -b:v 4000k'));
-            $video->save($format, storage_path('app/public/gal/1/a.mp4'));
+            $video->save($format, storage_path('app/public/gal/1/a2.mp4'));
 
         }
         catch(Exception $e){
