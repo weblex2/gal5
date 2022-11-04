@@ -49,7 +49,10 @@ class GalleryController extends Controller
         #echo $url;
         #echo "<br>";
 
-
+        $cmd = "/mnt/web418/a2/92/52085492/htdocs/gal5/vendor/ffmpegbin/ffprobe ./storage/app/public/gal/1/a.MOV";
+        exec($cmd, $output, $retval);
+        echo "Returned with status $retval and output:\n";
+        print_r($output);
 
         //try to convert .mov to mp4
         try{
