@@ -35,7 +35,7 @@ class GalleryController extends Controller
         $logger = \Log::getLogger();
 
 
-        die();
+       //die();
         $ffmpeg = FFMpeg\FFMpeg::create(array(
             'ffmpeg.binaries'  => env('FFMPEG'),
             'ffprobe.binaries' => env('FFPROBE'),
