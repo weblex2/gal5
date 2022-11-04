@@ -63,6 +63,7 @@ class GalleryController extends Controller
             #$format->setAudioCodec("libmp3lame");
             #$format = new FFMpeg\Format\Video\X264('libmp3lame', 'libx264');
             $format = new \FFMpeg\Format\Video\X264('aac', 'libx264');
+            $format->setAdditionalParameters(explode(' ', '-pix_fmt yuv420p -b:v 4000k'));
             $video->save($format, storage_path('app/public/gal/1/a.mp4'));
 
         }
