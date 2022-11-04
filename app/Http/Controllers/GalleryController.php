@@ -63,6 +63,8 @@ class GalleryController extends Controller
         catch(Exception $e){
             echo "Nope!";
             echo $e->getMessage();
+            dump($e);
+            die();
         }
 
         try{
