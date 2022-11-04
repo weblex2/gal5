@@ -26,6 +26,7 @@ class GalleryController extends Controller
 
         echo "hi";
         echo env('FFMPEG');
+        
         $logger = \Log::getLogger();
 
 
