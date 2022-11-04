@@ -29,7 +29,7 @@ class GalleryController extends Controller
         echo "FF = ".$ff;
         #print_r(env());
 
-        $ff = env('REDIS_HOST','notfoundRedis');
+        $ff = env('DB_HOST','notfoundRedis');
         echo "FF = ".$ff;
 
         $logger = \Log::getLogger();
