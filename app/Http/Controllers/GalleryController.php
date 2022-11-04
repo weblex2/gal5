@@ -25,9 +25,10 @@ class GalleryController extends Controller
     public function index(){
 
         echo "hi";
+        echo env('FFMPEG');
         $logger = \Log::getLogger();
 
-        echo env('FFMPEG');
+
         die();
         $ffmpeg = FFMpeg\FFMpeg::create(array(
             'ffmpeg.binaries'  => env('FFMPEG'),
