@@ -49,7 +49,7 @@ class GalleryController extends Controller
         #echo $url;
         #echo "<br>";
 
-        $cmd = "/mnt/web418/a2/92/52085492/htdocs/gal5/vendor/ffmpegbin/ffprobe ./storage/app/public/gal/1/a.MOV";
+        $cmd = "/mnt/web418/a2/92/52085492/htdocs/gal5/vendor/ffmpegbin/ffprobe /mnt/web418/a2/92/52085492/htdocs/gal5/storage/app/public/gal/1/a.MOV";
         exec($cmd, $output, $retval);
         echo "Returned with status $retval and output:\n";
         print_r($output);
@@ -61,7 +61,8 @@ class GalleryController extends Controller
 
             #$format = new FFMpeg\Format\Video\X264('aac');
             #$format->setAudioCodec("libmp3lame");
-            $format = new FFMpeg\Format\Video\X264('libmp3lame', 'libx264');
+            #$format = new FFMpeg\Format\Video\X264('libmp3lame', 'libx264');
+            $format = new \FFMpeg\Format\Video\X264('aac', 'libx264');
             $video->save($format, storage_path('app/public/gal/1/a.mp4'));
 
         }
