@@ -43,6 +43,20 @@
                     {{ __('Log in') }}
                 </x-jet-button>
             </div>
+
+            <div class="flex items-center justify-end mt-4">
+                <a class="ml-1 btn btn-primary" href="{{ url('auth/facebook') }}" style="margin-top: 0px !important;background: blue;color: #ffffff;padding: 5px;border-radius:7px;" id="btn-fblogin">
+                    <i class="fa-solid fa-square-facebook"></i> Login with Facebook
+                </a>
+            </div>
+
+            <div class="flex items-center justify-end mt-4">
+                <a class="btn" href="{{ url('auth/twitter') }}"
+                   style="background: #1E9DEA; padding: 10px; width: 100%; text-align: center; display: block; border-radius:4px; color: #ffffff;">
+                    Login with Twitter
+                </a>
+            </div>
+
         </form>
     </x-jet-authentication-card>
 </x-guest-layout>

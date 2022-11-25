@@ -13,6 +13,9 @@ use App\Http\Controllers\DispatchController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\PayPalPaymentController;
 use App\Http\Controllers\PaypalController;
+use App\Http\Controllers\FacebookController;
+use App\Http\Controllers\TwitterController;
+use App\Http\Controllers\CalendarController;
 
 
 /*
@@ -32,6 +35,10 @@ Route::get('/', function () {
 });
 */
 
+Route::get('/ck', function () {
+    return view('cktest.index');
+});
+
 Route::controller(DispatchController::class)->group(function () {
     Route::get('/', 'index')->name('index');
 });
@@ -40,6 +47,16 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
+
+Route::controller(FacebookController::class)->group(function(){
+    Route::get('auth/facebook', 'redirectToFacebook')->name('auth.facebook');
+    Route::get('auth/facebook/callback', 'handleFacebookCallback');
+});
+
+Route::controller(TwitterController::class)->group(function(){
+    Route::get('auth/twitter', 'redirectToTwitter')->name('auth.twitter');
+    Route::get('auth/twitter/callback', 'handleTwitterCallback');
+});
 
 Route::get('/php', function () {
     return phpinfo();
@@ -57,9 +74,13 @@ Route::get('/php2', function () {
 })->name('php');
 */
 
-
+Route::controller(CalendarController::class)->group(function () {
+    Route::get('/cal/{year?}/{month?}', 'index')->name('cal.index');
+    Route::post('/cal/save', 'store')->name('cal.saveEvent');
+});
 
 Route::controller(GalleryController::class)->group(function () {
+    Route::post('/cktest.save', 'cksave')->name('cktest.save');
     Route::get('/gallery', 'index')->name('gallery.index');
     Route::get('/gallery/newGallery', 'newGallery')->middleware(['auth'])->name('gallery.new');
     Route::get('/gallery/showGallery/{id}', 'showGallery')->name('gallery.show');
@@ -117,6 +138,6 @@ Route::controller(PaypalController::class)->group(function () {
     Route::get('/shop/pay', 'payWithPaypal')->name('paypal.pay');
     Route::post('/shop/pay', 'postPaymentWithpaypal')->name('paypal.doPayment');
     Route::get('paypal/payment', 'getPaymentStatus')->name('paypal.getPaypalStatus');
-}); 
+});
 
 

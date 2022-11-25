@@ -21,6 +21,7 @@
 
 
 
+
         {{--  dropbox CDN  --}}
        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.0/min/dropzone.min.css">
        <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.0/dropzone.js"></script>
@@ -63,5 +64,6 @@
         @stack('modals')
 
         @livewireScripts
+
     </body>
 </html>

@@ -4,6 +4,9 @@
 @import 'tailwindcss/utilities';
 
 
+.day_selected{
+    @apply bg-blue-300 !important;
+}
 
 .gallery_body{
     @apply bg-slate-800

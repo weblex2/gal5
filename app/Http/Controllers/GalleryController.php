@@ -35,7 +35,7 @@ class GalleryController extends Controller
         $logger = \Log::getLogger();
 
 
-       //die();
+       /*
         $ffmpeg = FFMpeg\FFMpeg::create(array(
             'ffmpeg.binaries'  => env('FFMPEG'),
             'ffprobe.binaries' => env('FFPROBE'),
@@ -85,6 +85,7 @@ class GalleryController extends Controller
             echo $e->getMessage();
         }
         #dump($logger);
+        */
 
         $create_user_id = \Auth::id();
         if ($create_user_id) {
@@ -97,6 +98,10 @@ class GalleryController extends Controller
         return view("gallery.index", compact('galleries'));
 
 
+    }
+
+    public function cksave(Request $request){
+        dump($request->all());
     }
 
     public function newGallery(){

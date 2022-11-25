@@ -26,7 +26,7 @@ class User extends Authenticatable
      * @var string[]
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','twitter_id', 'facebook_id'
     ];
 
     /**
@@ -63,7 +63,7 @@ class User extends Authenticatable
         return $this->hasMany(ShopUserAddress::Class);
     }
 
-    
 
-    
+
+
 }

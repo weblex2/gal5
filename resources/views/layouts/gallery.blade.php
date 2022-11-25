@@ -16,6 +16,8 @@
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 
+    <script src="ckeditor/ckeditor.js"></script>
+
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <!--link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -46,6 +48,18 @@
 </head>
 <body class="gallery_body">
 <div class="h-screen  flex flex-col" id="maindiv">
+
+
+    <form>
+            <textarea name="editor1" id="editor1" rows="10" cols="80">
+                This is my textarea to be replaced with CKEditor 4.
+            </textarea>
+        <script>
+            // Replace the <textarea id="editor1"> with a CKEditor 4
+            // instance, using default configuration.
+            CKEDITOR.replace( 'editor1' );
+        </script>
+    </form>
 
     <div class="bg-slate-800 border-b border-slate-900 pt-3  sm:block ">
         <div class="flex space-x-4 float-left">
