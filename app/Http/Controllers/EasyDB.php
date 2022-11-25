@@ -20,11 +20,12 @@ class EasyDB extends Controller
         where schema_name='".env('DB_DATABASE')."'
         order by schema_name";
         $res = \DB::select(\DB::raw($qr));
+        
         $databases = [];
         foreach ($res as $row){
-          $databases[$row->SCHEMA_NAME]['TABLES'][$row->TABLE_NAME]['COLUMN'][$row->COLUMN_NAME] = $row ; 
+          $databases[$row->SCHEMA_NAME]['TABLES'][$row->TABLE_NAME]['COLUMN'][$row->COLUMN_NAME] = $row ;
         }
-            
+
         return view('EasyDb.index', compact('databases'));
     }
 
@@ -43,9 +44,9 @@ class EasyDB extends Controller
         $res = \DB::select(\DB::raw($qr));
         $databases = [];
         foreach ($res as $row){
-          $databases[$row->SCHEMA_NAME]['TABLES'][$row->TABLE_NAME]['COLUMN'][$row->COLUMN_NAME] = $row ; 
+          $databases[$row->SCHEMA_NAME]['TABLES'][$row->TABLE_NAME]['COLUMN'][$row->COLUMN_NAME] = $row ;
         }
-            
+
         return view('EasyDb.editColumn', compact('databases'));
         return $db;
     }
@@ -84,9 +85,9 @@ class EasyDB extends Controller
         $res = \DB::select(\DB::raw($qr));
         $databases = [];
         foreach ($res as $row){
-          $databases[$row->SCHEMA_NAME]['TABLES'][$row->TABLE_NAME]['COLUMN'][$row->COLUMN_NAME] = $row ; 
+          $databases[$row->SCHEMA_NAME]['TABLES'][$row->TABLE_NAME]['COLUMN'][$row->COLUMN_NAME] = $row ;
         }
-            
+
         return view('EasyDb.createTable', compact('databases'));
     }
 
@@ -109,7 +110,7 @@ class EasyDB extends Controller
     }
 
     function makeTable(Request $request){
-        $result='abc';    
+        $result='abc';
         $migration  = file_get_contents($this->TEMPLATEFOLDER.'\createTable.txt');
         $data = $request->all();
         #echo "<pre>";
@@ -120,32 +121,32 @@ class EasyDB extends Controller
         $colum_def = $this->createColumnDefinitionStatements($data['col']);
         $table_name  = $data['table_name'];
         $classname = 'Create'.$this->toCamelCase($table_name, true).'Table';
-       
+
         $migration = str_replace( '%classname%', $classname, $migration);
         $migration = str_replace( '%table_name%', $table_name, $migration);
         $migration = str_replace( '%column_def%', $colum_def, $migration);
         $migration = trim($migration);
 
-        
+
         #$migration = nl2br($migration);
         //echo htmlentities($migration);
-        
+
         $fh = fopen($this->MIGRATIONFOLDER.'/2022_03_24_000000_create_'.$table_name. '_table.php','w');
         fwrite($fh,$migration);
         fclose($fh);
-        
+
         // Neccessary to execute partisan commands
         echo $this->ROOTFOLDER;
         chdir($this->ROOTFOLDER);
         $result="0";
         $output = shell_exec('php artisan migrate');
         echo getcwd();
-       
+
         if (strpos('Nothing to migrate.',$output)){
             $result='2';
         }
         $output = nl2br($output);
-        return view('EasyDb.makeTable',compact( 'migration', 'table_name', 'output', 'result'));   
+        return view('EasyDb.makeTable',compact( 'migration', 'table_name', 'output', 'result'));
     }
 
     function editTable($name){
@@ -204,20 +205,20 @@ class EasyDB extends Controller
 
             // id
             if ($datatype=="id"){
-                   $datatype = "string"; 
+                   $datatype = "string";
                    $datalength="";
             }
 
             if (in_array($datatype, $noDataLength)){
                 $datalength="";
-                
+
                 echo "jpoooooooooooooooooo";
             }
             else {
                 echo "datatype is". $datatype;
                 echo "neeeeeeeeeeeee";
             }
-                    
+
             if (isset($col['nullable'])){
                 $nullable   = $col['nullable'] !="" ? "->nullable()" : "";
             }
@@ -225,7 +226,7 @@ class EasyDB extends Controller
             $column_definition .= '$table->'.$col['datatype'];
             $column_definition .= '('.$col_name. $datalength.')';
             $column_definition .= $nullable.';'.PHP_EOL;
-        }   
+        }
         return $column_definition;
-    } 
+    }
 }
